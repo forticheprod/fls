@@ -9,25 +9,26 @@ fn get_path() -> String {
     file_path.to_string()
 }
 
-fn parse_dir(input_path: String) {
+fn parse_dir(input_path: String) -> Vec<Vec<String>> {
     let mut paths_splited: Vec<Vec<String>> = Vec::new();
     let paths = fs::read_dir(&input_path).unwrap();
     for path in paths {
         let path_str =  path.unwrap().path().display().to_string();
-        let split = path_str.split(".");
-        let vec = split.collect::<Vec<&str>>();
+        let vec:Vec<String> = path_str.split(".").map(|s| s.to_string()).collect();
         paths_splited.push(vec)
     }
+    paths_splited
 }
 
 fn main() {
-    parse_dir(get_path())
+    let paths: Vec<Vec<String>> = parse_dir(get_path());
+    println!("{}",paths.len());
 }
 
 #[cfg(test)]
 mod tests {
     #[test]
-    fn exploration() {
-        assert_eq!(2 + 2, 4);
+    fn test_parse_dir() {
+        assert_eq!(5, super::parse_dir("./samples".to_string()).len());
     }
 }
