@@ -1,21 +1,33 @@
+use std::path::Path;
 use std::{env, fs};
-use std::path::PathBuf;
-use expanduser::expanduser;
 
-fn get_path()-> String {
+fn get_path() -> String {
     let args: Vec<String> = env::args().collect();
-    let raw_path = &args[1];
-    let path = expanduser(raw_path);
-    let file_path = path.display().to_string();
-
+    let file_path = &args[1];
+    let _ = Path::new(file_path).exists();
     println!("In file {}", file_path);
     file_path.to_string()
 }
 
-fn main() {
-    let input_path: &str = &get_path();
-    let paths= fs::read_dir(input_path).unwrap();
+fn parse_dir(input_path: String) {
+    let mut paths_splited: Vec<Vec<String>> = Vec::new();
+    let paths = fs::read_dir(&input_path).unwrap();
     for path in paths {
-        println!("{}", path.unwrap().path().display())
+        let path_str =  path.unwrap().path().display().to_string();
+        let split = path_str.split(".");
+        let vec = split.collect::<Vec<&str>>();
+        paths_splited.push(vec)
+    }
+}
+
+fn main() {
+    parse_dir(get_path())
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn exploration() {
+        assert_eq!(2 + 2, 4);
     }
 }
