@@ -29,6 +29,6 @@ fn main() {
 mod tests {
     #[test]
     fn test_parse_dir() {
-        assert_eq!(5, super::parse_dir("./samples".to_string()).len());
+        assert_eq!(5, crate::parse_dir("./samples".to_string()).len());
     }
 }
