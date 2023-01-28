@@ -1,5 +1,6 @@
 use std::path::Path;
 use std::{env, fs};
+mod lib;
 
 fn get_path() -> String {
     let args: Vec<String> = env::args().collect();
@@ -10,8 +11,8 @@ fn get_path() -> String {
 }
 
 fn parse_dir(input_path: String) -> Vec<String> {
-    let paths = fs::read_dir(&input_path).unwrap();
-    let names = paths
+    let paths = fs::read_dir(input_path).unwrap();
+    paths
         .filter_map(|entry| {
             entry.ok().and_then(|e| {
                 e.path()
@@ -19,8 +20,7 @@ fn parse_dir(input_path: String) -> Vec<String> {
                     .and_then(|n| n.to_str().map(|s| String::from(s)))
             })
         })
-        .collect::<Vec<String>>();
-    names
+        .collect::<Vec<String>>()
 }
 
 fn main() {
