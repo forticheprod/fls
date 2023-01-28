@@ -5,7 +5,7 @@ fn get_path() -> String {
     let args: Vec<String> = env::args().collect();
     let file_path = &args[1];
     let _ = Path::new(file_path).exists();
-    println!("In file {}", file_path);
+    println!("In path {}", file_path);
     file_path.to_string()
 }
 
