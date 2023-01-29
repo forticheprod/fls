@@ -53,59 +53,37 @@ fn test_parse_string() {
     assert_eq!(expected, parse_result(source));
 }
 
-fn convert_vec(frames_vec: Vec<String>) -> Vec<i32> {
+fn convert_vec(frames_vec: Vec<String>) -> Vec<isize> {
     frames_vec
         .into_iter()
-        .map(|x: String| x.parse::<i32>().unwrap())
+        .map(|x: String| x.parse::<isize>().unwrap())
         .collect()
 }
 
 #[test]
 fn test_convert_vec() {
     let source: Vec<String> = vec!["001".to_string(), "003".to_string()];
-    let expected: Vec<i32> = vec![1, 3];
+    let expected: Vec<isize> = vec![1, 3];
     assert_eq!(expected, convert_vec(source));
 }
 
-fn check_continuity(frames_vec: Vec<String>) -> Vec<String> {
-    let mut frames_seq: Vec<String> = Vec::new();
-    let tmp_vec: Vec<i32> = convert_vec(frames_vec);
-    let last = tmp_vec.last().copied().unwrap();
-    let mut continuity: bool = true;
-    for (i, frame) in tmp_vec.iter().enumerate() {
-        if frame == &tmp_vec[0] || frame == &last {
-            //Get the first or the last
-            frames_seq.push(frame.to_string());
-            continuity = true;
-        } else if frame - 1 != tmp_vec[i - 1] {
-            //Catch the continuity brake
-            frames_seq.push(tmp_vec[i - 1].to_string());
-            frames_seq.push(frame.to_string());
-            continuity = false;
+fn group_continuity(data: &[isize]) -> Vec<&[isize]> {
+    let mut slice_start: usize = 0;
+    let mut result: Vec<&[isize]> = Vec::new();
+    for i in 1..data.len() {
+        if data[i - 1] + 1 != data[i] {
+            result.push(&data[slice_start..i]);
+            slice_start = i;
         }
     }
-    frames_seq
+    if data.len() > 0 {
+        result.push(&data[slice_start..]);
+    }
+    result
 }
 #[test]
 fn test_continuity() {
-    let source: Vec<String> = vec![
-        "001".to_string(),
-        "002".to_string(),
-        "003".to_string(),
-        "005".to_string(),
-        "006".to_string(),
-        "007".to_string(),
-        "011".to_string(),
-        "012".to_string(),
-    ];
-    let expected: Vec<Vec<String>> = vec![
-        vec!["1".to_string(), "3".to_string()],
-        vec!["5".to_string(), "7".to_string()],
-        vec!["11".to_string(), "12".to_string()],
-    ];
-    assert_eq!(expected, check_continuity(source));
-}
-
-fn convert_frames(frames_vec: Vec<String>) -> String {
-    "toto".to_string()
+    let source: Vec<isize> = vec![1, 2, 3, 5, 6, 7, 11, 12];
+    let expected: Vec<Vec<isize>> = vec![vec![1, 2, 3], vec![5, 6, 7], vec![11, 12]];
+    assert_eq!(expected, group_continuity(&source));
 }
