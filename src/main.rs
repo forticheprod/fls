@@ -1,6 +1,6 @@
+use std::collections::HashMap;
 use std::path::Path;
 use std::{env, fs};
-use std::collections::HashMap;
 
 fn get_path() -> String {
     let args: Vec<String> = env::args().collect();
@@ -23,16 +23,13 @@ fn parse_dir(input_path: String) -> Vec<String> {
         .collect::<Vec<String>>()
 }
 
+#[test]
+fn test_parse_dir() {
+    assert_eq!(5, crate::parse_dir("./samples".to_string()).len());
+}
+
 fn main() {
     let paths = parse_dir(get_path());
     let results: HashMap<String, Vec<String>> = flslib::parse_result(paths);
     println!("{:#?}", results);
-}
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn test_parse_dir() {
-        assert_eq!(5, crate::parse_dir("./samples".to_string()).len());
-    }
 }
