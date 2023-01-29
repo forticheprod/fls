@@ -3,9 +3,11 @@ use std::{collections::HashMap, usize};
 
 fn extract_regex(x: String) -> (String, String) {
     let re: Regex = Regex::new(r"(?x)(?P<name>.*)\.(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})").unwrap();
-    let result_caps = re.captures(&x).unwrap_unchecked();
+    let result_caps = re.captures(&x);
     match result_caps {
-        caps => {
+        None => (x, "1".to_string()),
+        caps_wrap => {
+            let caps = caps_wrap.unwrap();
             let string_list = vec![
                 caps["name"].to_string(),
                 "*".to_string(),
@@ -14,9 +16,14 @@ fn extract_regex(x: String) -> (String, String) {
             let key: String = string_list.join(".");
             (key, caps["frames"].to_string())
         }
-        None => (x, "1".to_string()),
         _ => panic!("Nothing found"),
     }
+}
+#[test]
+fn test_handle_none() {
+    let source: String = "foobar.exr".to_string();
+    let expected: (String, String) = (source.clone(), "1".to_string());
+    assert_eq!(expected, extract_regex(source))
 }
 
 fn parse_result(dir_scan: Vec<String>) -> HashMap<String, String> {
@@ -37,6 +44,9 @@ fn test_parse_string() {
         "toto.002.tiff".to_string(),
         "foo.exr".to_string(),
     ];
-    let expected = HashMap::from([("toto.*.tiff".to_string(), "001002".to_string())]);
+    let expected = HashMap::from([
+        ("toto.*.tiff".to_string(), "001002".to_string()),
+        ("foo.exr".to_string(), "1".to_string()),
+    ]);
     assert_eq!(expected, parse_result(source));
 }
