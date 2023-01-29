@@ -1,6 +1,8 @@
 use std::path::Path;
 use std::{env, fs};
+
 mod lib;
+use std::collections::HashMap;
 
 fn get_path() -> String {
     let args: Vec<String> = env::args().collect();
@@ -25,7 +27,8 @@ fn parse_dir(input_path: String) -> Vec<String> {
 
 fn main() {
     let paths = parse_dir(get_path());
-    println!("{:#?}", paths);
+    let results: HashMap<String, Vec<String>> = lib::parse_result(paths);
+    println!("{:#?}", results);
 }
 
 #[cfg(test)]

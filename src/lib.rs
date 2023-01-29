@@ -25,7 +25,7 @@ fn test_handle_none() {
     assert_eq!(expected, extract_regex(source))
 }
 
-fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
+pub fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
     let mut book_reviews: HashMap<String, Vec<String>> = HashMap::new();
     for x in dir_scan {
         let extraction: (String, String) = extract_regex(x);
