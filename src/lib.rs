@@ -98,7 +98,11 @@ fn test_continuity() {
         "011".to_string(),
         "012".to_string(),
     ];
-    let expected: Vec<String> = vec!["1".to_string(), "3".to_string()];
+    let expected: Vec<Vec<String>> = vec![
+        vec!["1".to_string(), "3".to_string()],
+        vec!["5".to_string(), "7".to_string()],
+        vec!["11".to_string(), "12".to_string()],
+    ];
     assert_eq!(expected, check_continuity(source));
 }
 
