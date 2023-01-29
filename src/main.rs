@@ -1,7 +1,5 @@
 use std::path::Path;
 use std::{env, fs};
-
-mod lib;
 use std::collections::HashMap;
 
 fn get_path() -> String {
@@ -19,7 +17,7 @@ fn parse_dir(input_path: String) -> Vec<String> {
             entry.ok().and_then(|e| {
                 e.path()
                     .file_name()
-                    .and_then(|n| n.to_str().map(|s| String::from(s)))
+                    .and_then(|n| n.to_str().map(|s| s.to_string()))
             })
         })
         .collect::<Vec<String>>()
@@ -27,7 +25,7 @@ fn parse_dir(input_path: String) -> Vec<String> {
 
 fn main() {
     let paths = parse_dir(get_path());
-    let results: HashMap<String, Vec<String>> = lib::parse_result(paths);
+    let results: HashMap<String, Vec<String>> = flslib::parse_result(paths);
     println!("{:#?}", results);
 }
 
