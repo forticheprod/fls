@@ -52,3 +52,33 @@ fn test_parse_string() {
     ]);
     assert_eq!(expected, parse_result(source));
 }
+
+fn convert_vec(frames_vec: Vec<String>) -> Vec<isize> {
+    frames_vec
+        .into_iter()
+        .map(|x: String| x.parse::<isize>().unwrap())
+        .collect()
+}
+
+#[test]
+fn test_convert_vec() {
+    let source: Vec<String> = vec!["001".to_string(), "003".to_string()];
+    let expected: Vec<isize> = vec![1, 3];
+    assert_eq!(expected, convert_vec(source));
+}
+
+fn check_continuity(frames_vec: Vec<String>) -> Vec<String> {
+    let mut frames_seq: Vec<String> = Vec::new();
+    for (i, frame) in frames_vec[..].iter().enumerate() {
+        if frame == &frames_vec[0] {
+            frames_seq.push(frame.to_string());
+        } else {
+            frames_seq.push(frames_vec[i].to_string());
+        }
+    }
+    frames_seq
+}
+
+fn convert_frames(frames_vec: Vec<String>) -> String {
+    "toto".to_string()
+}
