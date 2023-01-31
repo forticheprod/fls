@@ -87,3 +87,20 @@ fn test_continuity() {
     let expected: Vec<Vec<isize>> = vec![vec![1, 2, 3], vec![5, 6, 7], vec![11, 12]];
     assert_eq!(expected, group_continuity(&source));
 }
+fn convert_vec_to_str(input_vec: Vec<Vec<isize>>) -> String {
+    let mut tmp_vec: Vec<String> = Vec::new();
+    for x in input_vec {
+        if x.len() == 0 {
+            tmp_vec.push(x[0].to_string());
+        } else {
+            tmp_vec.push(format!("{}-{}", x.first().unwrap(), x.last().unwrap()))
+        }
+    }
+    tmp_vec.join(",")
+}
+#[test]
+fn test_convert_vec_to_str() {
+    let source: Vec<Vec<isize>> = vec![vec![1, 2, 3], vec![5, 6, 7], vec![11, 12]];
+    let expected: String = "1-3,5-7,11-12".to_string();
+    assert_eq!(expected, test_continuity(source));
+}
