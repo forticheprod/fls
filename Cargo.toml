@@ -7,15 +7,12 @@ description = "a simple command line tool to list frame sequence in friendly way
 readme = "README.md"
 license-file = "LICENSE"
 
-[lib]
-name = "flslib"
-path = "src/lib.rs"
-
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 
 [dependencies.regex]
 version = "1.7"
+default-features = false
 # regex currently requires the standard library, you must re-enable it.
-features = ["std"]
+features = ["std","unicode-perl"]

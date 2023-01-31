@@ -1,4 +1,6 @@
+use fls::parse_result;
 use std::collections::HashMap;
+use std::fs::ReadDir;
 use std::path::Path;
 use std::{env, fs};
 
@@ -11,7 +13,7 @@ fn get_path() -> String {
 }
 
 fn parse_dir(input_path: String) -> Vec<String> {
-    let paths = fs::read_dir(input_path).unwrap();
+    let paths: ReadDir = fs::read_dir(input_path).unwrap();
     paths
         .filter_map(|entry| {
             entry.ok().and_then(|e| {
@@ -29,7 +31,7 @@ fn test_parse_dir() {
 }
 
 fn main() {
-    let paths = parse_dir(get_path());
-    let results: HashMap<String, Vec<String>> = flslib::parse_result(paths);
+    let paths: Vec<String> = parse_dir(get_path());
+    let results: HashMap<String, Vec<String>> = parse_result(paths);
     println!("{:#?}", results);
 }
