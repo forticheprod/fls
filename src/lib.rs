@@ -90,7 +90,7 @@ fn test_continuity() {
 fn convert_vec_to_str(input_vec: Vec<Vec<isize>>) -> String {
     let mut tmp_vec: Vec<String> = Vec::new();
     for x in input_vec {
-        if x.len() == 0 {
+        if x.len() == 1 {
             tmp_vec.push(x[0].to_string());
         } else {
             tmp_vec.push(format!("{}-{}", x.first().unwrap(), x.last().unwrap()))
@@ -100,7 +100,7 @@ fn convert_vec_to_str(input_vec: Vec<Vec<isize>>) -> String {
 }
 #[test]
 fn test_convert_vec_to_str() {
-    let source: Vec<Vec<isize>> = vec![vec![1, 2, 3], vec![5, 6, 7], vec![11, 12]];
-    let expected: String = "1-3,5-7,11-12".to_string();
-    assert_eq!(expected, test_continuity(source));
+    let source: Vec<Vec<isize>> = vec![vec![1, 2, 3], vec![5, 6, 7], vec![11, 12], vec![45]];
+    let expected: String = "1-3,5-7,11-12,45".to_string();
+    assert_eq!(expected, convert_vec_to_str(source));
 }
