@@ -5,7 +5,7 @@ fn extract_regex(x: String) -> (String, String) {
     let re: Regex = Regex::new(r"(?x)(?P<name>.*)\.(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})").unwrap();
     let result_caps: Option<Captures> = re.captures(&x);
     match result_caps {
-        None => (x, "1".to_string()),
+        None => (x, "None".to_string()),
         caps_wrap => {
             let caps = caps_wrap.unwrap();
             let string_list = vec![
@@ -21,11 +21,11 @@ fn extract_regex(x: String) -> (String, String) {
 #[test]
 fn test_handle_none() {
     let source: String = "foobar.exr".to_string();
-    let expected: (String, String) = (source.clone(), "1".to_string());
+    let expected: (String, String) = (source.clone(), "None".to_string());
     assert_eq!(expected, extract_regex(source))
 }
 
-pub fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
+fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
     let mut book_reviews: HashMap<String, Vec<String>> = HashMap::new();
     for x in dir_scan {
         let extraction: (String, String) = extract_regex(x);
@@ -67,7 +67,7 @@ fn test_convert_vec() {
     assert_eq!(expected, convert_vec(source));
 }
 
-fn group_continuity(data: &[isize]) -> Vec<&[isize]> {
+fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
     let mut slice_start: usize = 0;
     let mut result: Vec<&[isize]> = Vec::new();
     for i in 1..data.len() {
@@ -79,7 +79,7 @@ fn group_continuity(data: &[isize]) -> Vec<&[isize]> {
     if data.len() > 0 {
         result.push(&data[slice_start..]);
     }
-    result
+    result.iter().map(|x| x.to_vec()).collect()
 }
 #[test]
 fn test_continuity() {
@@ -103,4 +103,20 @@ fn test_convert_vec_to_str() {
     let source: Vec<Vec<isize>> = vec![vec![1, 2, 3], vec![5, 6, 7], vec![11, 12], vec![45]];
     let expected: String = "1-3,5-7,11-12,45".to_string();
     assert_eq!(expected, convert_vec_to_str(source));
+}
+
+pub fn run(frames: Vec<String>) -> Vec<String> {
+    let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
+    let mut out_frames: Vec<String> = Vec::new();
+    for (key, value) in frames_dict {
+        if value[0] == "None" && value.len() == 1 {
+            out_frames.push(key);
+        } else {
+            let i = convert_vec(value);
+            let j = group_continuity(&i);
+            let k = convert_vec_to_str(j);
+            out_frames.push(format!("{}@{}", key, k));
+        }
+    }
+    out_frames
 }

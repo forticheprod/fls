@@ -1,5 +1,4 @@
-use fil_ls::parse_result;
-use std::collections::HashMap;
+use fil_ls::run;
 use std::fs::ReadDir;
 use std::path::Path;
 use std::{env, fs};
@@ -8,7 +7,6 @@ fn get_path() -> String {
     let args: Vec<String> = env::args().collect();
     let file_path = &args[1];
     let _ = Path::new(file_path).exists();
-    println!("In path {}", file_path);
     file_path.to_string()
 }
 
@@ -32,6 +30,8 @@ fn test_parse_dir() {
 
 fn main() {
     let paths: Vec<String> = parse_dir(get_path());
-    let results: HashMap<String, Vec<String>> = parse_result(paths);
-    println!("{:#?}", results);
+    let results: Vec<String> = run(paths);
+    for line in results {
+        println!("{}", line);
+    }
 }
