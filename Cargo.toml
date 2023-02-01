@@ -1,5 +1,5 @@
 [package]
-name = "fil-ls"
+name = "fil_ls"
 version = "0.1.1"
 edition = "2021"
 authors = ["Philippe Llerena<philippe.llerena@gmail.com>"]
