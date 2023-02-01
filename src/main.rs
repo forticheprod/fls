@@ -1,4 +1,4 @@
-use fls::parse_result;
+use fil_ls::parse_result;
 use std::collections::HashMap;
 use std::fs::ReadDir;
 use std::path::Path;
