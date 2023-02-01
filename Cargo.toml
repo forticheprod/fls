@@ -1,5 +1,5 @@
 [package]
-name = "fls"
+name = "fil-ls"
 version = "0.1.1"
 edition = "2021"
 authors = ["Philippe Llerena<philippe.llerena@gmail.com>"]
@@ -7,7 +7,9 @@ description = "a simple command line tool to list frame sequence in friendly way
 readme = "README.md"
 license-file = "LICENSE"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[[bin]]
+name = "fls"
+path = "src/main.rs"
 
 [dependencies]
 
