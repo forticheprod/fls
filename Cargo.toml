@@ -11,6 +11,9 @@ license-file = "LICENSE"
 name = "fls"
 path = "src/main.rs"
 
+[profile.release]
+lto = true
+
 [dependencies]
 
 [dependencies.regex]
