@@ -2,7 +2,7 @@ use regex::{Captures, Regex};
 use std::collections::HashMap;
 
 fn extract_regex(x: String) -> (String, String) {
-    let re: Regex = Regex::new(r"(?x)(?P<name>.*)\.(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})").unwrap();
+    let re: Regex = Regex::new(r"(?x)(?P<name>.*)\.(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
     let result_caps: Option<Captures> = re.captures(&x);
     match result_caps {
         None => (x, "None".to_string()),
