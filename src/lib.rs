@@ -2,7 +2,8 @@ use regex::{Captures, Regex};
 use std::collections::HashMap;
 
 fn extract_regex(x: String) -> (String, String) {
-    let re: Regex = Regex::new(r"(?x)(?P<name>.*)\.(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
+    let re: Regex =
+        Regex::new(r"(?x)(?P<name>.*)\.(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
     let result_caps: Option<Captures> = re.captures(&x);
     match result_caps {
         None => (x, "None".to_string()),
@@ -54,16 +55,18 @@ fn test_parse_string() {
 }
 
 fn convert_vec(frames_vec: Vec<String>) -> Vec<isize> {
-    frames_vec
+    let mut out_vec: Vec<isize> = frames_vec
         .into_iter()
         .map(|x: String| x.parse::<isize>().unwrap())
-        .collect()
+        .collect();
+    out_vec.sort();
+    out_vec
 }
 
 #[test]
 fn test_convert_vec() {
-    let source: Vec<String> = vec!["001".to_string(), "003".to_string()];
-    let expected: Vec<isize> = vec![1, 3];
+    let source: Vec<String> = vec!["001".to_string(), "005".to_string(), "003".to_string()];
+    let expected: Vec<isize> = vec![1, 3, 5];
     assert_eq!(expected, convert_vec(source));
 }
 
