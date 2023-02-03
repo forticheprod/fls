@@ -20,3 +20,4 @@ You can install via <https://crates.io/>
 Run `fls` to list your current directory.
 
 Run `fls /path/of/directory/` to list a specific directory.
+[](images/fls_demo.gif)
