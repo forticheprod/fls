@@ -16,5 +16,6 @@ jobs:
     container: doubleailes/rust-docker-nextest:0.1.1
 
     steps:
+    - uses: actions/checkout@v2
     - name: Bench
       run: cargo bench
