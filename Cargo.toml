@@ -21,3 +21,10 @@ version = "1.7"
 default-features = false
 # regex currently requires the standard library, you must re-enable it.
 features = ["std","unicode-perl"]
+
+[dev-dependencies]
+criterion = "0.4"
+
+[[bench]]
+name = "sample"
+harness = false
