@@ -3,7 +3,7 @@ use fil_ls::{parse_dir, run};
 
 fn parse_and_run() {
     let paths: Vec<String> = parse_dir("./samples".to_string());
-    let results: Vec<String> = run(paths);
+    let _results: Vec<String> = run(paths);
 }
 
 fn criterion_benchmark(c: &mut Criterion) {
