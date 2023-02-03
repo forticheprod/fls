@@ -1,9 +1,26 @@
 use regex::{Captures, Regex};
 use std::collections::HashMap;
+use std::fs;
 
-fn extract_regex(x: String) -> (String, String) {
-    let re: Regex =
-        Regex::new(r"(?x)(?P<name>.*)\.(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
+pub fn parse_dir(input_path: String) -> Vec<String> {
+    let paths: fs::ReadDir = fs::read_dir(input_path).unwrap();
+    paths
+        .filter_map(|entry| {
+            entry.ok().and_then(|e| {
+                e.path()
+                    .file_name()
+                    .and_then(|n| n.to_str().map(|s| s.to_string()))
+            })
+        })
+        .collect::<Vec<String>>()
+}
+
+#[test]
+fn test_parse_dir() {
+    assert_eq!(6, crate::parse_dir("./samples".to_string()).len());
+}
+
+fn extract_regex(re: &Regex, x: String) -> (String, String) {
     let result_caps: Option<Captures> = re.captures(&x);
     match result_caps {
         None => (x, "None".to_string()),
@@ -11,7 +28,7 @@ fn extract_regex(x: String) -> (String, String) {
             let caps = caps_wrap.unwrap();
             let string_list = vec![
                 caps["name"].to_string(),
-                "*".to_string(),
+                String::from_utf8(vec![b'*'; caps["frames"].len()]).unwrap(),
                 caps["ext"].to_string(),
             ];
             let key: String = string_list.join(".");
@@ -21,15 +38,19 @@ fn extract_regex(x: String) -> (String, String) {
 }
 #[test]
 fn test_handle_none() {
+    let re: Regex =
+        Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
     let source: String = "foobar.exr".to_string();
     let expected: (String, String) = (source.clone(), "None".to_string());
-    assert_eq!(expected, extract_regex(source))
+    assert_eq!(expected, extract_regex(&re, source))
 }
 
 fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
     let mut book_reviews: HashMap<String, Vec<String>> = HashMap::new();
+    let re: Regex =
+        Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
     for x in dir_scan {
-        let extraction: (String, String) = extract_regex(x);
+        let extraction: (String, String) = extract_regex(&re, x);
         let vec1: Vec<String> = vec![extraction.1.clone()];
         book_reviews
             .entry(extraction.0)
@@ -48,7 +69,7 @@ fn test_parse_string() {
     let vec_toto: Vec<String> = vec!["001".to_string(), "002".to_string()];
     let vec_foo: Vec<String> = vec!["None".to_string()];
     let expected: HashMap<String, Vec<String>> = HashMap::from([
-        ("toto.*.tiff".to_string(), vec_toto),
+        ("toto.***.tiff".to_string(), vec_toto),
         ("foo.exr".to_string(), vec_foo),
     ]);
     assert_eq!(expected, parse_result(source));
