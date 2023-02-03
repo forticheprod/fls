@@ -10,7 +10,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+  bench:
 
     runs-on: ubuntu-latest
     container: doubleailes/rust-docker-nextest:0.1.1
