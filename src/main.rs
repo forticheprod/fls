@@ -25,7 +25,5 @@ fn get_path() -> String {
 fn main() {
     let paths: Vec<String> = parse_dir(get_path());
     let results: Vec<String> = run(paths);
-    for line in results {
-        println!("{}", line);
-    }
+    println!("{}", results.join("\n"))
 }
