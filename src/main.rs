@@ -44,7 +44,5 @@ fn test_parse_dir() {
 fn main() {
     let paths: Vec<String> = parse_dir(get_path());
     let results: Vec<String> = run(paths);
-    for line in results {
-        println!("{}", line);
-    }
+    println!("{}", results.join("\n"))
 }
