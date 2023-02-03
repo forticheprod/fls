@@ -1,7 +1,6 @@
-use fil_ls::run;
-use std::fs::ReadDir;
+use fil_ls::{parse_dir, run};
+use std::env;
 use std::path::Path;
-use std::{env, fs};
 
 fn get_current_working_dir() -> String {
     let file_path = env::current_dir();
@@ -21,24 +20,6 @@ fn get_path() -> String {
 
     let _ = Path::new(&file_path).exists();
     file_path.to_string()
-}
-
-fn parse_dir(input_path: String) -> Vec<String> {
-    let paths: ReadDir = fs::read_dir(input_path).unwrap();
-    paths
-        .filter_map(|entry| {
-            entry.ok().and_then(|e| {
-                e.path()
-                    .file_name()
-                    .and_then(|n| n.to_str().map(|s| s.to_string()))
-            })
-        })
-        .collect::<Vec<String>>()
-}
-
-#[test]
-fn test_parse_dir() {
-    assert_eq!(6, crate::parse_dir("./samples".to_string()).len());
 }
 
 fn main() {
