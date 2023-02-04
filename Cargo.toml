@@ -6,6 +6,7 @@ authors = ["Philippe Llerena<philippe.llerena@gmail.com>"]
 description = "a simple command line tool to list frame sequence in friendly way"
 readme = "README.md"
 license-file = "LICENSE"
+exclude = ["benches", "images", "samples"]
 
 [[bin]]
 name = "fls"
