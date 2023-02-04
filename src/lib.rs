@@ -17,7 +17,7 @@ pub fn parse_dir(input_path: String) -> Vec<String> {
 
 #[test]
 fn test_parse_dir() {
-    assert_eq!(6, crate::parse_dir("./samples".to_string()).len());
+    assert_eq!(6, crate::parse_dir("./samples/small".to_string()).len());
 }
 
 fn extract_regex(re: &Regex, x: String) -> (String, String) {
