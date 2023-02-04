@@ -1,5 +1,5 @@
 [package]
-name = "fil_ls"
+name = "framels"
 version = "0.3.0.rc1"
 edition = "2021"
 authors = ["Philippe Llerena<philippe.llerena@gmail.com>"]
