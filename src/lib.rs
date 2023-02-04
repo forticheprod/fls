@@ -46,21 +46,6 @@ fn test_handle_none() {
     assert_eq!(expected, extract_regex(&re, source))
 }
 
-fn old_parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
-    let mut book_reviews: HashMap<String, Vec<String>> = HashMap::new();
-    let re: Regex =
-        Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
-    for x in dir_scan {
-        let extraction: (String, String) = extract_regex(&re, x);
-        let vec1: Vec<String> = vec![extraction.1.clone()];
-        book_reviews
-            .entry(extraction.0)
-            .and_modify(|value| (*value).push(extraction.1))
-            .or_insert(vec1);
-    }
-    book_reviews
-}
-
 pub fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
     let re: Regex =
     Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
