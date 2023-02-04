@@ -1,5 +1,5 @@
 use criterion::{criterion_group, criterion_main, Criterion};
-use fil_ls::{parse_dir, run};
+use framels::{parse_dir, run};
 
 fn parse_and_run() {
     let paths: Vec<String> = parse_dir("./samples/big".to_string());

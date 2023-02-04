@@ -1,4 +1,4 @@
-use fil_ls::{parse_dir, run};
+use framels::{parse_dir, run};
 use std::env;
 use std::path::Path;
 
