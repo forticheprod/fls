@@ -26,5 +26,5 @@ features = ["std","unicode-perl"]
 criterion = "0.4"
 
 [[bench]]
-name = "small"
+name = "big"
 harness = false
