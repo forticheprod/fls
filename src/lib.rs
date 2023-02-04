@@ -46,7 +46,7 @@ fn test_handle_none() {
     assert_eq!(expected, extract_regex(&re, source))
 }
 
-pub fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
+fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
     let re: Regex =
     Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
     let extracted:Vec<(String,String)> = dir_scan.par_iter().map(|path| {extract_regex(&re, path.to_string())}).collect();
