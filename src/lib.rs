@@ -49,7 +49,11 @@ fn test_handle_none() {
 fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
     let re: Regex =
     Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
-    let extracted:Vec<(String,String)> = dir_scan.par_iter().map(|path| {extract_regex(&re, path.to_string())}).collect();
+    let extracted:Vec<(String,String)> = if dir_scan.len()<100000{
+        dir_scan.iter().map(|path| {extract_regex(&re, path.to_string())}).collect()
+    }else{
+        dir_scan.par_iter().map(|path| {extract_regex(&re, path.to_string())}).collect()
+    };
     let mut book_reviews: HashMap<String, Vec<String>> = HashMap::new();
     for extraction in extracted {
         let vec1: Vec<String> = vec![extraction.1.clone()];
