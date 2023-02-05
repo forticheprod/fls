@@ -16,10 +16,26 @@ jobs:
     container: doubleailes/rust-docker-nextest:0.1.1
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: cargo build --verbose
-    - name: Tests
-      run: cargo nextest run
-    - name: Bench
-      run: cargo bench
+      - uses: actions/checkout@v2
+      - name: ⚡ Cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: 🔨 Build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+
+      - name: 🔎 Test
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
