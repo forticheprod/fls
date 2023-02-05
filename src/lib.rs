@@ -65,9 +65,10 @@ fn test_parse_string() {
     let source = vec![
         "toto.001.tiff".to_string(),
         "toto.002.tiff".to_string(),
+        "toto.003.tiff".to_string(),
         "foo.exr".to_string(),
     ];
-    let vec_toto: Vec<String> = vec!["001".to_string(), "002".to_string()];
+    let vec_toto: Vec<String> = vec!["001".to_string(), "002".to_string(),"003".to_string()];
     let vec_foo: Vec<String> = vec!["None".to_string()];
     let expected: HashMap<String, Vec<String>> = HashMap::from([
         ("toto.***.tiff".to_string(), vec_toto),
