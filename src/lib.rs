@@ -1,7 +1,17 @@
+use exr::prelude::*;
+use rayon::prelude::*;
 use regex::{Captures, Regex};
 use std::collections::HashMap;
 use std::fs;
-use rayon::prelude::*;
+
+pub fn get_metadata(path: String) {
+    let meta_data = MetaData::read_from_file(
+        path,
+        false, // do not throw an error for invalid or missing attributes, skipping them instead
+    )
+    .expect("run example `1_write_rgba_with_metadata` to generate the required file");
+    meta_data.headers.iter().enumerate();
+}
 
 pub fn parse_dir(input_path: String) -> Vec<String> {
     let paths: fs::ReadDir = fs::read_dir(input_path).unwrap();
@@ -48,11 +58,17 @@ fn test_handle_none() {
 
 fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
     let re: Regex =
-    Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
-    let extracted:Vec<(String,String)> = if dir_scan.len()<100000{
-        dir_scan.iter().map(|path| {extract_regex(&re, path.to_string())}).collect()
-    }else{
-        dir_scan.par_iter().map(|path| {extract_regex(&re, path.to_string())}).collect()
+        Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
+    let extracted: Vec<(String, String)> = if dir_scan.len() < 100000 {
+        dir_scan
+            .iter()
+            .map(|path| extract_regex(&re, path.to_string()))
+            .collect()
+    } else {
+        dir_scan
+            .par_iter()
+            .map(|path| extract_regex(&re, path.to_string()))
+            .collect()
     };
     let mut book_reviews: HashMap<String, Vec<String>> = HashMap::new();
     for extraction in extracted {
@@ -72,7 +88,7 @@ fn test_parse_string() {
         "toto.003.tiff".to_string(),
         "foo.exr".to_string(),
     ];
-    let vec_toto: Vec<String> = vec!["001".to_string(), "002".to_string(),"003".to_string()];
+    let vec_toto: Vec<String> = vec!["001".to_string(), "002".to_string(), "003".to_string()];
     let vec_foo: Vec<String> = vec!["None".to_string()];
     let expected: HashMap<String, Vec<String>> = HashMap::from([
         ("toto.***.tiff".to_string(), vec_toto),
@@ -106,7 +122,7 @@ fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
             slice_start = i;
         }
     }
-    if data.len() > 0 {
+    if !data.is_empty() {
         result.push(&data[slice_start..]);
     }
     result.iter().map(|x| x.to_vec()).collect()
