@@ -1,6 +1,6 @@
 [package]
 name = "framels"
-version = "0.3.0-rc4"
+version = "0.3.0-rc5"
 edition = "2021"
 authors = ["Philippe Llerena<philippe.llerena@gmail.com>"]
 description = "a simple command line tool to list frame sequence in friendly way"
@@ -16,6 +16,7 @@ path = "src/main.rs"
 lto = true
 
 [dependencies]
+clap = "4.1.4"
 rayon = "1.6.1"
 
 [dependencies.regex]
