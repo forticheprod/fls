@@ -16,7 +16,7 @@ path = "src/main.rs"
 lto = true
 
 [dependencies]
-clap = "4.1.4"
+clap = { version = "4.1.4", features = ["derive"] }
 rayon = "1.6.1"
 
 [dependencies.regex]
