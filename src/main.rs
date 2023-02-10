@@ -1,5 +1,5 @@
 use clap::Parser;
-use framels::{parse_dir, run};
+use framels::{basic, listing, parse_dir};
 
 /// Simple program to greet a person
 #[derive(Parser, Debug)]
@@ -15,8 +15,13 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-    println!("{}", &args.path);
-    let paths: Vec<String> = parse_dir(args.path);
-    let results: Vec<String> = run(paths);
+    let results = if args.list {
+        let paths: Vec<String> = parse_dir(args.path.clone());
+        listing(args.path, paths)
+    } else {
+        let paths: Vec<String> = parse_dir(args.path);
+        basic(paths)
+    };
+
     println!("{}", results.join("\n"))
 }
