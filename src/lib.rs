@@ -1,7 +1,7 @@
+use rayon::prelude::*;
 use regex::{Captures, Regex};
 use std::collections::HashMap;
 use std::fs;
-use rayon::prelude::*;
 
 pub fn parse_dir(input_path: String) -> Vec<String> {
     let paths: fs::ReadDir = fs::read_dir(input_path).unwrap();
@@ -48,11 +48,17 @@ fn test_handle_none() {
 
 fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
     let re: Regex =
-    Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
-    let extracted:Vec<(String,String)> = if dir_scan.len()<100000{
-        dir_scan.iter().map(|path| {extract_regex(&re, path.to_string())}).collect()
-    }else{
-        dir_scan.par_iter().map(|path| {extract_regex(&re, path.to_string())}).collect()
+        Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
+    let extracted: Vec<(String, String)> = if dir_scan.len() < 100000 {
+        dir_scan
+            .iter()
+            .map(|path| extract_regex(&re, path.to_string()))
+            .collect()
+    } else {
+        dir_scan
+            .par_iter()
+            .map(|path| extract_regex(&re, path.to_string()))
+            .collect()
     };
     let mut book_reviews: HashMap<String, Vec<String>> = HashMap::new();
     for extraction in extracted {
@@ -72,7 +78,7 @@ fn test_parse_string() {
         "toto.003.tiff".to_string(),
         "foo.exr".to_string(),
     ];
-    let vec_toto: Vec<String> = vec!["001".to_string(), "002".to_string(),"003".to_string()];
+    let vec_toto: Vec<String> = vec!["001".to_string(), "002".to_string(), "003".to_string()];
     let vec_foo: Vec<String> = vec!["None".to_string()];
     let expected: HashMap<String, Vec<String>> = HashMap::from([
         ("toto.***.tiff".to_string(), vec_toto),
@@ -135,7 +141,7 @@ fn test_convert_vec_to_str() {
     assert_eq!(expected, convert_vec_to_str(source));
 }
 
-pub fn run(frames: Vec<String>) -> Vec<String> {
+pub fn basic(frames: Vec<String>) -> Vec<String> {
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
     let mut out_frames: Vec<String> = Vec::new();
     for (key, value) in frames_dict {
@@ -149,4 +155,46 @@ pub fn run(frames: Vec<String>) -> Vec<String> {
         }
     }
     out_frames
+}
+
+pub fn listing(root_path: String, frames: Vec<String>) -> Vec<String> {
+    let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
+    let mut out_frames: Vec<String> = Vec::new();
+    for (key, value) in frames_dict {
+        if value[0] == "None" && value.len() == 1 {
+            out_frames.push(key);
+        } else {
+            let new_path = &key.replace("*****", value.first().unwrap());
+            let path = format!("{}{}", root_path, &new_path);
+            println!("{}", &path);
+            read_meta(path);
+            let i = convert_vec(value);
+            let j = group_continuity(&i);
+            let k = convert_vec_to_str(j);
+            out_frames.push(format!("{}@{}", key, k));
+        }
+    }
+    out_frames
+}
+
+// exr imports
+extern crate exr;
+
+/// Print the custom meta data of a file, excluding technical encoding meta data.
+/// Prints compression method and tile size, but not purely technical data like chunk count.
+fn read_meta(path: String) {
+    use exr::prelude::*;
+
+    let meta_data = MetaData::read_from_file(
+        "D:/samples/big/RenderPass_Beauty_1.00000.exr",
+        false, // do not throw an error for invalid or missing attributes, skipping them instead
+    )
+    .expect("run example `1_write_rgba_with_metadata` to generate the required file");
+
+    for (layer_index, image_layer) in meta_data.headers.iter().enumerate() {
+        println!(
+            "custom meta data of layer #{}:\n{:#?}",
+            layer_index, image_layer.own_attributes
+        );
+    }
 }
