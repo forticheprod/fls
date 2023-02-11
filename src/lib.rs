@@ -1,3 +1,5 @@
+mod exr_metadata;
+use crate::exr_metadata::read_meta;
 use rayon::prelude::*;
 use regex::{Captures, Regex};
 use std::collections::HashMap;
@@ -27,12 +29,13 @@ fn extract_regex(re: &Regex, x: String) -> (String, String) {
         None => (x, "None".to_string()),
         caps_wrap => {
             let caps = caps_wrap.unwrap();
-            let string_list = vec![
+            let key: String = format!(
+                "{}{}{}.{}",
                 caps["name"].to_string(),
+                caps["separator"].to_string(),
                 String::from_utf8(vec![b'*'; caps["frames"].len()]).unwrap(),
-                caps["ext"].to_string(),
-            ];
-            let key: String = string_list.join(".");
+                caps["ext"].to_string()
+            );
             (key, caps["frames"].to_string())
         }
     }
@@ -40,7 +43,8 @@ fn extract_regex(re: &Regex, x: String) -> (String, String) {
 #[test]
 fn test_handle_none() {
     let re: Regex =
-        Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
+        Regex::new(r"(?x)(?P<name>.*)(?P<separator>\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$")
+            .unwrap();
     let source: String = "foobar.exr".to_string();
     let expected: (String, String) = (source.clone(), "None".to_string());
     assert_eq!(expected, extract_regex(&re, source))
@@ -48,7 +52,8 @@ fn test_handle_none() {
 
 fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
     let re: Regex =
-        Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
+        Regex::new(r"(?x)(?P<name>.*)(?P<separator>\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$")
+            .unwrap();
     let extracted: Vec<(String, String)> = if dir_scan.len() < 100000 {
         dir_scan
             .iter()
@@ -158,16 +163,20 @@ pub fn basic(frames: Vec<String>) -> Vec<String> {
 }
 
 pub fn listing(root_path: String, frames: Vec<String>) -> Vec<String> {
+    let re: Regex = Regex::new(r".*.exr$").unwrap();
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
     let mut out_frames: Vec<String> = Vec::new();
     for (key, value) in frames_dict {
         if value[0] == "None" && value.len() == 1 {
             out_frames.push(key);
         } else {
-            let new_path = &key.replace("*****", value.first().unwrap());
-            let path = format!("{}{}", root_path, &new_path);
-            println!("{}", &path);
-            read_meta(path);
+            let to = value.first().unwrap();
+            let from = String::from_utf8(vec![b'*'; to.len()]).unwrap();
+            let new_path = &key.replace(&from, to);
+            if re.is_match(&new_path) {
+                let path = format!("{}{}", root_path, &new_path);
+                read_meta(path);
+            };
             let i = convert_vec(value);
             let j = group_continuity(&i);
             let k = convert_vec_to_str(j);
@@ -175,26 +184,4 @@ pub fn listing(root_path: String, frames: Vec<String>) -> Vec<String> {
         }
     }
     out_frames
-}
-
-// exr imports
-extern crate exr;
-
-/// Print the custom meta data of a file, excluding technical encoding meta data.
-/// Prints compression method and tile size, but not purely technical data like chunk count.
-fn read_meta(path: String) {
-    use exr::prelude::*;
-
-    let meta_data = MetaData::read_from_file(
-        "D:/samples/big/RenderPass_Beauty_1.00000.exr",
-        false, // do not throw an error for invalid or missing attributes, skipping them instead
-    )
-    .expect("run example `1_write_rgba_with_metadata` to generate the required file");
-
-    for (layer_index, image_layer) in meta_data.headers.iter().enumerate() {
-        println!(
-            "custom meta data of layer #{}:\n{:#?}",
-            layer_index, image_layer.own_attributes
-        );
-    }
 }
