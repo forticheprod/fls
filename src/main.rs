@@ -5,7 +5,7 @@ use framels::{basic, listing, parse_dir};
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-    /// Display EXR metadata
+    /// Display EXR metadata size and channels description
     #[arg(short, long)]
     list: bool,
 
