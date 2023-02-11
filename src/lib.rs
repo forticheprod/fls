@@ -29,22 +29,22 @@ fn extract_regex(re: &Regex, x: String) -> (String, String) {
         None => (x, "None".to_string()),
         caps_wrap => {
             let caps = caps_wrap.unwrap();
-            let key: String = format!(
-                "{}{}{}.{}",
-                caps["name"].to_string(),
-                caps["separator"].to_string(),
-                String::from_utf8(vec![b'*'; caps["frames"].len()]).unwrap(),
-                caps["ext"].to_string()
-            );
-            (key, caps["frames"].to_string())
+            (
+                x.replace(
+                    &caps["frames"],
+                    String::from_utf8(vec![b'*'; caps["frames"].len()])
+                        .unwrap()
+                        .as_str(),
+                ),
+                caps["frames"].to_string(),
+            )
         }
     }
 }
 #[test]
 fn test_handle_none() {
     let re: Regex =
-        Regex::new(r"(?x)(?P<name>.*)(?P<separator>\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$")
-            .unwrap();
+        Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
     let source: String = "foobar.exr".to_string();
     let expected: (String, String) = (source.clone(), "None".to_string());
     assert_eq!(expected, extract_regex(&re, source))
@@ -52,8 +52,7 @@ fn test_handle_none() {
 
 fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
     let re: Regex =
-        Regex::new(r"(?x)(?P<name>.*)(?P<separator>\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$")
-            .unwrap();
+        Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
     let extracted: Vec<(String, String)> = if dir_scan.len() < 100000 {
         dir_scan
             .iter()
@@ -65,15 +64,15 @@ fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
             .map(|path| extract_regex(&re, path.to_string()))
             .collect()
     };
-    let mut book_reviews: HashMap<String, Vec<String>> = HashMap::new();
+    let mut paths_dict: HashMap<String, Vec<String>> = HashMap::new();
     for extraction in extracted {
         let vec1: Vec<String> = vec![extraction.1.clone()];
-        book_reviews
+        paths_dict
             .entry(extraction.0)
             .and_modify(|value| (*value).push(extraction.1))
             .or_insert(vec1);
     }
-    book_reviews
+    paths_dict
 }
 #[test]
 fn test_parse_string() {
