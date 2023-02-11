@@ -5,10 +5,11 @@ use framels::{basic, listing, parse_dir};
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-    /// Name of the person to greet
+    /// Display EXR metadata
     #[arg(short, long)]
     list: bool,
 
+    /// Path to parse
     #[arg(default_value_t = String::from("."), last = true)]
     path: String,
 }

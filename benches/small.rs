@@ -1,9 +1,9 @@
 use criterion::{criterion_group, criterion_main, Criterion};
-use framels::{parse_dir, run};
+use framels::{basic, parse_dir};
 
 fn parse_and_run() {
     let paths: Vec<String> = parse_dir("./samples/small/".to_string());
-    let _results: Vec<String> = run(paths);
+    let _results: Vec<String> = basic(paths);
 }
 
 fn criterion_benchmark(c: &mut Criterion) {

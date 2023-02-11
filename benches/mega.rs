@@ -1,21 +1,20 @@
 use criterion::{criterion_group, criterion_main, Criterion};
-use framels::run;
+use framels::basic;
 use serde::Deserialize;
-
 
 #[derive(Deserialize)]
 struct Paths {
     paths_list: Vec<String>,
 }
 
-fn get_data_set()-> Vec<String>{
+fn get_data_set() -> Vec<String> {
     let text = std::fs::read_to_string("/home/philippellerena/Downloads/e101.json").unwrap();
     let dataset = serde_json::from_str::<Paths>(&text).unwrap();
     dataset.paths_list
 }
 
-fn parse_and_run(){
-    let _results: Vec<String> = run(get_data_set());
+fn parse_and_run() {
+    let _results: Vec<String> = basic(get_data_set());
 }
 
 fn criterion_benchmark(c: &mut Criterion) {

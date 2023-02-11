@@ -25,8 +25,21 @@ You can install via <https://crates.io/>
 
 ## Usage
 
+### Help
+
+Run `fls --help`
+
+### Basic
+
 Run `fls` to list your current directory.
 
-Run `fls /path/of/directory/` to list a specific directory.
+Run `fls -- /path/of/directory/` to list a specific directory.
 
-![demo](images/fls_demo.gif)
+### Exr Metadata
+
+Inspired by rvls. You can use `-l`
+
+Run `fls -l` to list your current directory and display EXR informations.
+
+Run `fls -l -- /path/of/directory/` to list a specific directory and display EXR informations.
+
