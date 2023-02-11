@@ -2,7 +2,7 @@
 
 ## Description
 
-**frame-ls** project is intent to deliver a *ls* command inspired by *bls* from Buf Compagnie or more recently *rvls* from RV
+**framels** project is intent to deliver a *ls* command inspired by *bls* from Buf Compagnie or more recently *rvls* from RV
 
 ## Installation
 
@@ -42,4 +42,3 @@ Inspired by rvls. You can use `-l`
 Run `fls -l` to list your current directory and display EXR informations.
 
 Run `fls -l -- /path/of/directory/` to list a specific directory and display EXR informations.
-
