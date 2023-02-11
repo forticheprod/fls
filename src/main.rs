@@ -1,7 +1,7 @@
 use clap::Parser;
 use framels::{basic, listing, parse_dir};
 
-/// Simple program to greet a person
+/// Command line to list directory and pack frames by in sequence
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {
