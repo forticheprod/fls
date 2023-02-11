@@ -36,8 +36,8 @@ jobs:
         with:
           command: build
 
-      - name: Tests
+      - name: ✔️ Tests
         run: cargo nextest run
 
-      - name: Bench
+      - name: ⏲️ Bench
         run: cargo bench
