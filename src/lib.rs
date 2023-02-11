@@ -43,25 +43,35 @@ fn extract_regex(re: &Regex, x: String) -> (String, String) {
 }
 #[test]
 fn test_handle_none() {
-    let re: Regex =
-        Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
     let source: String = "foobar.exr".to_string();
     let expected: (String, String) = (source.clone(), "None".to_string());
-    assert_eq!(expected, extract_regex(&re, source))
+    assert_eq!(expected, extract_regex(&get_regex(), source))
+}
+
+#[test]
+fn test_regex_simple() {
+    let source: String = "RenderPass_Beauty_1_00000.exr".to_string();
+    let expected: (String, String) = (
+        "RenderPass_Beauty_1_*****.exr".to_string(),
+        "00000".to_string(),
+    );
+    assert_eq!(expected, extract_regex(&get_regex(), source))
+}
+
+fn get_regex() -> regex::Regex {
+    Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap()
 }
 
 fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
-    let re: Regex =
-        Regex::new(r"(?x)(?P<name>.*)(\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$").unwrap();
     let extracted: Vec<(String, String)> = if dir_scan.len() < 100000 {
         dir_scan
             .iter()
-            .map(|path| extract_regex(&re, path.to_string()))
+            .map(|path| extract_regex(&get_regex(), path.to_string()))
             .collect()
     } else {
         dir_scan
             .par_iter()
-            .map(|path| extract_regex(&re, path.to_string()))
+            .map(|path| extract_regex(&get_regex(), path.to_string()))
             .collect()
     };
     let mut paths_dict: HashMap<String, Vec<String>> = HashMap::new();
@@ -116,7 +126,7 @@ fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
             slice_start = i;
         }
     }
-    if data.len() > 0 {
+    if !data.is_empty() {
         result.push(&data[slice_start..]);
     }
     result.iter().map(|x| x.to_vec()).collect()
@@ -172,8 +182,8 @@ pub fn listing(root_path: String, frames: Vec<String>) -> Vec<String> {
             let to = value.first().unwrap();
             let from = String::from_utf8(vec![b'*'; to.len()]).unwrap();
             let new_path = &key.replace(&from, to);
-            if re.is_match(&new_path) {
-                let path = format!("{}{}", root_path, &new_path);
+            if re.is_match(new_path) {
+                let path = format!("{}{}", root_path, new_path);
                 read_meta(path);
             };
             let i = convert_vec(value);
