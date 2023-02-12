@@ -18,6 +18,7 @@ fn parse_and_run() {
 }
 
 fn criterion_benchmark(c: &mut Criterion) {
+    #[allow(clippy::redundant_closure)]
     c.bench_function("mega", |b| b.iter(|| parse_and_run()));
 }
 criterion_group!(name=benches;config = Criterion::default().significance_level(0.1).sample_size(10); targets=criterion_benchmark);
