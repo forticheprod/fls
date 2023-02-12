@@ -20,8 +20,9 @@ Support current linux distro tested Fedora 37, Centos 7, Manjaro 22
 
 ### From Cargo
 
-You can install via <https://crates.io/>
-`cargo install fil_ls`
+You can install via [<https://crates.io/>](https://crates.io/crates/framels)
+
+Run `cargo install framels`
 
 ## Usage
 
@@ -42,3 +43,11 @@ Inspired by rvls. You can use `-l`
 Run `fls -l` to list your current directory and display EXR informations.
 
 Run `fls -l -- /path/of/directory/` to list a specific directory and display EXR informations.
+
+## Thanks
+
+Thanks to:
+- Ben Legros for the passive mentorship over a beer ( or many )
+- Djl for the idea
+- Tcherno
+- Mercenaries Eng for the best render engine ( samples/big from [Guerilla render](http://guerillarender.com/) )
