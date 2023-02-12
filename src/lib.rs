@@ -5,6 +5,10 @@ use regex::{Captures, Regex};
 use std::collections::HashMap;
 use std::fs;
 
+fn get_regex() -> regex::Regex {
+    Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$").unwrap()
+}
+
 pub fn parse_dir(input_path: String) -> Vec<String> {
     let paths: fs::ReadDir = fs::read_dir(input_path).unwrap();
     paths
@@ -43,7 +47,7 @@ fn extract_regex(re: &Regex, x: String) -> (String, String) {
 }
 #[test]
 fn test_handle_none() {
-    let re = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$").unwrap();
+    let re = get_regex();
     let source: String = "foobar.exr".to_string();
     let expected: (String, String) = (source.clone(), "None".to_string());
     assert_eq!(expected, extract_regex(&re, source))
@@ -51,7 +55,7 @@ fn test_handle_none() {
 
 #[test]
 fn test_regex_simple() {
-    let re = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$").unwrap();
+    let re = get_regex();
     let source: String = "RenderPass_Beauty_1_00000.exr".to_string();
     let expected: (String, String) = (
         "RenderPass_Beauty_1_*****.exr".to_string(),
@@ -61,7 +65,7 @@ fn test_regex_simple() {
 }
 
 fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
-    let re = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$").unwrap();
+    let re = get_regex();
     let extracted: Vec<(String, String)> = if dir_scan.len() < 100000 {
         dir_scan
             .iter()
