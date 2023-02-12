@@ -119,7 +119,6 @@ fn test_convert_vec() {
     let expected: Vec<isize> = vec![1, 3, 5];
     assert_eq!(expected, convert_vec(source));
 }
-
 fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
     let mut slice_start: usize = 0;
     let mut result: Vec<&[isize]> = Vec::new();
