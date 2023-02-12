@@ -7,7 +7,7 @@ fn parse_and_run() {
 }
 
 fn criterion_benchmark(c: &mut Criterion) {
-    c.bench_function("small", |b| b.iter(|| parse_and_run()));
+    c.bench_function("small", |b| parse_and_run());
 }
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
