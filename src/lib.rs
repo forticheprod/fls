@@ -6,7 +6,11 @@ use std::collections::HashMap;
 use std::fs;
 
 fn get_regex() -> regex::Regex {
-    Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$").unwrap()
+    let re = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$");
+    match re {
+        Ok(succes_value) => succes_value,
+        Err(err) => panic!("Can't compile regex with error {}", err),
+    }
 }
 
 pub fn parse_dir(input_path: String) -> Vec<String> {
