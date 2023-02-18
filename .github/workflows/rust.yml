@@ -13,7 +13,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    container: doubleailes/rust-docker-nextest:0.1.1
+    container: ghcr.io/doubleailes/rust-docker-nextest:latest
 
     steps:
       - uses: actions/checkout@v2
