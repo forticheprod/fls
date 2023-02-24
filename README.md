@@ -35,7 +35,7 @@ Run `fls --help`
 Run `fls` to list your current directory.
 
 ```bash
-$ touch aaa.001.tif aaa.002.tif aaa.003.tif aaa.004.tif aaa.005.tif
+$ touch aaa.001.tif aaa.002.tif aaa.003.tif aaa.004.tif aaa.005.tif foo_bar.exr
 $ fls
 foo_bar.exr
 aaa.***.tif@1-5
