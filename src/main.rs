@@ -10,7 +10,7 @@ struct Args {
     list: bool,
 
     /// Path to parse
-    #[arg(default_value_t = String::from("."), last = true)]
+    #[arg(default_value_t = String::from("./"), last = true)]
     path: String,
 }
 
