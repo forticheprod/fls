@@ -95,7 +95,7 @@ RenderPass_Occlusion_1_*****.exr@0-73,75-96
 
 Using the sample **big**, some time comparaison with `rvls` or `lsseq`
 
-| Tool | fls      | Rvls     | Lsseq    |
+| Tool | `fls`    | `rvls`   |`lsseq -l`|
 |------|----------|----------|----------|
 | Time | 0m0.005s | 0m0.069s | 0m0.034s | 
 
