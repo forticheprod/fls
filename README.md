@@ -91,6 +91,14 @@ RenderPass_Occlusion_1_***.exr@74
 RenderPass_Occlusion_1_*****.exr@0-73,75-96
 ```
 
+## Benchmarks
+
+Using the sample **big**, some time comparaison with `rvls` or `lsseq`
+
+| Tool | fls      | Rvls     | Lsseq    |
+|------|----------|----------|----------|
+| Time | 0m0.005s | 0m0.069s | 0m0.034s | 
+
 ## Issues and PR
 
 Issues, feedback and PR are welcome
