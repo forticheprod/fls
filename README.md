@@ -108,6 +108,7 @@ Some hard rules, i won't trade off
 - Windows compatible
 - Speed
 - UTF8 friendly
+- Pure Rust
 
 ## Thanks
 
