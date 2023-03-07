@@ -1,5 +1,6 @@
 mod exr_metadata;
 use crate::exr_metadata::read_meta;
+use lscolors::{LsColors, Style};
 use rayon::prelude::*;
 use regex::{Captures, Regex};
 use std::collections::HashMap;
@@ -164,6 +165,7 @@ fn test_convert_vec_to_str() {
 pub fn basic(frames: Vec<String>) -> Vec<String> {
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
     let mut out_frames: Vec<String> = Vec::new();
+    let lscolors = LsColors::from_env().unwrap_or_default();
     for (key, value) in frames_dict {
         if value[0] == "None" && value.len() == 1 {
             out_frames.push(key);
@@ -171,7 +173,9 @@ pub fn basic(frames: Vec<String>) -> Vec<String> {
             let i = convert_vec(value);
             let j = group_continuity(&i);
             let k = convert_vec_to_str(j);
-            out_frames.push(format!("{}@{}", key, k));
+            let style = lscolors.style_for_path(&key);
+            let ansi_style = style.map(Style::to_ansi_term_style).unwrap_or_default();
+            out_frames.push(format!("{}@{}", ansi_style.paint(key), k));
         }
     }
     out_frames
