@@ -16,7 +16,7 @@ path = "src/main.rs"
 lto = true
 
 [dependencies]
-clap = { version = "4.1.4", features = ["derive"] }
+clap = { version = "4.3.0", features = ["derive"] }
 exr = "1.5.3"
 rayon = "1.6.1"
 
