@@ -21,7 +21,7 @@ exr = "1.6.4"
 rayon = "1.7.0"
 
 [dependencies.regex]
-version = "1.8.3"
+version = "1.8.4"
 default-features = false
 # regex currently requires the standard library, you must re-enable it.
 features = ["std","unicode-perl"]
