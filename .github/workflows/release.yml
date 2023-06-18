@@ -14,6 +14,8 @@ jobs:
         target: [x86_64-pc-windows-gnu, x86_64-unknown-linux-musl, x86_64-apple-darwin]
     steps:
       - uses: actions/checkout@master
+      - name: 🏷️ Tag Version
+        run: cargo bump ${{ github.ref }}
       - name: Compile and release
         uses: rust-build/rust-build.action@v1.4.3
         env:
