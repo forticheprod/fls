@@ -7,9 +7,9 @@ fn file_doesnt_exist() -> Result<(), Box<dyn std::error::Error>> {
     let mut cmd = Command::cargo_bin("fls")?;
 
     cmd.arg("--").arg("./samples/toto/");
-    cmd.assert().failure().stderr(predicate::str::contains(
-        "Le chemin d’accès spécifié est introuvable.",
-    ));
+    cmd.assert()
+        .failure()
+        .stderr(predicate::str::contains("No such file or directory"));
 
     Ok(())
 }
