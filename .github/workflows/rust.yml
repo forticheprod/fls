@@ -32,9 +32,7 @@ jobs:
           toolchain: stable
 
       - name: 🔨 Build
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
+        run: cargo build
 
       - name: ✔️ Tests
         run: cargo nextest run
