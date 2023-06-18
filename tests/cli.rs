@@ -13,3 +13,13 @@ fn file_doesnt_exist() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
+
+#[test]
+fn file_exist() -> Result<(), Box<dyn std::error::Error>> {
+    let mut cmd = Command::cargo_bin("fls")?;
+
+    cmd.arg("--").arg("./samples/small/");
+    cmd.assert().success();
+
+    Ok(())
+}
