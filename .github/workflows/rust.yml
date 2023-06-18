@@ -16,7 +16,7 @@ jobs:
     container: ghcr.io/doubleailes/rust-docker-nextest:latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: ⚡ Cache
         uses: actions/cache@v3
         with:
