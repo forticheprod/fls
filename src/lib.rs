@@ -1,5 +1,6 @@
-//! Library to list files and directorys like `ls` style and return a packed
-//! sequence of files. This lib is oriented for Animation and VFX industries,
+//! # framels
+//! framels is a Library to list files and directorys like `ls` style and return a packed
+//! sequence of files. This lib is industry oriented for Animation and VFX,
 //! using a lot a frames sequences.
 //! The main objective is to be the fastest as possible using rustlang.
 mod exr_metadata;
@@ -17,6 +18,9 @@ fn get_regex() -> regex::Regex {
     }
 }
 
+/// # parse_dir
+/// List files and directories in the targeted directory, take a `String` as
+/// input and return a `Vec<String>` of the entries.
 pub fn parse_dir(input_path: String) -> Vec<String> {
     let paths: fs::ReadDir = fs::read_dir(input_path).unwrap();
     paths
@@ -183,7 +187,16 @@ pub fn basic(frames: Vec<String>) -> Vec<String> {
     }
     out_frames
 }
-
+/// ## Extended function of the Library
+/// ### Description
+///
+/// This function is specialize to analyse exr frames really similar to
+/// `rvls -l`
+///
+/// It take a `Vec<String>` of entries as an input
+///  - Pack the frames
+///  - Print the metada if the sequence is an exr sequence
+///  - Return a Vector of path packed
 pub fn extended_listing(root_path: String, frames: Vec<String>) -> Vec<String> {
     let re: Regex = Regex::new(r".*.exr$").unwrap();
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
