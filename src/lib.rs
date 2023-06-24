@@ -1,3 +1,7 @@
+//! Library to list files and directorys like `ls` style and return a packed
+//! sequence of files. This lib is oriented for Animation and VFX industries,
+//! using a lot a frames sequences.
+//! The main objective is to be the fastest as possible using rustlang.
 mod exr_metadata;
 use crate::exr_metadata::read_meta;
 use rayon::prelude::*;

@@ -30,7 +30,7 @@ Run `cargo install framels`
 
 Run `fls --help`
 
-### Basic
+### basic_listing
 
 Run `fls` to list your current directory.
 

@@ -1,5 +1,5 @@
 use criterion::{criterion_group, criterion_main, Criterion};
-use framels::basic;
+use framels::basic_listing;
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -14,7 +14,7 @@ fn get_data_set() -> Vec<String> {
 }
 
 fn parse_and_run() {
-    let _results: Vec<String> = basic(get_data_set());
+    let _results: Vec<String> = basic_listing(get_data_set());
 }
 
 fn criterion_benchmark(c: &mut Criterion) {
