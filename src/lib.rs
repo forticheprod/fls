@@ -184,7 +184,7 @@ pub fn basic(frames: Vec<String>) -> Vec<String> {
     out_frames
 }
 
-pub fn listing(root_path: String, frames: Vec<String>) -> Vec<String> {
+pub fn extended_listing(root_path: String, frames: Vec<String>) -> Vec<String> {
     let re: Regex = Regex::new(r".*.exr$").unwrap();
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
     let mut out_frames: Vec<String> = Vec::new();
