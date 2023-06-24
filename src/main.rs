@@ -1,5 +1,5 @@
 use clap::Parser;
-use framels::{basic_listing, listing, parse_dir};
+use framels::{basic_listing, extended_listing, parse_dir};
 
 /// Command line to list directory and pack frames by in sequence
 #[derive(Parser, Debug)]
@@ -18,7 +18,7 @@ fn main() {
     let args = Args::parse();
     let results = if args.list {
         let paths: Vec<String> = parse_dir(args.path.clone());
-        listing(args.path, paths)
+        extended_listing(args.path, paths)
     } else {
         let paths: Vec<String> = parse_dir(args.path);
         basic_listing(paths)
