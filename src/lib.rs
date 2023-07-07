@@ -161,6 +161,12 @@ fn test_convert_vec_to_str() {
     assert_eq!(expected, convert_vec_to_str(source));
 }
 
+fn create_frame_string(value: Vec<String>) -> String {
+    let converted_vec_isize: Vec<isize> = convert_vec(value);
+    let group_continuity: Vec<Vec<isize>> = group_continuity(&converted_vec_isize);
+    convert_vec_to_str(group_continuity)
+}
+
 pub fn basic(frames: Vec<String>) -> Vec<String> {
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
     let mut out_frames: Vec<String> = Vec::new();
@@ -168,10 +174,7 @@ pub fn basic(frames: Vec<String>) -> Vec<String> {
         if value[0] == "None" && value.len() == 1 {
             out_frames.push(key);
         } else {
-            let i = convert_vec(value);
-            let j = group_continuity(&i);
-            let k = convert_vec_to_str(j);
-            out_frames.push(format!("{}@{}", key, k));
+            out_frames.push(format!("{}@{}", key, create_frame_string(value)));
         }
     }
     out_frames
@@ -192,10 +195,7 @@ pub fn listing(root_path: String, frames: Vec<String>) -> Vec<String> {
                 let path = format!("{}{}", root_path, new_path);
                 read_meta(path);
             };
-            let i = convert_vec(value);
-            let j = group_continuity(&i);
-            let k = convert_vec_to_str(j);
-            out_frames.push(format!("{}@{}", key, k));
+            out_frames.push(format!("{}@{}", key, create_frame_string(value)));
         }
     }
     out_frames
