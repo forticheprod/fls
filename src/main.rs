@@ -1,7 +1,7 @@
 use clap::Parser;
 use framels::{basic_listing, extended_listing, parse_dir};
 
-/// Command line to list directory and pack frames by in sequence
+/// Command line to list directory and pack frames in sequences
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 struct Args {

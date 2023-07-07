@@ -10,14 +10,6 @@ use regex::{Captures, Regex};
 use std::collections::HashMap;
 use std::fs;
 
-fn get_regex() -> regex::Regex {
-    let re = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$");
-    match re {
-        Ok(succes_value) => succes_value,
-        Err(err) => panic!("Can't compile regex with error {}", err),
-    }
-}
-
 /// # parse_dir
 /// List files and directories in the targeted directory, take a `String` as
 /// input and return a `Vec<String>` of the entries.
@@ -39,6 +31,23 @@ fn test_parse_dir() {
     assert_eq!(6, crate::parse_dir("./samples/small".to_string()).len());
 }
 
+/// This function compile the main regular expression used to extract the
+/// frames from the file name.
+/// (?x) match the remainder of the pattern with the following effective flags:
+/// gmx x modifier: extended. Spaces and text after a # in the pattern are ignored
+/// The frames group should contain between **2** and **9** digit, the extension
+/// group should contains only letters between 2 and 5
+fn get_regex() -> regex::Regex {
+    let re = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$");
+    match re {
+        Ok(succes_value) => succes_value,
+        Err(err) => panic!("Can't compile regex with error {}", err),
+    }
+}
+
+/// This function extract the matching group based on regex already compile to
+/// a tuple of string. For exemple toto.458.jpg should return
+/// (toto.***.jpg, 458)
 fn extract_regex(re: &Regex, x: String) -> (String, String) {
     let result_caps: Option<Captures> = re.captures(&x);
     match result_caps {
@@ -75,10 +84,15 @@ fn test_regex_simple() {
     );
     assert_eq!(expected, extract_regex(&re, source))
 }
-
+/// Parse the result of a vector of string. This function use HashMap to pack
+/// filename removed from the frame value.
 fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
     let re = get_regex();
-    let extracted: Vec<(String, String)> = if dir_scan.len() < 100000 {
+    // Optimisation over PAR_THRESHOLD value, the parsing of the frame list
+    // used rayon lib to paralelize the work. Result depends a lot from the
+    // cpu number of thread may be put in a config file
+    const PAR_THRESHOLD: usize = 100000;
+    let extracted: Vec<(String, String)> = if dir_scan.len() < PAR_THRESHOLD {
         dir_scan
             .iter()
             .map(|path| extract_regex(&re, path.to_string()))
@@ -116,6 +130,8 @@ fn test_parse_string() {
     assert_eq!(expected, parse_result(source));
 }
 
+/// Convert the frame string to a number usefull to work with
+/// fn group_continuity and apply comparaison of value
 fn convert_vec(frames_vec: Vec<String>) -> Vec<isize> {
     let mut out_vec: Vec<isize> = frames_vec
         .into_iter()
@@ -124,13 +140,13 @@ fn convert_vec(frames_vec: Vec<String>) -> Vec<isize> {
     out_vec.sort();
     out_vec
 }
-
 #[test]
 fn test_convert_vec() {
     let source: Vec<String> = vec!["001".to_string(), "005".to_string(), "003".to_string()];
     let expected: Vec<isize> = vec![1, 3, 5];
     assert_eq!(expected, convert_vec(source));
 }
+/// Check the continuity of a numbers' serie
 fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
     let mut slice_start: usize = 0;
     let mut result: Vec<&[isize]> = Vec::new();
@@ -151,6 +167,8 @@ fn test_continuity() {
     let expected: Vec<Vec<isize>> = vec![vec![1, 2, 3], vec![5, 6, 7], vec![11, 12]];
     assert_eq!(expected, group_continuity(&source));
 }
+
+/// Concatenation of continuity group in s string
 fn convert_vec_to_str(input_vec: Vec<Vec<isize>>) -> String {
     let mut tmp_vec: Vec<String> = Vec::new();
     for x in input_vec {
@@ -168,14 +186,25 @@ fn test_convert_vec_to_str() {
     let expected: String = "1-3,5-7,11-12,45".to_string();
     assert_eq!(expected, convert_vec_to_str(source));
 }
-
+/// Basic function to:
+/// - convert vector of string into vector of isize
+/// - analyse the continuity
+/// - convert group of continuity into a concat string
 fn create_frame_string(value: Vec<String>) -> String {
     let converted_vec_isize: Vec<isize> = convert_vec(value);
     let group_continuity: Vec<Vec<isize>> = group_continuity(&converted_vec_isize);
     convert_vec_to_str(group_continuity)
 }
-
-pub fn basic(frames: Vec<String>) -> Vec<String> {
+/// ## Basic listing of the library
+/// ### Description
+///
+/// This function is the main function of the library it use a list of
+/// filename as in input and pack the frame sequences using a new filename
+/// like `toto.***.jpg@158-179`
+///
+/// It take a `Vec<String>` of entries as an input
+///  - Pack the frames
+pub fn basic_listing(frames: Vec<String>) -> Vec<String> {
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
     let mut out_frames: Vec<String> = Vec::new();
     for (key, value) in frames_dict {
