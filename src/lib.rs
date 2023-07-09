@@ -196,9 +196,14 @@ fn create_frame_string(value: Vec<String>) -> String {
     convert_vec_to_str(group_continuity)
 }
 #[test]
-fn test_create_frame_string(){
-    let source: Vec<String> = vec!["001".to_string(), "005".to_string(), "003".to_string(),"002".to_string()];
-    let expected: String ="1-3,5".to_string();
+fn test_create_frame_string() {
+    let source: Vec<String> = vec![
+        "001".to_string(),
+        "005".to_string(),
+        "003".to_string(),
+        "002".to_string(),
+    ];
+    let expected: String = "1-3,5".to_string();
     assert_eq!(expected, create_frame_string(source));
 }
 /// ## Basic listing of the library
@@ -224,11 +229,13 @@ pub fn basic_listing(frames: Vec<String>) -> Vec<String> {
 }
 /// This function is intented to check if a file is an exr to call exr module
 /// and print the exr metadata of the file
-fn get_exr_metada(re: &Regex, root_path: &String, path: &String){
+fn get_exr_metada(re: &Regex, root_path: &String, path: &String) -> String {
     if re.is_match(&path) {
         let path = format!("{}{}", root_path, path);
-        read_meta(path);
-    };
+        read_meta(path)
+    } else {
+        "Not an exr".to_string()
+    }
 }
 /// ## Extended function of the Library
 /// ### Description
@@ -244,17 +251,19 @@ pub fn extended_listing(root_path: String, frames: Vec<String>) -> Vec<String> {
     let re: Regex = Regex::new(r".*.exr$").unwrap();
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
     let mut out_frames: Vec<String> = Vec::new();
+    let mut medata: Vec<String> = Vec::new();
     for (key, value) in frames_dict {
         if value[0] == "None" && value.len() == 1 {
-            get_exr_metada(&re, &root_path, &key);
+            medata.push(get_exr_metada(&re, &root_path, &key));
             out_frames.push(key);
         } else {
             let to = value.first().unwrap();
             let from = String::from_utf8(vec![b'*'; to.len()]).unwrap();
             let new_path = &key.replace(&from, to);
-            get_exr_metada(&re, &root_path, &new_path);
+            medata.push(get_exr_metada(&re, &root_path, &new_path));
             out_frames.push(format!("{}@{}", key, create_frame_string(value)));
         }
     }
+    out_frames.append(&mut medata);
     out_frames
 }
