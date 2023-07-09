@@ -195,6 +195,12 @@ fn create_frame_string(value: Vec<String>) -> String {
     let group_continuity: Vec<Vec<isize>> = group_continuity(&converted_vec_isize);
     convert_vec_to_str(group_continuity)
 }
+#[test]
+fn test_create_frame_string(){
+    let source: Vec<String> = vec!["001".to_string(), "005".to_string(), "003".to_string(),"002".to_string()];
+    let expected: String ="1-3,5".to_string();
+    assert_eq!(expected, create_frame_string(source));
+}
 /// ## Basic listing of the library
 /// ### Description
 ///
