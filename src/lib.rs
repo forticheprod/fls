@@ -216,6 +216,12 @@ pub fn basic_listing(frames: Vec<String>) -> Vec<String> {
     }
     out_frames
 }
+fn get_exr_metada(re: &Regex, root_path: &String, path: &String){
+    if re.is_match(&path) {
+        let path = format!("{}{}", root_path, path);
+        read_meta(path);
+    };
+}
 /// ## Extended function of the Library
 /// ### Description
 ///
@@ -232,15 +238,13 @@ pub fn extended_listing(root_path: String, frames: Vec<String>) -> Vec<String> {
     let mut out_frames: Vec<String> = Vec::new();
     for (key, value) in frames_dict {
         if value[0] == "None" && value.len() == 1 {
+            get_exr_metada(&re, &root_path, &key);
             out_frames.push(key);
         } else {
             let to = value.first().unwrap();
             let from = String::from_utf8(vec![b'*'; to.len()]).unwrap();
             let new_path = &key.replace(&from, to);
-            if re.is_match(new_path) {
-                let path = format!("{}{}", root_path, new_path);
-                read_meta(path);
-            };
+            get_exr_metada(&re, &root_path, &new_path);
             out_frames.push(format!("{}@{}", key, create_frame_string(value)));
         }
     }
