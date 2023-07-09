@@ -168,7 +168,7 @@ fn test_continuity() {
     assert_eq!(expected, group_continuity(&source));
 }
 
-/// Concatenation of continuity group in s string
+/// Concatenation of continuity group in a string
 fn convert_vec_to_str(input_vec: Vec<Vec<isize>>) -> String {
     let mut tmp_vec: Vec<String> = Vec::new();
     for x in input_vec {
@@ -216,6 +216,8 @@ pub fn basic_listing(frames: Vec<String>) -> Vec<String> {
     }
     out_frames
 }
+/// This function is intented to check if a file is an exr to call exr module
+/// and print the exr metadata of the file
 fn get_exr_metada(re: &Regex, root_path: &String, path: &String){
     if re.is_match(&path) {
         let path = format!("{}{}", root_path, path);
