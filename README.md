@@ -111,7 +111,7 @@ Run `fls -r -- /path/of/directory/` to list a specific directory and his
 subfolder
 
 ```bash
-$fls -r -- .\samples\
+$ fls -r -- .\samples\
 .\samples\big\RenderPass_Diffuse_1_*****.exr@0-96
 .\samples\big\RenderPass_Ncam_1_00042.exr.bkp
 .\samples\big\RenderPass_DiffuseKey_1_*****.exr@0-96
