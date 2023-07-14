@@ -1,5 +1,5 @@
 use clap::Parser;
-use framels::{basic_listing, extended_listing, parse_dir, recursive_dir};
+use framels::{basic_listing, extended_listing, parse_dir, recursive_dir, paths::Paths};
 
 /// Command line to list directory and pack frames in sequences
 #[derive(Parser, Debug)]
@@ -15,22 +15,22 @@ struct Args {
 
     /// Path to parse
     #[arg(default_value_t = String::from("./"), last = true)]
-    path: String,
+    root: String,
 }
 
 fn main() {
     let args = Args::parse();
-    let paths: Vec<String> = if args.recursive{
-        recursive_dir(&args.path)
+    let p:Paths = if args.recursive{
+        recursive_dir(&args.root)
     }else{
-        parse_dir(&args.path)
+        parse_dir(&args.root)
     };
     let results = if args.list && args.recursive{
-        extended_listing("".to_string(), paths)
+        extended_listing("".to_string(), p)
     } else if args.list {
-        extended_listing(args.path, paths)
+        extended_listing(args.root, p)
     } else {
-        basic_listing(paths)
+        basic_listing(p)
     };
 
     println!("{}", results.join("\n"))

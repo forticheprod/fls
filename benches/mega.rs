@@ -1,16 +1,21 @@
 use criterion::{criterion_group, criterion_main, Criterion};
-use framels::basic_listing;
+use framels::{basic_listing,paths::Paths};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
-struct Paths {
+struct PathsJson {
     paths_list: Vec<String>,
 }
+impl PathsJson {
+    pub fn to_paths(&self)->Paths{
+        Paths::new(self.paths_list.clone())
+    }
+}
 
-fn get_data_set() -> Vec<String> {
+fn get_data_set() ->Paths {
     let text = std::fs::read_to_string("/home/philippellerena/Downloads/e101.json").unwrap();
-    let dataset = serde_json::from_str::<Paths>(&text).unwrap();
-    dataset.paths_list
+    let dataset = serde_json::from_str::<PathsJson>(&text).unwrap();
+    dataset.to_paths()
 }
 
 fn parse_and_run() {
