@@ -9,6 +9,7 @@ struct Args {
     #[arg(short, long)]
     list: bool,
 
+    /// Use a recursive approch of listing dir
     #[arg(short, long)]
     recursive: bool,
 
@@ -24,7 +25,9 @@ fn main() {
     }else{
         parse_dir(&args.path)
     };
-    let results = if args.list {
+    let results = if args.list && args.recursive{
+        extended_listing("".to_string(), paths)
+    } else if args.list {
         extended_listing(args.path, paths)
     } else {
         basic_listing(paths)

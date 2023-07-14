@@ -31,7 +31,9 @@ fn test_parse_dir() {
     let source= "./samples/small".to_string();
     assert_eq!(6, crate::parse_dir(&source).len());
 }
-
+/// # Recursive walking
+/// List files and directories in the targeted directory, take a `String` as
+/// inut and return a `Vec<String>` of the entries recursively
 pub fn recursive_dir(input_path: &String) -> Vec<String> {
     WalkDir::new(input_path)
     .sort(true)
