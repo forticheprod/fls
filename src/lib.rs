@@ -4,6 +4,8 @@
 //! using a lot a frames sequences.
 //! The main objective is to be the fastest as possible using rustlang.
 mod exr_metadata;
+pub mod paths;
+use paths::Paths;
 use crate::exr_metadata::read_meta;
 use rayon::prelude::*;
 use regex::{Captures, Regex};
@@ -14,9 +16,9 @@ use jwalk::WalkDir;
 /// # parse_dir
 /// List files and directories in the targeted directory, take a `String` as
 /// input and return a `Vec<String>` of the entries.
-pub fn parse_dir(input_path: &String) -> Vec<String> {
-    let paths: fs::ReadDir = fs::read_dir(input_path).unwrap();
-    paths
+pub fn parse_dir(input_path: &String) -> paths::Paths {
+    let paths_dir: fs::ReadDir = fs::read_dir(input_path).unwrap();
+    let paths = paths_dir
         .filter_map(|entry| {
             entry.ok().and_then(|e| {
                 e.path()
@@ -24,7 +26,8 @@ pub fn parse_dir(input_path: &String) -> Vec<String> {
                     .and_then(|n| n.to_str().map(|s| s.to_string()))
             })
         })
-        .collect::<Vec<String>>()
+        .collect::<Vec<String>>();
+    Paths::new(paths)
 }
 #[test]
 fn test_parse_dir() {
@@ -34,13 +37,14 @@ fn test_parse_dir() {
 /// # Recursive walking
 /// List files and directories in the targeted directory, take a `String` as
 /// inut and return a `Vec<String>` of the entries recursively
-pub fn recursive_dir(input_path: &String) -> Vec<String> {
-    WalkDir::new(input_path)
+pub fn recursive_dir(input_path: &String) -> paths::Paths {
+    let paths = WalkDir::new(input_path)
     .sort(true)
     .into_iter()
     .filter_map(|e| e.ok())
     .map(|x| x.path().display().to_string())
-    .collect()
+    .collect();
+    Paths::new(paths)
 }
 
 /// This function compile the main regular expression used to extract the
@@ -98,7 +102,7 @@ fn test_regex_simple() {
 }
 /// Parse the result of a vector of string. This function use HashMap to pack
 /// filename removed from the frame value.
-fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
+fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
     let re = get_regex();
     // Optimisation over PAR_THRESHOLD value, the parsing of the frame list
     // used rayon lib to paralelize the work. Result depends a lot from the
@@ -127,12 +131,12 @@ fn parse_result(dir_scan: Vec<String>) -> HashMap<String, Vec<String>> {
 }
 #[test]
 fn test_parse_string() {
-    let source = vec![
+    let source:Paths = Paths::new(vec![
         "toto.001.tiff".to_string(),
         "toto.002.tiff".to_string(),
         "toto.003.tiff".to_string(),
         "foo.exr".to_string(),
-    ];
+    ]);
     let vec_toto: Vec<String> = vec!["001".to_string(), "002".to_string(), "003".to_string()];
     let vec_foo: Vec<String> = vec!["None".to_string()];
     let expected: HashMap<String, Vec<String>> = HashMap::from([
@@ -227,7 +231,7 @@ fn test_create_frame_string() {
 ///
 /// It take a `Vec<String>` of entries as an input
 ///  - Pack the frames
-pub fn basic_listing(frames: Vec<String>) -> Vec<String> {
+pub fn basic_listing(frames: Paths) -> Vec<String> {
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
     let mut out_frames: Vec<String> = Vec::new();
     for (key, value) in frames_dict {
@@ -259,7 +263,7 @@ fn get_exr_metada(re: &Regex, root_path: &String, path: &String) -> String {
 ///  - Pack the frames
 ///  - Print the metada if the sequence is an exr sequence
 ///  - Return a Vector of path packed
-pub fn extended_listing(root_path: String, frames: Vec<String>) -> Vec<String> {
+pub fn extended_listing(root_path: String, frames: Paths) -> Vec<String> {
     let re: Regex = Regex::new(r".*.exr$").unwrap();
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
     let mut out_frames: Vec<String> = Vec::new();
