@@ -102,7 +102,6 @@ Not an exr
 
 ### Recursive
 
-
 You can use a recursive approch of the directory and sub-folder
 
 You can use `-r`
@@ -138,7 +137,7 @@ Using the sample **big**, some time comparaison with `rvls` or `lsseq`
 
 | Tool | `fls`    | `rvls`   |`lsseq -l`|
 |------|----------|----------|----------|
-| Time | 0m0.005s | 0m0.069s | 0m0.034s | 
+| Time | 0m0.007s | 0m0.069s | 0m0.034s | 
 
 ## Issues and PR
 
