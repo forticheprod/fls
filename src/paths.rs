@@ -4,6 +4,7 @@ use core;
 pub struct Paths{
     paths: Vec<String>,
 }
+pub struct PathsPacked(Paths);
 
 impl Paths{
     pub fn len(&self)->usize{
@@ -20,5 +21,8 @@ impl Paths{
     }
     pub fn to_vec(&self)->Vec<String>{
         self.paths.clone()
+    }
+    pub fn join(&self, sep: &str)->String{
+        self.paths.join(sep)
     }
 }
