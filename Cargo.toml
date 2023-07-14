@@ -19,6 +19,7 @@ lto = true
 [dependencies]
 clap = { version = "4.3.11", features = ["derive"] }
 exr = "1.7.0"
+jwalk = "0.8.1"
 rayon = "1.7.0"
 
 [dependencies.regex]

@@ -9,11 +9,12 @@ use rayon::prelude::*;
 use regex::{Captures, Regex};
 use std::collections::HashMap;
 use std::fs;
+use jwalk::WalkDir;
 
 /// # parse_dir
 /// List files and directories in the targeted directory, take a `String` as
 /// input and return a `Vec<String>` of the entries.
-pub fn parse_dir(input_path: String) -> Vec<String> {
+pub fn parse_dir(input_path: &String) -> Vec<String> {
     let paths: fs::ReadDir = fs::read_dir(input_path).unwrap();
     paths
         .filter_map(|entry| {
@@ -25,10 +26,19 @@ pub fn parse_dir(input_path: String) -> Vec<String> {
         })
         .collect::<Vec<String>>()
 }
-
 #[test]
 fn test_parse_dir() {
-    assert_eq!(6, crate::parse_dir("./samples/small".to_string()).len());
+    let source= "./samples/small".to_string();
+    assert_eq!(6, crate::parse_dir(&source).len());
+}
+
+pub fn recursive_dir(input_path: &String) -> Vec<String> {
+    WalkDir::new(input_path)
+    .sort(true)
+    .into_iter()
+    .filter_map(|e| e.ok())
+    .map(|x| x.path().display().to_string())
+    .collect()
 }
 
 /// This function compile the main regular expression used to extract the
