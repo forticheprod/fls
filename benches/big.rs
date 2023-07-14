@@ -2,7 +2,8 @@ use criterion::{criterion_group, criterion_main, Criterion};
 use framels::{basic_listing, parse_dir};
 
 fn parse_and_run() {
-    let paths: Vec<String> = parse_dir("./samples/big".to_string());
+    let source= "./samples/big".to_string();
+    let paths: Vec<String> = parse_dir(&source);
     let _results: Vec<String> = basic_listing(paths);
 }
 
