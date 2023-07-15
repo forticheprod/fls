@@ -1,7 +1,9 @@
 use core;
 use rayon::prelude::*;
+use std::clone::Clone;
 
 /// A representation of group of paths
+#[derive(Clone)]
 pub struct Paths {
     data: Vec<String>,
 }
@@ -30,6 +32,9 @@ impl Paths {
     /// Create a Vector of paths from a Paths
     pub fn to_vec(&self) -> Vec<String> {
         self.data.clone()
+    }
+    pub fn join(&self, sep: &str) -> String {
+        self.data.join(sep)
     }
 }
 
@@ -60,5 +65,8 @@ impl PathsPacked {
         let mut main_vec = self.paths.data.clone();
         main_vec.extend(self.metadata.data.clone());
         main_vec.join(sep)
+    }
+    pub fn get_paths(&self)->Paths{
+        self.paths.clone()
     }
 }
