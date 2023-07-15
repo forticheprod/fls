@@ -1,5 +1,5 @@
 use criterion::{criterion_group, criterion_main, Criterion};
-use framels::{basic_listing,paths::Paths};
+use framels::{basic_listing, paths::{Paths,PathsPacked}};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
@@ -19,7 +19,7 @@ fn get_data_set() ->Paths {
 }
 
 fn parse_and_run() {
-    let _results: Vec<String> = basic_listing(get_data_set());
+    let _results: PathsPacked = basic_listing(get_data_set());
 }
 
 fn criterion_benchmark(c: &mut Criterion) {
