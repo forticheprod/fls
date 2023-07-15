@@ -34,7 +34,7 @@ Run `fls --help`
 
 Run `fls` to list your current directory.
 
-![](images\fls_demo.gif)
+![](./images/fls_demo.gif)
 
 ```bash
 $ touch aaa.001.tif aaa.002.tif aaa.003.tif aaa.004.tif aaa.005.tif foo_bar.exr
