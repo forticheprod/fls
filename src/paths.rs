@@ -1,6 +1,6 @@
 use core;
 use rayon::prelude::*;
-use std::clone::Clone;
+use std::{clone::Clone, path::PathBuf};
 
 /// A representation of group of paths
 #[derive(Clone)]
@@ -22,16 +22,20 @@ impl Paths {
         self.data.par_iter()
     }
     /// Create a new Paths from a Vec of Strings
-    pub fn new(data: Vec<String>) -> Paths {
+    pub fn new(data: Vec<String>) -> Self {
         Paths { data }
     }
     /// Create an empty Paths
-    fn new_empty() -> Paths {
+    fn new_empty() -> Self {
         Paths { data: Vec::new() }
     }
     /// Create a Vector of paths from a Paths
     pub fn to_vec(&self) -> Vec<String> {
         self.data.clone()
+    }
+    /// Create a Vecor of PathBuf from a Paths
+    pub fn to_vec_path(&self)->Vec<PathBuf>{
+        self.data.iter().map(|f|PathBuf::from(f)).collect()
     }
     pub fn join(&self, sep: &str) -> String {
         self.data.join(sep)
@@ -46,7 +50,7 @@ pub struct PathsPacked {
 
 impl PathsPacked {
     /// Create a new PathsPacked empty
-    pub fn new_empty() -> PathsPacked {
+    pub fn new_empty() -> Self {
         PathsPacked {
             paths: Paths::new_empty(),
             metadata: Paths::new_empty(),
@@ -62,11 +66,16 @@ impl PathsPacked {
     }
     /// Join the paths and the metadata
     pub fn join(&self, sep: &str) -> String {
-        let mut main_vec = self.paths.data.clone();
+        let mut main_vec:Vec<String> = self.paths.data.clone();
         main_vec.extend(self.metadata.data.clone());
         main_vec.join(sep)
     }
+    /// Return a clone of the paths elements
     pub fn get_paths(&self) -> Paths {
         self.paths.clone()
+    }
+    /// Return a clone of the metadata elements
+    pub fn get_metadata(&self) -> Paths{
+        self.metadata.clone()
     }
 }
