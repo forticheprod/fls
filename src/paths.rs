@@ -1,60 +1,62 @@
-use rayon::prelude::*;
 use core;
+use rayon::prelude::*;
 
 /// A representation of group of paths
-pub struct Paths{
+pub struct Paths {
     data: Vec<String>,
 }
 
-
-impl Paths{
+impl Paths {
     /// Get the number of path
-    pub fn len(&self)->usize{
+    pub fn len(&self) -> usize {
         self.data.len()
     }
     /// Iter over the paths
-    pub fn iter(&self)->core::slice::Iter<'_, String>{
+    pub fn iter(&self) -> core::slice::Iter<'_, String> {
         self.data.iter()
     }
     /// Multithread iter over the paths
-    pub fn par_iter(&self)->rayon::slice::Iter<'_, String>{
+    pub fn par_iter(&self) -> rayon::slice::Iter<'_, String> {
         self.data.par_iter()
     }
     /// Create a new Paths from a Vec of Strings
-    pub fn new(data: Vec<String>)->Paths{
-        Paths{ data}
+    pub fn new(data: Vec<String>) -> Paths {
+        Paths { data }
     }
     /// Create an empty Paths
-    fn new_empty()->Paths{
-        Paths{ data: Vec::new()}
+    fn new_empty() -> Paths {
+        Paths { data: Vec::new() }
     }
     /// Create a Vector of paths from a Paths
-    pub fn to_vec(&self)->Vec<String>{
+    pub fn to_vec(&self) -> Vec<String> {
         self.data.clone()
     }
 }
 
 /// A representation of the paths packed based on the Paths struct
-pub struct PathsPacked{
+pub struct PathsPacked {
     paths: Paths,
-    metadata: Paths
+    metadata: Paths,
 }
 
 impl PathsPacked {
     /// Create a new PathsPacked empty
-    pub fn new_empty()->PathsPacked{
-        PathsPacked { paths: Paths::new_empty(), metadata: Paths::new_empty() }
+    pub fn new_empty() -> PathsPacked {
+        PathsPacked {
+            paths: Paths::new_empty(),
+            metadata: Paths::new_empty(),
+        }
     }
     /// Push a path packed
-    pub fn push_paths(&mut self, path:String){
+    pub fn push_paths(&mut self, path: String) {
         self.paths.data.push(path)
     }
     /// Push a metadata String
-    pub fn push_metadata(&mut self, path:String){
+    pub fn push_metadata(&mut self, path: String) {
         self.metadata.data.push(path)
     }
     /// Join the paths and the metadata
-    pub fn join(&self, sep: &str)->String{
+    pub fn join(&self, sep: &str) -> String {
         let mut main_vec = self.paths.data.clone();
         main_vec.extend(self.metadata.data.clone());
         main_vec.join(sep)
