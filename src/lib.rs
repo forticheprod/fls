@@ -5,7 +5,7 @@
 //! The main objective is to be the fastest as possible using rustlang.
 mod exr_metadata;
 pub mod paths;
-use paths::Paths;
+use paths::{Paths,PathsPacked};
 use crate::exr_metadata::read_meta;
 use rayon::prelude::*;
 use regex::{Captures, Regex};
@@ -231,14 +231,14 @@ fn test_create_frame_string() {
 ///
 /// It take a `Vec<String>` of entries as an input
 ///  - Pack the frames
-pub fn basic_listing(frames: Paths) -> Vec<String> {
+pub fn basic_listing(frames: Paths) -> PathsPacked {
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
-    let mut out_frames: Vec<String> = Vec::new();
+    let mut out_frames: PathsPacked = PathsPacked::new_empty();
     for (key, value) in frames_dict {
         if value[0] == "None" && value.len() == 1 {
-            out_frames.push(key);
+            out_frames.push_paths(key);
         } else {
-            out_frames.push(format!("{}@{}", key, create_frame_string(value)));
+            out_frames.push_paths(format!("{}@{}", key, create_frame_string(value)));
         }
     }
     out_frames
@@ -263,23 +263,21 @@ fn get_exr_metada(re: &Regex, root_path: &String, path: &String) -> String {
 ///  - Pack the frames
 ///  - Print the metada if the sequence is an exr sequence
 ///  - Return a Vector of path packed
-pub fn extended_listing(root_path: String, frames: Paths) -> Vec<String> {
+pub fn extended_listing(root_path: String, frames: Paths) -> PathsPacked {
     let re: Regex = Regex::new(r".*.exr$").unwrap();
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
-    let mut out_frames: Vec<String> = Vec::new();
-    let mut medata: Vec<String> = Vec::new();
+    let mut out_frames: PathsPacked = PathsPacked::new_empty();
     for (key, value) in frames_dict {
         if value[0] == "None" && value.len() == 1 {
-            medata.push(get_exr_metada(&re, &root_path, &key));
-            out_frames.push(key);
+            out_frames.push_metadata(get_exr_metada(&re, &root_path, &key));
+            out_frames.push_paths(key);
         } else {
             let to = value.first().unwrap();
             let from = String::from_utf8(vec![b'*'; to.len()]).unwrap();
             let new_path = &key.replace(&from, to);
-            medata.push(get_exr_metada(&re, &root_path, &new_path));
-            out_frames.push(format!("{}@{}", key, create_frame_string(value)));
+            out_frames.push_metadata(get_exr_metada(&re, &root_path, &new_path));
+            out_frames.push_paths(format!("{}@{}", key, create_frame_string(value)));
         }
     }
-    out_frames.append(&mut medata);
     out_frames
 }
