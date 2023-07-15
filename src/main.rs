@@ -25,7 +25,7 @@ fn main() {
     } else {
         parse_dir(&args.root)
     };
-    let results:String = if args.list && args.recursive {
+    let results: String = if args.list && args.recursive {
         extended_listing("".to_string(), in_paths).join("\n")
     } else if args.list {
         extended_listing(args.root, in_paths).join("\n")

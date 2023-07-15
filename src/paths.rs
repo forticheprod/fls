@@ -66,7 +66,7 @@ impl PathsPacked {
         main_vec.extend(self.metadata.data.clone());
         main_vec.join(sep)
     }
-    pub fn get_paths(&self)->Paths{
+    pub fn get_paths(&self) -> Paths {
         self.paths.clone()
     }
 }
