@@ -25,13 +25,13 @@ fn main() {
     } else {
         parse_dir(&args.root)
     };
-    let results = if args.list && args.recursive {
-        extended_listing("".to_string(), in_paths)
+    let results:String = if args.list && args.recursive {
+        extended_listing("".to_string(), in_paths).join("\n")
     } else if args.list {
-        extended_listing(args.root, in_paths)
+        extended_listing(args.root, in_paths).join("\n")
     } else {
-        basic_listing(in_paths)
+        basic_listing(in_paths).get_paths().join("\n")
     };
 
-    println!("{}", results.join("\n"))
+    println!("{}", results)
 }
