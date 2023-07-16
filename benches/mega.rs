@@ -16,7 +16,7 @@ impl PathsJson {
 }
 
 fn get_data_set() -> Paths {
-    let text = std::fs::read_to_string("/home/philippellerena/Downloads/e101.json").unwrap();
+    let text = std::fs::read_to_string("./samples/mega/response_1689510067951.json").unwrap();
     let dataset = serde_json::from_str::<PathsJson>(&text).unwrap();
     dataset.to_paths()
 }
