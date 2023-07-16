@@ -16,9 +16,9 @@ use std::fs;
 /// # parse_dir
 /// List files and directories in the targeted directory, take a `String` as
 /// input and return a `Vec<String>` of the entries.
-pub fn parse_dir(input_path: &String) -> paths::Paths {
+pub fn parse_dir(input_path: &String) -> Paths {
     let paths_dir: fs::ReadDir = fs::read_dir(input_path).unwrap();
-    let paths = paths_dir
+    Paths::new(paths_dir
         .filter_map(|entry| {
             entry.ok().and_then(|e| {
                 e.path()
@@ -26,21 +26,19 @@ pub fn parse_dir(input_path: &String) -> paths::Paths {
                     .and_then(|n| n.to_str().map(|s| s.to_string()))
             })
         })
-        .collect::<Vec<String>>();
-    Paths::new(paths)
+        .collect::<Vec<String>>())
 }
 
 /// # Recursive walking
 /// List files and directories in the targeted directory, take a `String` as
 /// inut and return a `Vec<String>` of the entries recursively
-pub fn recursive_dir(input_path: &String) -> paths::Paths {
-    let paths = WalkDir::new(input_path)
-        .sort(true)
-        .into_iter()
-        .filter_map(|e| e.ok())
-        .map(|x| x.path().display().to_string())
-        .collect();
-    Paths::new(paths)
+pub fn recursive_dir(input_path: &String) -> Paths {
+    Paths::new(WalkDir::new(input_path)
+    .sort(true)
+    .into_iter()
+    .filter_map(|e| e.ok())
+    .map(|x| x.path().display().to_string())
+    .collect())
 }
 
 /// This function compile the main regular expression used to extract the
@@ -49,7 +47,7 @@ pub fn recursive_dir(input_path: &String) -> paths::Paths {
 /// gmx x modifier: extended. Spaces and text after a # in the pattern are ignored
 /// The frames group should contain between **2** and **9** digit, the extension
 /// group should contains only letters between 2 and 5
-fn get_regex() -> regex::Regex {
+fn get_regex() -> Regex {
     let re = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$");
     match re {
         Ok(succes_value) => succes_value,
@@ -115,7 +113,7 @@ fn convert_vec(frames_vec: Vec<String>) -> Vec<isize> {
     let mut out_vec: Vec<isize> = frames_vec
         .into_iter()
         .map(|x: String| x.parse::<isize>().unwrap())
-        .collect();
+        .collect::<Vec<isize>>();
     out_vec.sort();
     out_vec
 }
@@ -136,19 +134,6 @@ fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
     result.iter().map(|x| x.to_vec()).collect()
 }
 
-/// Concatenation of continuity group in a string
-fn convert_vec_to_str(input_vec: Vec<Vec<isize>>) -> String {
-    let mut tmp_vec: Vec<String> = Vec::new();
-    for x in input_vec {
-        if x.len() == 1 {
-            tmp_vec.push(x[0].to_string());
-        } else {
-            tmp_vec.push(format!("{}-{}", x.first().unwrap(), x.last().unwrap()))
-        }
-    }
-    tmp_vec.join(",")
-}
-
 /// Basic function to:
 /// - convert vector of string into vector of isize
 /// - analyse the continuity
@@ -156,7 +141,12 @@ fn convert_vec_to_str(input_vec: Vec<Vec<isize>>) -> String {
 fn create_frame_string(value: Vec<String>) -> String {
     let converted_vec_isize: Vec<isize> = convert_vec(value);
     let group_continuity: Vec<Vec<isize>> = group_continuity(&converted_vec_isize);
-    convert_vec_to_str(group_continuity)
+    // Concatenation of continuity group in a string
+    group_continuity.into_iter().map(|x|if x.len() == 1 {
+        x[0].to_string()
+    } else {
+        format!("{}-{}", x.first().unwrap(), x.last().unwrap())
+    }).collect::<Vec<String>>().join(",")
 }
 
 /// ## Basic listing of the library
@@ -272,12 +262,6 @@ fn test_continuity() {
     let source: Vec<isize> = vec![1, 2, 3, 5, 6, 7, 11, 12];
     let expected: Vec<Vec<isize>> = vec![vec![1, 2, 3], vec![5, 6, 7], vec![11, 12]];
     assert_eq!(expected, group_continuity(&source));
-}
-#[test]
-fn test_convert_vec_to_str() {
-    let source: Vec<Vec<isize>> = vec![vec![1, 2, 3], vec![5, 6, 7], vec![11, 12], vec![45]];
-    let expected: String = "1-3,5-7,11-12,45".to_string();
-    assert_eq!(expected, convert_vec_to_str(source));
 }
 #[test]
 fn test_create_frame_string() {
