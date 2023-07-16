@@ -37,5 +37,5 @@ predicates = "3.0.3"
 sys-locale = "0.3.0"
 
 [[bench]]
-name = "big"
+name = "mega"
 harness = false
