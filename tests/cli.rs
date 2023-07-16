@@ -29,7 +29,20 @@ fn file_exist() -> Result<(), Box<dyn std::error::Error>> {
     let mut cmd = Command::cargo_bin("fls")?;
 
     cmd.arg("--").arg("./samples/small/");
-    cmd.assert().success();
+    cmd.assert()
+        .success()
+        .stdout(predicate::str::contains("aaa.***.tif@1-5\nfoo_bar.exr"));
+
+    Ok(())
+}
+#[test]
+fn version() -> Result<(), Box<dyn std::error::Error>> {
+    let mut cmd = Command::cargo_bin("fls")?;
+
+    cmd.arg("-V");
+    cmd.assert()
+        .success()
+        .stdout(predicate::str::contains("framels 0.4.0-rc.2"));
 
     Ok(())
 }

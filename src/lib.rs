@@ -18,27 +18,31 @@ use std::fs;
 /// input and return a `Vec<String>` of the entries.
 pub fn parse_dir(input_path: &String) -> Paths {
     let paths_dir: fs::ReadDir = fs::read_dir(input_path).unwrap();
-    Paths::new(paths_dir
-        .filter_map(|entry| {
-            entry.ok().and_then(|e| {
-                e.path()
-                    .file_name()
-                    .and_then(|n| n.to_str().map(|s| s.to_string()))
+    Paths::new(
+        paths_dir
+            .filter_map(|entry| {
+                entry.ok().and_then(|e| {
+                    e.path()
+                        .file_name()
+                        .and_then(|n| n.to_str().map(|s| s.to_string()))
+                })
             })
-        })
-        .collect::<Vec<String>>())
+            .collect::<Vec<String>>(),
+    )
 }
 
 /// # Recursive walking
 /// List files and directories in the targeted directory, take a `String` as
 /// inut and return a `Vec<String>` of the entries recursively
 pub fn recursive_dir(input_path: &String) -> Paths {
-    Paths::new(WalkDir::new(input_path)
-    .sort(true)
-    .into_iter()
-    .filter_map(|e| e.ok())
-    .map(|x| x.path().display().to_string())
-    .collect())
+    Paths::new(
+        WalkDir::new(input_path)
+            .sort(true)
+            .into_iter()
+            .filter_map(|e| e.ok())
+            .map(|x| x.path().display().to_string())
+            .collect(),
+    )
 }
 
 /// This function compile the main regular expression used to extract the
@@ -142,11 +146,17 @@ fn create_frame_string(value: Vec<String>) -> String {
     let converted_vec_isize: Vec<isize> = convert_vec(value);
     let group_continuity: Vec<Vec<isize>> = group_continuity(&converted_vec_isize);
     // Concatenation of continuity group in a string
-    group_continuity.into_iter().map(|x|if x.len() == 1 {
-        x[0].to_string()
-    } else {
-        format!("{}-{}", x.first().unwrap(), x.last().unwrap())
-    }).collect::<Vec<String>>().join(",")
+    group_continuity
+        .into_iter()
+        .map(|x| {
+            if x.len() == 1 {
+                x[0].to_string()
+            } else {
+                format!("{}-{}", x.first().unwrap(), x.last().unwrap())
+            }
+        })
+        .collect::<Vec<String>>()
+        .join(",")
 }
 
 /// ## Basic listing of the library
@@ -160,15 +170,18 @@ fn create_frame_string(value: Vec<String>) -> String {
 ///  - Pack the frames
 pub fn basic_listing(frames: Paths) -> PathsPacked {
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
-    let mut out_frames: PathsPacked = PathsPacked::new_empty();
-    for (key, value) in frames_dict {
-        if value[0] == "None" && value.len() == 1 {
-            out_frames.push_paths(key);
-        } else {
-            out_frames.push_paths(format!("{}@{}", key, create_frame_string(value)));
-        }
-    }
-    out_frames
+    let mut frames_list: Vec<String> = frames_dict
+        .into_par_iter()
+        .map(|(key, value)| {
+            if value[0] == "None" && value.len() == 1 {
+                key
+            } else {
+                format!("{}@{}", key, create_frame_string(value))
+            }
+        })
+        .collect();
+    frames_list.sort();
+    PathsPacked::new_from_vec(frames_list)
 }
 
 /// This function is intented to check if a file is an exr to call exr module

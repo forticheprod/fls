@@ -34,8 +34,8 @@ impl Paths {
         self.data.clone()
     }
     /// Create a Vecor of PathBuf from a Paths
-    pub fn to_vec_path(&self)->Vec<PathBuf>{
-        self.data.iter().map(|f|PathBuf::from(f)).collect()
+    pub fn to_vec_path(&self) -> Vec<PathBuf> {
+        self.data.iter().map(|f| PathBuf::from(f)).collect()
     }
     pub fn join(&self, sep: &str) -> String {
         self.data.join(sep)
@@ -56,9 +56,19 @@ impl PathsPacked {
             metadata: Paths::new_empty(),
         }
     }
+    pub fn new_from_vec(data: Vec<String>) -> Self {
+        PathsPacked {
+            paths: Paths::new(data),
+            metadata: Paths::new_empty(),
+        }
+    }
     /// Push a path packed
     pub fn push_paths(&mut self, path: String) {
         self.paths.data.push(path)
+    }
+    /// Sort the paths attributes
+    pub fn sort_paths(&mut self) {
+        self.paths.data.sort()
     }
     /// Push a metadata String
     pub fn push_metadata(&mut self, path: String) {
@@ -66,7 +76,7 @@ impl PathsPacked {
     }
     /// Join the paths and the metadata
     pub fn join(&self, sep: &str) -> String {
-        let mut main_vec:Vec<String> = self.paths.data.clone();
+        let mut main_vec: Vec<String> = self.paths.data.clone();
         main_vec.extend(self.metadata.data.clone());
         main_vec.join(sep)
     }
@@ -75,7 +85,7 @@ impl PathsPacked {
         self.paths.clone()
     }
     /// Return a clone of the metadata elements
-    pub fn get_metadata(&self) -> Paths{
+    pub fn get_metadata(&self) -> Paths {
         self.metadata.clone()
     }
 }
