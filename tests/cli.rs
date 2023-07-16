@@ -36,7 +36,7 @@ fn file_exist() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 #[test]
-fn version() -> Result<(), Box<dyn std::error::Error>> {
+fn cli_version() -> Result<(), Box<dyn std::error::Error>> {
     let mut cmd = Command::cargo_bin("fls")?;
 
     cmd.arg("-V");
