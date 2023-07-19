@@ -135,11 +135,23 @@ $ fls -r -- .\samples\
 
 ## Benchmarks
 
-Using the sample **big**, some time comparaison with `rvls` or `lsseq`
+![](https://camo.githubusercontent.com/e8a50ee9600d66095bf0046f06e65ef8fe0675a40122db2a801d1f66e595add6/68747470733a2f2f692e726564642e69742f74376e733971746235676838312e6a7067)
 
-| Tool | `fls`    | `rvls`   |`lsseq -l`|
-|------|----------|----------|----------|
-| Time | 0m0.007s | 0m0.069s | 0m0.034s | 
+Using the sample **big**, some time comparaison with [rvls](https://www.shotgridsoftware.com/rv/download/), [lsseq](https://github.com/jrowellfx/lsseq) or [lss](https://github.com/rsgalloway/pyseq).
+
+Here benchmarks done with [hyperfine](https://github.com/sharkdp/hyperfine) with a warmup of 3 iterations
+
+### Simple file listing
+
+| Tool | `fls`    | `rvls`   |`lsseq -l`| `lss`    |
+|------|----------|----------|----------|----------|
+| Time | 6.7 ms   | 43.1 ms  | 33.5 ms  | 41.8 ms  |
+
+### Exr reading
+
+| Tool | `fls -l` | `rvls -l`|
+|------|----------|----------|
+| Time | 7.3 ms   | 95.8 ms  |
 
 ## Issues and PR
 
