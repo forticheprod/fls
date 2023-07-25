@@ -33,5 +33,5 @@ fn main() {
         basic_listing(in_paths).get_paths().join("\n")
     };
 
-    println!("{}", results)
+    println!("{results}")
 }
