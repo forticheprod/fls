@@ -12,3 +12,6 @@
 # Added by cargo
 
 /target
+
+# Added by the author
+/docs/public
