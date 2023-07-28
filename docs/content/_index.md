@@ -4,7 +4,7 @@ title = "A simple but sexy ls command line tool"
 
 # The homepage contents
 [extra]
-lead = '<b>fls</b> is a command line tool dedicated to animation and vfx terminal user.'
+lead = '<b>fls</b> is a command line tool dedicated to animation and vfx, terminal user.'
 url = "/docs/getting-started/introduction/"
 url_button = "Get started"
 repo_version = "GitHub v0.4.0rc.5"
