@@ -1,6 +1,6 @@
 +++
 title = "Quick Start"
-description = "One page summary of how to start a new AdiDoks project."
+description = "How to start using fls?"
 date = 2021-05-01T08:20:00+00:00
 updated = 2021-05-01T08:20:00+00:00
 draft = false
@@ -9,86 +9,56 @@ sort_by = "weight"
 template = "docs/page.html"
 
 [extra]
-lead = "One page summary of how to start a new AdiDoks project."
+lead = "How to start using fls?"
 toc = true
 top = false
 +++
 
 ## Requirements
 
-Before using the theme, you need to install the [Zola](https://www.getzola.org/documentation/getting-started/installation/) ≥ 0.15.0.
+### Configuration
 
-## Run the Theme Directly
+a standard machine with an OS listed below:
+- Windows 10 x86_64+
+- current linux distro tested: Fedora 37, Centos 7, Manjaro 22
+- MacOs 10.7+
 
-```bash
-git clone https://github.com/aaranxu/adidoks.git
-cd adidoks
-zola serve
-```
-
-Visit `http://127.0.0.1:1111/` in the browser.
+### Terminal
+Before using `fls` you need to have the adminstrator right and terminal application
+like **powershell** or **gnome-terminal**
 
 ## Installation
 
-Just earlier we showed you how to run the theme directly. Now we start to
-install the theme in an existing site step by step.
+### Pre-compile bin
 
-### Step 1: Create a new zola site
+You can download the last version <https://github.com/doubleailes/fls/releases>
 
-```bash
-zola init mysite
-```
+#### Windows
 
-### Step 2: Install AdiDoks
+- Unzip the folder
+- Copy the `fls.exe` file into `C:\program files\Fls`
+- Add the path `C:\program files\Fls` to the `PATH` environement variable
 
-Download this theme to your themes directory:
+#### Linux
 
-```bash
-cd mysite/themes
-git clone https://github.com/aaranxu/adidoks.git
-```
+- Untar the folder
+- Copy the `fls` binary into `/usr/bin`
 
-Or install as a submodule:
+### From Cargo
 
-```bash
-cd mysite
-git init  # if your project is a git repository already, ignore this command
-git submodule add https://github.com/aaranxu/adidoks.git themes/adidoks
-```
+You can install via [<https://crates.io/>](https://crates.io/crates/framels)
 
-### Step 3: Configuration
+- Run `cargo install framels`
+- Check `~/.cargo/bin/` is added to path if not add it
 
-Enable the theme in your `config.toml` in the site derectory:
+## Usage
 
-```toml
-theme = "adidoks"
-```
+### Help
 
-Or copy the `config.toml.example` from the theme directory to your project's
-root directory:
+Run `fls --help`
 
-```bash
-cp themes/adidoks/config.toml.example config.toml
-```
+### Basic Listing
 
-### Step 4: Add new content
+Run `fls` to list your current directory.
 
-You can copy the content from the theme directory to your project:
-
-```bash
-cp -r themes/adidoks/content .
-```
-
-You can modify or add new posts in the `content/blog`, `content/docs` or other
-content directories as needed.
-
-### Step 5: Run the project
-
-Just run `zola serve` in the root path of the project:
-
-```bash
-zola serve
-```
-
-AdiDoks will start the Zola development web server accessible by default at 
-`http://127.0.0.1:1111`. Saved changes will live reload in the browser.
+![](./docs/content/docs/getting-started/images/fls_demo.gif)
