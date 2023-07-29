@@ -80,6 +80,11 @@ impl PathsPacked {
         main_vec.extend(self.metadata.data.clone());
         main_vec.join(sep)
     }
+    pub fn to_vec(&self)->Vec<String>{
+        let mut main_vec: Vec<String> = self.paths.data.clone();
+        main_vec.extend(self.metadata.data.clone());
+        main_vec
+    }
     /// Return a clone of the paths elements
     pub fn get_paths(&self) -> Paths {
         self.paths.clone()

@@ -13,8 +13,8 @@ pub fn read_meta(path: String) -> String {
     let mut metadata: Vec<String> = Vec::new();
     for (layer_index, image_layer) in meta_data.headers.iter().enumerate() {
         metadata.push(format!(
-            "{} layer #{} size:{:?}; channels:{:?}",
-            &path, layer_index, image_layer.layer_size, image_layer.channels
+            "{} layer #{} size:{:?}",
+            &path, layer_index, image_layer.layer_size
         ));
     }
     // Join the headers
