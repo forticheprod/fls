@@ -2,13 +2,17 @@
 
 ## Description
 
-**framels** project is intent to deliver a *ls* command inspired by *bls* from Buf Compagnie or more recently *rvls* from RV
+**framels** project is intent to deliver a *ls* command inspired by *bls* from Buf Compagnie or more recently *rvls* from RV.
+
+## User Guide
+
+The user guide is [here](https://doubleailes.github.io/fls/).
 
 ## Installation
 
 ### Pre-compile bin
 
-You can download the last version <https://github.com/doubleailes/fls/releases>
+You can download the last version <https://github.com/doubleailes/fls/releases>.
 
 #### Windows
 
