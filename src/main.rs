@@ -13,6 +13,10 @@ struct Args {
     #[arg(short, long)]
     recursive: bool,
 
+    /// Represent output as a tree
+    #[arg(short, long)]
+    tree: bool,
+
     /// Path to parse
     #[arg(default_value_t = String::from("./"), last = true)]
     root: String,
@@ -20,7 +24,7 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-    let in_paths: Paths = if args.recursive {
+    let in_paths: Paths = if args.recursive && args.tree {
         recursive_dir(&args.root)
     } else {
         parse_dir(&args.root)

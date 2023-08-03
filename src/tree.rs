@@ -1,34 +1,19 @@
 extern crate ptree;
 use ptree::{print_tree, TreeBuilder};
+use std::borrow::Cow;
 
 #[derive(Debug)]
 struct Node {
     name: String,
     children: Vec<Node>,
 }
-impl TreeItem for Node {
-    type Child = Self;
 
-    fn write_self<W: io::Write>(&self, f: &mut W, style: &Style) -> io::Result<()> {
-        if let Some(n) = self.0.file_name() {
-            write!(f, "{}", style.paint(n.to_string_lossy()))
-        } else {
-            Ok(())
-        }
-    }
-
-    fn children(&self) -> Cow<[Self::Child]> {
-        let v = if let Ok(list) = fs::read_dir(&self.0) {
-            list.filter_map(|item| item.ok())
-                .map(|entry| entry.path())
-                .map(PathItem)
-                .collect()
-        } else {
-            Vec::new()
-        };
-
-        Cow::from(v)
-    }
+fn build_children(dad: children: Vec<Node>) {
+    for child in children {}
+}
+fn walk_tree(root: Node) {
+    let dad = TreeBuilder::new(root.name);
+    build_children(dad, root.children)
 }
 
 pub fn build_tree_from_paths(paths: Vec<String>) -> Node {
@@ -66,4 +51,7 @@ pub fn build_tree_from_paths(paths: Vec<String>) -> Node {
     root
 }
 
-fn build_tree(root: Node) -> TreeBuilder {}
+fn build_tree(root: Node) -> TreeBuilder {
+    Node("");
+    ptree::print_tree(&dir).expect("Unable to print directory tree");
+}
