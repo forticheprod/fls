@@ -19,19 +19,26 @@ struct Args {
 }
 
 fn main() {
+    // Parse command-line arguments
     let args = Args::parse();
+
+    // Perform directory listing
     let in_paths: Paths = if args.recursive {
         recursive_dir(&args.root)
     } else {
         parse_dir(&args.root)
     };
-    let results: String = if args.list && args.recursive {
-        extended_listing("".to_string(), in_paths).join("\n")
-    } else if args.list {
-        extended_listing(args.root, in_paths).join("\n")
+
+    // Generate results based on arguments
+    let results: String = if args.list {
+        if args.recursive {
+            extended_listing("".to_string(), in_paths).join("\n")
+        } else {
+            extended_listing(args.root.clone(), in_paths).join("\n")
+        }
     } else {
         basic_listing(in_paths).get_paths().join("\n")
     };
 
-    println!("{results}")
+    println!("{}",results)
 }
