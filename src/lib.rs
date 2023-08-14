@@ -63,10 +63,10 @@ fn get_regex() -> Regex {
 /// a tuple of string. For exemple toto.458.jpg should return
 /// (toto.***.jpg, 458)
 #[inline(always)]
-fn extract_regex(re: &Regex, x: String) -> (String, String) {
+fn extract_regex(re: &Regex, x: &str) -> (String, String) {
     let result_caps: Option<Captures> = re.captures(&x);
     match result_caps {
-        None => (x, "None".to_string()),
+        None => (x.to_string(), "None".to_string()),
         caps_wrap => {
             let caps = caps_wrap.unwrap();
             (
@@ -91,12 +91,12 @@ fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
     let extracted: Vec<(String, String)> = if dir_scan.len() < PAR_THRESHOLD {
         dir_scan
             .iter()
-            .map(|path| extract_regex(&re, path.to_string()))
+            .map(|path| extract_regex(&re, path))
             .collect()
     } else {
         dir_scan
             .par_iter()
-            .map(|path| extract_regex(&re, path.to_string()))
+            .map(|path| extract_regex(&re, path))
             .collect()
     };
     let mut paths_dict: HashMap<String, Vec<String>> = HashMap::with_capacity(extracted.len());
@@ -232,15 +232,15 @@ fn test_parse_dir() {
 #[test]
 fn test_handle_none() {
     let re = get_regex();
-    let source: String = "foobar.exr".to_string();
-    let expected: (String, String) = (source.clone(), "None".to_string());
+    let source:&str = "foobar.exr";
+    let expected: (String, String) = (source.to_string(), "None".to_string());
     assert_eq!(expected, extract_regex(&re, source))
 }
 
 #[test]
 fn test_regex_simple() {
     let re = get_regex();
-    let source: String = "RenderPass_Beauty_1_00000.exr".to_string();
+    let source: &str = "RenderPass_Beauty_1_00000.exr";
     let expected: (String, String) = (
         "RenderPass_Beauty_1_*****.exr".to_string(),
         "00000".to_string(),
