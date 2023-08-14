@@ -62,6 +62,7 @@ fn get_regex() -> Regex {
 /// This function extract the matching group based on regex already compile to
 /// a tuple of string. For exemple toto.458.jpg should return
 /// (toto.***.jpg, 458)
+#[inline(always)]
 fn extract_regex(re: &Regex, x: String) -> (String, String) {
     let result_caps: Option<Captures> = re.captures(&x);
     match result_caps {
