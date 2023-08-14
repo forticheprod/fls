@@ -1,6 +1,6 @@
 use criterion::{criterion_group, criterion_main, Criterion};
 use framels::{
-    basic_listing,parse_dir,
+    basic_listing, parse_dir,
     paths::{Paths, PathsPacked},
 };
 use serde::Deserialize;

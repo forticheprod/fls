@@ -70,10 +70,7 @@ fn extract_regex(re: &Regex, x: &str) -> (String, String) {
         caps_wrap => {
             let caps = caps_wrap.unwrap();
             (
-                x.replace(
-                    &caps["frames"],
-                    &"*".repeat(caps["frames"].len()),
-                ),
+                x.replace(&caps["frames"], &"*".repeat(caps["frames"].len())),
                 caps["frames"].to_string(),
             )
         }
@@ -232,7 +229,7 @@ fn test_parse_dir() {
 #[test]
 fn test_handle_none() {
     let re = get_regex();
-    let source:&str = "foobar.exr";
+    let source: &str = "foobar.exr";
     let expected: (String, String) = (source.to_string(), "None".to_string());
     assert_eq!(expected, extract_regex(&re, source))
 }
