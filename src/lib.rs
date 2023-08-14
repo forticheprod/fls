@@ -16,7 +16,7 @@ use std::fs;
 /// # parse_dir
 /// List files and directories in the targeted directory, take a `String` as
 /// input and return a `Vec<String>` of the entries.
-pub fn parse_dir(input_path: &String) -> Paths {
+pub fn parse_dir(input_path: &str) -> Paths {
     let paths_dir: fs::ReadDir = fs::read_dir(input_path).unwrap();
     Paths::new(
         paths_dir
@@ -24,7 +24,7 @@ pub fn parse_dir(input_path: &String) -> Paths {
                 entry.ok().and_then(|e| {
                     e.path()
                         .file_name()
-                        .and_then(|n| n.to_str().map(|s| s.to_string()))
+                        .and_then(|n| n.to_str().map(|s| s.to_owned()))
                 })
             })
             .collect::<Vec<String>>(),
@@ -34,7 +34,7 @@ pub fn parse_dir(input_path: &String) -> Paths {
 /// # Recursive walking
 /// List files and directories in the targeted directory, take a `String` as
 /// inut and return a `Vec<String>` of the entries recursively
-pub fn recursive_dir(input_path: &String) -> Paths {
+pub fn recursive_dir(input_path: &str) -> Paths {
     Paths::new(
         WalkDir::new(input_path)
             .sort(true)
@@ -72,9 +72,7 @@ fn extract_regex(re: &Regex, x: String) -> (String, String) {
             (
                 x.replace(
                     &caps["frames"],
-                    String::from_utf8(vec![b'*'; caps["frames"].len()])
-                        .unwrap()
-                        .as_str(),
+                    &"*".repeat(caps["frames"].len()),
                 ),
                 caps["frames"].to_string(),
             )
@@ -101,7 +99,7 @@ fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
             .map(|path| extract_regex(&re, path.to_string()))
             .collect()
     };
-    let mut paths_dict: HashMap<String, Vec<String>> = HashMap::new();
+    let mut paths_dict: HashMap<String, Vec<String>> = HashMap::with_capacity(extracted.len());
     for extraction in extracted {
         let vec1: Vec<String> = vec![extraction.1.clone()];
         paths_dict
