@@ -1,4 +1,3 @@
-use core;
 use rayon::prelude::*;
 use std::{clone::Clone, path::PathBuf};
 
@@ -14,11 +13,11 @@ impl Paths {
         self.data.len()
     }
     /// Iter over the paths
-    pub fn iter(&self) -> core::slice::Iter<'_, String> {
+    pub fn iter(&self) -> impl Iterator<Item = &String> {
         self.data.iter()
     }
     /// Multithread iter over the paths
-    pub fn par_iter(&self) -> rayon::slice::Iter<'_, String> {
+    pub fn par_iter(&self) -> impl ParallelIterator<Item = &String> {
         self.data.par_iter()
     }
     /// Create a new Paths from a Vec of Strings
