@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+
 use criterion::{criterion_group, criterion_main, Criterion};
 use framels::{
     basic_listing, parse_dir,
@@ -7,7 +9,7 @@ use serde::Deserialize;
 
 #[derive(Deserialize)]
 struct PathsJson {
-    paths_list: Vec<String>,
+    paths_list: Vec<PathBuf>,
 }
 impl PathsJson {
     pub fn to_paths(&self) -> Paths {

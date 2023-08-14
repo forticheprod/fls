@@ -12,6 +12,8 @@ use rayon::prelude::*;
 use regex::{Captures, Regex};
 use std::collections::HashMap;
 use std::fs;
+use std::{clone::Clone, path::PathBuf};
+
 
 /// # parse_dir
 /// List files and directories in the targeted directory, take a `String` as
@@ -24,10 +26,10 @@ pub fn parse_dir(input_path: &str) -> Paths {
                 entry.ok().and_then(|e| {
                     e.path()
                         .file_name()
-                        .and_then(|n| n.to_str().map(|s| s.to_owned()))
+                        .map(PathBuf::from)
                 })
             })
-            .collect::<Vec<String>>(),
+            .collect::<Vec<PathBuf>>(),
     )
 }
 
@@ -39,9 +41,14 @@ pub fn recursive_dir(input_path: &str) -> Paths {
         WalkDir::new(input_path)
             .sort(true)
             .into_iter()
-            .filter_map(|e| e.ok())
-            .map(|x| x.path().display().to_string())
-            .collect(),
+            .filter_map(|entry| {
+                entry.ok().and_then(|e| {
+                    e.path()
+                        .file_name()
+                        .map(PathBuf::from)
+                })
+            })
+            .collect::<Vec<PathBuf>>(),
     )
 }
 
@@ -88,12 +95,12 @@ fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
     let extracted: Vec<(String, String)> = if dir_scan.len() < PAR_THRESHOLD {
         dir_scan
             .iter()
-            .map(|path| extract_regex(&re, path))
+            .map(|path| extract_regex(&re, path.to_str().unwrap()))
             .collect()
     } else {
         dir_scan
             .par_iter()
-            .map(|path| extract_regex(&re, path))
+            .map(|path| extract_regex(&re, path.to_str().unwrap()))
             .collect()
     };
     let mut paths_dict: HashMap<String, Vec<String>> = HashMap::with_capacity(extracted.len());
@@ -177,7 +184,13 @@ pub fn basic_listing(frames: Paths) -> PathsPacked {
         })
         .collect();
     frames_list.sort();
-    PathsPacked::new_from_vec(frames_list)
+
+    let paths_packed_data = frames_list
+        .iter()
+        .map(|s| PathBuf::from(s)) // Convert to PathBuf
+        .collect::<Vec<PathBuf>>();
+
+    PathsPacked::new_from_vec(paths_packed_data)
 }
 
 /// This function is intented to check if a file is an exr to call exr module
@@ -208,13 +221,13 @@ pub fn extended_listing(root_path: String, frames: Paths) -> PathsPacked {
     for (key, value) in frames_dict {
         if value[0] == "None" && value.len() == 1 {
             out_frames.push_metadata(get_exr_metada(&re, &root_path, &key));
-            out_frames.push_paths(key);
+            out_frames.push_paths(key.into());
         } else {
             let to = value.first().unwrap();
             let from = String::from_utf8(vec![b'*'; to.len()]).unwrap();
             let new_path = &key.replace(&from, to);
             out_frames.push_metadata(get_exr_metada(&re, &root_path, &new_path));
-            out_frames.push_paths(format!("{}@{}", key, create_frame_string(value)));
+            out_frames.push_paths(format!("{}@{}", key, create_frame_string(value)).into());
         }
     }
     out_frames
@@ -247,10 +260,10 @@ fn test_regex_simple() {
 #[test]
 fn test_parse_string() {
     let source: Paths = Paths::new(vec![
-        "toto.001.tiff".to_string(),
-        "toto.002.tiff".to_string(),
-        "toto.003.tiff".to_string(),
-        "foo.exr".to_string(),
+        "toto.001.tiff".into(),
+        "toto.002.tiff".into(),
+        "toto.003.tiff".into(),
+        "foo.exr".into(),
     ]);
     let vec_toto: Vec<String> = vec!["001".to_string(), "002".to_string(), "003".to_string()];
     let vec_foo: Vec<String> = vec!["None".to_string()];
