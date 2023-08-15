@@ -38,7 +38,7 @@ Run `fls --help`
 
 Run `fls` to list your current directory.
 
-![](./images/fls_demo.gif)
+![demo](./images/fls_demo.gif)
 
 ```bash
 $ touch aaa.001.tif aaa.002.tif aaa.003.tif aaa.004.tif aaa.005.tif foo_bar.exr
@@ -139,7 +139,7 @@ $ fls -r -- .\samples\
 
 ## Benchmarks
 
-![](https://camo.githubusercontent.com/e8a50ee9600d66095bf0046f06e65ef8fe0675a40122db2a801d1f66e595add6/68747470733a2f2f692e726564642e69742f74376e733971746235676838312e6a7067)
+![fast](https://camo.githubusercontent.com/e8a50ee9600d66095bf0046f06e65ef8fe0675a40122db2a801d1f66e595add6/68747470733a2f2f692e726564642e69742f74376e733971746235676838312e6a7067)
 
 Using the sample **big**, some time comparaison with [rvls](https://www.shotgridsoftware.com/rv/download/), [lsseq](https://github.com/jrowellfx/lsseq) or [lss](https://github.com/rsgalloway/pyseq).
 
@@ -147,9 +147,23 @@ Here benchmarks done with [hyperfine](https://github.com/sharkdp/hyperfine) with
 
 ### Simple file listing
 
-| Tool | `fls`    | `rvls`   |`lsseq -l`| `lss`    |
+| Tool | `fls 4.0.0`    | `rvls 2023.0.1`   |`lsseq -l`| `lss`    |
 |------|----------|----------|----------|----------|
-| Time | 6.7 ms   | 43.1 ms  | 33.5 ms  | 41.8 ms  |
+| Time | 4.7 ms   | 23.3 ms  | 33.5 ms  | 41.8 ms  |
+
+```bash
+hyperfine -N --warmup 3 'target/release/fls -- ./samples/big/'
+Benchmark 1: target/release/fls -- ./samples/big/
+  Time (mean ± σ):       4.7 ms ±   0.7 ms    [User: 4.9 ms, System: 1.7 ms]
+  Range (min … max):     4.3 ms …  11.5 ms    560 runs
+```
+
+```bash
+hyperfine --warmup 3 '~/Downloads/rv-centos7-x86-64-2023.0.1/bin/rvls ./samples/big/'
+Benchmark 1: ~/Downloads/rv-centos7-x86-64-2023.0.1/bin/rvls ./samples/big/
+  Time (mean ± σ):      23.3 ms ±   7.1 ms    [User: 20.1 ms, System: 2.3 ms]
+  Range (min … max):    19.4 ms …  51.5 ms    75 runs
+```
 
 ### Exr reading
 
