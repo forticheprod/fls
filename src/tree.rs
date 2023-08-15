@@ -1,57 +1,48 @@
-extern crate ptree;
-use ptree::{print_tree, TreeBuilder};
-use std::borrow::Cow;
+use std::path::PathBuf;
+use std::ffi::OsString;
+use std::collections::HashMap;
+
 
 #[derive(Debug)]
-struct Node {
-    name: String,
-    children: Vec<Node>,
+struct TreeNode {
+    path: PathBuf,
+    children: HashMap<OsString, TreeNode>,
 }
 
-fn build_children(dad: children: Vec<Node>) {
-    for child in children {}
-}
-fn walk_tree(root: Node) {
-    let dad = TreeBuilder::new(root.name);
-    build_children(dad, root.children)
+impl TreeNode {
+    fn new(path: PathBuf) -> TreeNode {
+        TreeNode {
+            path,
+            children: HashMap::new(),
+        }
+    }
 }
 
-pub fn build_tree_from_paths(paths: Vec<String>) -> Node {
-    let mut root = Node {
-        name: String::from("/"), // Root node
-        children: Vec::new(),
-    };
+fn build_tree(paths: &[PathBuf]) -> TreeNode {
+    let mut root_node = TreeNode::new(PathBuf::new());
 
     for path in paths {
-        let mut current_node = &mut root;
-        for component in path.split('/') {
-            if component.is_empty() {
-                continue; // Skip empty components (e.g., leading slash)
-            }
+        let mut current_node = &mut root_node;
 
-            // Check if the component is already a child of the current node
-            if let Some(child) = current_node
+        for component in path.iter() {
+            current_node = current_node
                 .children
-                .iter_mut()
-                .find(|c| c.name == component)
-            {
-                current_node = child; // Move to the existing child
-            } else {
-                // Create a new child node if not found
-                let new_child = Node {
-                    name: String::from(component),
-                    children: Vec::new(),
-                };
-                current_node.children.push(new_child);
-                current_node = current_node.children.last_mut().unwrap();
-            }
+                .entry(component.to_os_string())
+                .or_insert(TreeNode::new(component.into()));
         }
     }
 
-    root
+    root_node
 }
 
-fn build_tree(root: Node) -> TreeBuilder {
-    Node("");
-    ptree::print_tree(&dir).expect("Unable to print directory tree");
+fn print_tree(tree: &TreeNode, indent: usize) {
+    println!("{:indent$}{}", "", tree.path.display(), indent = indent * 4);
+    for child in tree.children.values() {
+        print_tree(child, indent + 1);
+    }
+}
+
+pub fn run_tree(paths: Vec<PathBuf>) {
+    let tree = build_tree(&paths);
+    print_tree(&tree, 0);
 }

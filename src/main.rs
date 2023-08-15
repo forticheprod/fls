@@ -1,5 +1,7 @@
 use clap::Parser;
 use framels::{basic_listing, extended_listing, parse_dir, paths::Paths, recursive_dir};
+mod tree;
+use tree::run_tree;
 
 /// Command line to list directory and pack frames in sequences
 #[derive(Parser, Debug)]
@@ -24,18 +26,22 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-    let in_paths: Paths = if args.recursive && args.tree {
+    let in_paths: Paths = if args.recursive {
         recursive_dir(&args.root)
     } else {
         parse_dir(&args.root)
     };
-    let results: String = if args.list && args.recursive {
-        extended_listing("".to_string(), in_paths).join("\n")
+    let results = if args.list && args.recursive {
+        extended_listing("".to_string(), in_paths)
     } else if args.list {
-        extended_listing(args.root, in_paths).join("\n")
+        extended_listing(args.root, in_paths)
     } else {
-        basic_listing(in_paths).get_paths().join("\n")
+        basic_listing(in_paths)
     };
+    if args.tree{
+        run_tree(results.get_paths().to_vec_path())
+    }else{
+        println!("{}", results.join("\n"))
+    }
 
-    println!("{results}")
 }
