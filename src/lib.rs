@@ -353,6 +353,14 @@ pub fn extended_listing(root_path: String, frames: Paths, multithreaded: bool) -
     out_frames
 }
 
+pub fn simple_exr_read(frames: Paths) -> String {
+    let re: Regex = Regex::new(r".*.exr$").unwrap();
+    let path = frames.first();
+    let root_path: &String = &path.parent().unwrap().to_str().unwrap().to_string();
+    let key: &String = &path.file_name().unwrap().to_str().unwrap().to_string();
+    get_exr_metada(&re, root_path, &key)
+}
+
 /// Unitest
 #[test]
 fn test_parse_dir() {
