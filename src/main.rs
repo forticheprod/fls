@@ -25,7 +25,10 @@ struct Args {
 }
 
 fn main() {
+    // Parse command-line arguments
     let args = Args::parse();
+
+    // Perform directory listing
     let in_paths: Paths = if args.recursive {
         recursive_dir(&args.root)
     } else {
@@ -43,5 +46,4 @@ fn main() {
     }else{
         println!("{}", results.join("\n"))
     }
-
 }
