@@ -36,7 +36,10 @@ fn build_tree(paths: &[PathBuf]) -> TreeNode {
 }
 
 fn print_tree(tree: &TreeNode, indent: usize) {
-    println!("{:indent$}┠ {}", "", tree.path.display(), indent = indent * 4);
+    let t_path = tree.path.display();
+    if &t_path.to_string() != &"".to_string(){
+        println!("{:indent$}┠ {}", "", t_path, indent = indent * 4);
+    }
     for child in tree.children.values() {
         print_tree(child, indent + 1);
     }
