@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+
 use clap::Parser;
 use framels::{
     basic_listing, extended_listing, parse_dir,
@@ -14,6 +16,10 @@ struct Args {
     /// Display EXR metadata size and channels description
     #[arg(short, long)]
     list: bool,
+
+    /// Display EXR metadata size and channels description for a file
+    #[arg(short, long)]
+    exr: bool,
 
     /// Use a recursive approch of listing dir
     #[arg(short, long)]
@@ -37,7 +43,9 @@ fn main() {
     let args = Args::parse();
 
     // Perform directory listing
-    let in_paths: Paths = if args.recursive {
+    let in_paths: Paths = if args.exr {
+        Paths::new(vec![PathBuf::from(&args.root)])
+    } else if args.recursive {
         recursive_dir(&args.root)
     } else {
         parse_dir(&args.root)
