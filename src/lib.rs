@@ -14,7 +14,6 @@ use std::collections::HashMap;
 use std::fs;
 use std::{clone::Clone, path::PathBuf};
 
-
 /// # parse_dir
 /// List files and directories in the targeted directory, take a `String` as
 /// input and return a `Vec<String>` of the entries.
@@ -23,11 +22,9 @@ pub fn parse_dir(input_path: &str) -> Paths {
     Paths::new(
         paths_dir
             .filter_map(|entry| {
-                entry.ok().and_then(|e| {
-                    e.path()
-                        .file_name()
-                        .map(PathBuf::from)
-                })
+                entry
+                    .ok()
+                    .and_then(|e| e.path().file_name().map(PathBuf::from))
             })
             .collect::<Vec<PathBuf>>(),
     )
@@ -42,11 +39,9 @@ pub fn recursive_dir(input_path: &str) -> Paths {
             .sort(true)
             .into_iter()
             .filter_map(|entry| {
-                entry.ok().and_then(|e| {
-                    e.path()
-                        .file_name()
-                        .map(PathBuf::from)
-                })
+                entry
+                    .ok()
+                    .and_then(|e| e.path().file_name().map(PathBuf::from))
             })
             .collect::<Vec<PathBuf>>(),
     )
@@ -70,15 +65,15 @@ fn get_regex() -> Regex {
 /// a tuple of string. For exemple toto.458.jpg should return
 /// (toto.***.jpg, 458)
 #[inline(always)]
-fn extract_regex(re: &Regex, x: &str) -> (String, String) {
+fn extract_regex<'a>(re: &'a Regex, x: &'a str) -> (&'a str, &'a str) {
     let result_caps: Option<Captures> = re.captures(&x);
     match result_caps {
-        None => (x.to_string(), "None".to_string()),
+        None => (x, "None"),
         caps_wrap => {
             let caps = caps_wrap.unwrap();
             (
-                x.replace(&caps["frames"], &"*".repeat(caps["frames"].len())),
-                caps["frames"].to_string(),
+                &x.replace(&caps["frames"], &"*".repeat(caps["frames"].len())),
+                &caps["frames"],
             )
         }
     }
@@ -86,13 +81,13 @@ fn extract_regex(re: &Regex, x: &str) -> (String, String) {
 
 /// Parse the result of a vector of string. This function use HashMap to pack
 /// filename removed from the frame value.
-fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
+fn parse_result<'b>(dir_scan: Paths) -> HashMap<&'b str, Vec<&'b str>> {
     let re = get_regex();
     // Optimisation over PAR_THRESHOLD value, the parsing of the frame list
     // used rayon lib to paralelize the work. Result depends a lot from the
     // cpu number of thread may be put in a config file
     const PAR_THRESHOLD: usize = 100000;
-    let extracted: Vec<(String, String)> = if dir_scan.len() < PAR_THRESHOLD {
+    let extracted: Vec<(&str, &str)> = if dir_scan.len() < PAR_THRESHOLD {
         dir_scan
             .iter()
             .map(|path| extract_regex(&re, path.to_str().unwrap()))
@@ -103,9 +98,9 @@ fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
             .map(|path| extract_regex(&re, path.to_str().unwrap()))
             .collect()
     };
-    let mut paths_dict: HashMap<String, Vec<String>> = HashMap::with_capacity(extracted.len());
+    let mut paths_dict: HashMap<&str, Vec<&str>> = HashMap::with_capacity(extracted.len());
     for extraction in extracted {
-        let vec1: Vec<String> = vec![extraction.1.clone()];
+        let vec1: Vec<&str> = vec![extraction.1.clone()];
         paths_dict
             .entry(extraction.0)
             .and_modify(|value| (*value).push(extraction.1))
@@ -116,10 +111,10 @@ fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
 
 /// Convert the frame string to a number usefull to work with
 /// fn group_continuity and apply comparaison of value
-fn convert_vec(frames_vec: Vec<String>) -> Vec<isize> {
+fn convert_vec(frames_vec: Vec<&str>) -> Vec<isize> {
     let mut out_vec: Vec<isize> = frames_vec
         .into_iter()
-        .map(|x: String| x.parse::<isize>().unwrap())
+        .map(|x: &str| x.parse::<isize>().unwrap())
         .collect::<Vec<isize>>();
     out_vec.sort();
     out_vec
@@ -145,11 +140,11 @@ fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
 /// - convert vector of string into vector of isize
 /// - analyse the continuity
 /// - convert group of continuity into a concat string
-fn create_frame_string(value: Vec<String>) -> String {
+fn create_frame_string(value: Vec<&str>) -> &str {
     let converted_vec_isize: Vec<isize> = convert_vec(value);
     let group_continuity: Vec<Vec<isize>> = group_continuity(&converted_vec_isize);
     // Concatenation of continuity group in a string
-    group_continuity
+    &group_continuity
         .into_iter()
         .map(|x| {
             if x.len() == 1 {
@@ -171,15 +166,15 @@ fn create_frame_string(value: Vec<String>) -> String {
 ///
 /// It take a `Vec<String>` of entries as an input
 ///  - Pack the frames
-pub fn basic_listing(frames: Paths) -> PathsPacked {
-    let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
-    let mut frames_list: Vec<String> = frames_dict
+pub fn basic_listing<'b>(frames: Paths) -> PathsPacked {
+    let frames_dict: HashMap<&str, Vec<&str>> = parse_result(frames);
+    let mut frames_list: Vec<&str> = frames_dict
         .into_par_iter()
         .map(|(key, value)| {
             if value[0] == "None" && value.len() == 1 {
                 key
             } else {
-                format!("{}@{}", key, create_frame_string(value))
+                &format!("{}@{}", key, create_frame_string(value))
             }
         })
         .collect();
@@ -195,12 +190,12 @@ pub fn basic_listing(frames: Paths) -> PathsPacked {
 
 /// This function is intented to check if a file is an exr to call exr module
 /// and print the exr metadata of the file
-fn get_exr_metada(re: &Regex, root_path: &String, path: &String) -> String {
+fn get_exr_metada<'b>(re: &'b Regex, root_path: &'b str, path: &str) -> &'b str {
     if re.is_match(&path) {
-        let path = format!("{}{}", root_path, path);
+        let path = &format!("{}{}", root_path, path);
         read_meta(path)
     } else {
-        "Not an exr".to_string()
+        "Not an exr"
     }
 }
 
@@ -216,7 +211,7 @@ fn get_exr_metada(re: &Regex, root_path: &String, path: &String) -> String {
 ///  - Return a Vector of path packed
 pub fn extended_listing(root_path: String, frames: Paths) -> PathsPacked {
     let re: Regex = Regex::new(r".*.exr$").unwrap();
-    let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
+    let frames_dict: HashMap<&str, Vec<&str>> = parse_result(frames);
     let mut out_frames: PathsPacked = PathsPacked::new_empty();
     for (key, value) in frames_dict {
         if value[0] == "None" && value.len() == 1 {
@@ -243,7 +238,7 @@ fn test_parse_dir() {
 fn test_handle_none() {
     let re = get_regex();
     let source: &str = "foobar.exr";
-    let expected: (String, String) = (source.to_string(), "None".to_string());
+    let expected: (&str, &str) = (source, "None");
     assert_eq!(expected, extract_regex(&re, source))
 }
 
@@ -251,10 +246,7 @@ fn test_handle_none() {
 fn test_regex_simple() {
     let re = get_regex();
     let source: &str = "RenderPass_Beauty_1_00000.exr";
-    let expected: (String, String) = (
-        "RenderPass_Beauty_1_*****.exr".to_string(),
-        "00000".to_string(),
-    );
+    let expected: (&str, &str) = ("RenderPass_Beauty_1_*****.exr", "00000");
     assert_eq!(expected, extract_regex(&re, source))
 }
 #[test]
@@ -265,17 +257,15 @@ fn test_parse_string() {
         "toto.003.tiff".into(),
         "foo.exr".into(),
     ]);
-    let vec_toto: Vec<String> = vec!["001".to_string(), "002".to_string(), "003".to_string()];
-    let vec_foo: Vec<String> = vec!["None".to_string()];
-    let expected: HashMap<String, Vec<String>> = HashMap::from([
-        ("toto.***.tiff".to_string(), vec_toto),
-        ("foo.exr".to_string(), vec_foo),
-    ]);
+    let vec_toto: Vec<&str> = vec!["001", "002", "003"];
+    let vec_foo: Vec<&str> = vec!["None"];
+    let expected: HashMap<&str, Vec<&str>> =
+        HashMap::from([("toto.***.tiff", vec_toto), ("foo.exr", vec_foo)]);
     assert_eq!(expected, parse_result(source));
 }
 #[test]
 fn test_convert_vec() {
-    let source: Vec<String> = vec!["001".to_string(), "005".to_string(), "003".to_string()];
+    let source: Vec<&str> = vec!["001", "005", "003"];
     let expected: Vec<isize> = vec![1, 3, 5];
     assert_eq!(expected, convert_vec(source));
 }
@@ -287,12 +277,7 @@ fn test_continuity() {
 }
 #[test]
 fn test_create_frame_string() {
-    let source: Vec<String> = vec![
-        "001".to_string(),
-        "005".to_string(),
-        "003".to_string(),
-        "002".to_string(),
-    ];
-    let expected: String = "1-3,5".to_string();
+    let source: Vec<&str> = vec!["001", "005", "003", "002"];
+    let expected: &str = "1-3,5";
     assert_eq!(expected, create_frame_string(source));
 }

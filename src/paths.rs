@@ -37,17 +37,21 @@ impl Paths {
         self.data.iter().cloned().collect()
     }
     pub fn join(&self, sep: &str) -> String {
-        self.data.iter().map(|f| f.to_string_lossy()).collect::<Vec<_>>().join(sep)
+        self.data
+            .iter()
+            .map(|f| f.to_string_lossy())
+            .collect::<Vec<_>>()
+            .join(sep)
     }
 }
 
 /// A representation of the paths packed based on the Paths struct
-pub struct PathsPacked {
+pub struct PathsPacked<'c> {
     paths: Paths,
-    metadata: Vec<String>,
+    metadata: Vec<&'c str>,
 }
 
-impl PathsPacked {
+impl<'c> PathsPacked<'c> {
     /// Create a new PathsPacked empty
     pub fn new_empty() -> Self {
         PathsPacked {
@@ -70,24 +74,27 @@ impl PathsPacked {
         self.paths.data.sort()
     }
     /// Push a metadata String
-    pub fn push_metadata(&mut self, path: String) {
+    pub fn push_metadata(&mut self, path: &str) {
         self.metadata.push(path)
     }
     /// Join the paths and the metadata
-    pub fn join(&self, sep: &str) -> String {
-        let paths_strings: Vec<String> = self.paths.data.iter()
-            .map(|f| f.to_string_lossy().into_owned())
-            .collect();
-        
-        let main_vec = paths_strings.into_iter().chain(self.metadata.iter().cloned());
-        main_vec.collect::<Vec<String>>().join(sep)
+    pub fn join(&self, sep: &str) -> &str {
+        let paths_str: Vec<&str> = self
+            .paths
+            .data
+            .iter()
+            .map(|f| f.to_str().unwrap())
+            .collect::<Vec<&str>>();
+
+        let main_vec = paths_str.into_iter().chain(self.metadata.into_iter());
+        &main_vec.collect::<Vec<&str>>().join(sep)
     }
     /// Return a clone of the paths elements
     pub fn get_paths(&self) -> Paths {
         self.paths.clone()
     }
     /// Return a clone of the metadata elements
-    pub fn get_metadata(&self) -> Vec<String> {
-        self.metadata.clone()
+    pub fn get_metadata(&self) -> Vec<&str> {
+        self.metadata
     }
 }
