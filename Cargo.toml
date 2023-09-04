@@ -23,7 +23,7 @@ jwalk = "0.8.1"
 rayon = "1.7.0"
 
 [dependencies.regex]
-version = "1.9.4"
+version = "1.9.5"
 default-features = false
 # regex currently requires the standard library, you must re-enable it.
 features = ["std","unicode-perl"]
