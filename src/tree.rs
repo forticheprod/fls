@@ -1,18 +1,18 @@
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 use std::ffi::OsString;
 use std::path::{Path, PathBuf};
 
 #[derive(Debug)]
 struct TreeNode {
     path: PathBuf,
-    children: HashMap<OsString, TreeNode>,
+    children: BTreeMap<OsString, TreeNode>,
 }
 
 impl TreeNode {
     fn new(path: PathBuf) -> TreeNode {
         TreeNode {
             path,
-            children: HashMap::new(),
+            children: BTreeMap::new(),
         }
     }
 }
