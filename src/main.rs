@@ -41,9 +41,9 @@ fn main() {
     } else {
         basic_listing(in_paths)
     };
-    if args.tree{
+    if args.tree {
         run_tree(results.get_paths().to_vec_path())
-    }else{
+    } else {
         println!("{}", results.join("\n"))
     }
 }
