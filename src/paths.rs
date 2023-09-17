@@ -1,3 +1,12 @@
+//! # Paths
+//!
+//! The Paths struct is a representation of a group of paths.
+//!
+//! It contains a Vec of PathBuf.
+//!
+//! It is used to store the paths of the files in a directory.
+//!
+
 use rayon::prelude::*;
 use std::{clone::Clone, path::PathBuf};
 
@@ -37,11 +46,17 @@ impl Paths {
         self.data.iter().cloned().collect()
     }
     pub fn join(&self, sep: &str) -> String {
-        self.data.iter().map(|f| f.to_string_lossy()).collect::<Vec<_>>().join(sep)
+        self.data
+            .iter()
+            .map(|f| f.to_string_lossy())
+            .collect::<Vec<_>>()
+            .join(sep)
     }
 }
 
 /// A representation of the paths packed based on the Paths struct
+/// It contains the paths and the metadata
+/// The metadata is a Vec of String
 pub struct PathsPacked {
     paths: Paths,
     metadata: Vec<String>,
@@ -75,11 +90,16 @@ impl PathsPacked {
     }
     /// Join the paths and the metadata
     pub fn join(&self, sep: &str) -> String {
-        let paths_strings: Vec<String> = self.paths.data.iter()
+        let paths_strings: Vec<String> = self
+            .paths
+            .data
+            .iter()
             .map(|f| f.to_string_lossy().into_owned())
             .collect();
-        
-        let main_vec = paths_strings.into_iter().chain(self.metadata.iter().cloned());
+
+        let main_vec = paths_strings
+            .into_iter()
+            .chain(self.metadata.iter().cloned());
         main_vec.collect::<Vec<String>>().join(sep)
     }
     /// Return a clone of the paths elements
