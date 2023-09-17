@@ -82,7 +82,7 @@ pub fn recursive_dir(input_path: &str) -> Paths {
 /// (?x) match the remainder of the pattern with the following effective flags:
 /// gmx x modifier: extended. Spaces and text after a # in the pattern are ignored
 /// The frames group should contain between **2** and **9** digit, the extension
-/// group should contains only letters between 2 and 5
+/// group should contains only letters between 2 and 5 characters.
 fn get_regex() -> Regex {
     let re = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$");
     match re {
@@ -150,7 +150,8 @@ fn convert_vec(frames_vec: Vec<String>) -> Vec<isize> {
     out_vec
 }
 
-/// Check the continuity of a numbers' serie
+/// Check the continuity of a numbers' serie and return a vector of vector of
+/// isize with the continuity group
 fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
     let mut slice_start: usize = 0;
     let mut result: Vec<&[isize]> = Vec::new();
@@ -196,6 +197,14 @@ fn create_frame_string(value: Vec<String>) -> String {
 ///
 /// It take a `Vec<String>` of entries as an input
 ///  - Pack the frames
+/// - Return a Vector of path packed
+/// ### Example
+/// ```rust
+/// use framels::{basic_listing, parse_dir};
+/// let source = parse_dir("./samples/small");
+/// let result = basic_listing(source);
+/// assert_eq!(result.get_paths().len(), 6);
+/// ```
 pub fn basic_listing(frames: Paths) -> PathsPacked {
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
     let mut frames_list: Vec<String> = frames_dict
@@ -239,6 +248,21 @@ fn get_exr_metada(re: &Regex, root_path: &String, path: &String) -> String {
 ///  - Pack the frames
 ///  - Print the metada if the sequence is an exr sequence
 ///  - Return a Vector of path packed
+/// ### Example
+/// ```rust
+/// use framels::{extended_listing, parse_dir};
+/// let source = parse_dir("./samples/small");
+/// let result = extended_listing("./samples/small".to_string(), source);
+/// assert_eq!(result.get_paths().len(), 6);
+/// ```
+/// ### Example of output
+/// ```bash
+/// ./samples/small/RenderPass_Beauty_1_*****.exr@0-9    1920x1080, RGBA
+/// ```
+/// ### Example of output with non exr file
+/// ```bash
+/// ./samples/small/foo.exr    Not an exr
+/// ```
 pub fn extended_listing(root_path: String, frames: Paths) -> PathsPacked {
     let re: Regex = Regex::new(r".*.exr$").unwrap();
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
