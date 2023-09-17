@@ -82,3 +82,39 @@ $ fls -r -- .\samples\
 ```
 
 Watch out, the recursive mode is not compatible with the `-l, --list` option, at the moment.
+
+### Tree
+
+You can use a tree approch of the directory and sub-folder
+
+You can use `-t` or `--tree`
+
+Always use `-r` to use the tree mode.
+
+Run `fls -t -r -- /path/of/directory/` to list a specific directory and his
+subfolder
+
+```bash
+$ fls -t -r -- .\samples\
+┗ 
+    ┗ samples
+        ┗ big
+            ┗ RenderPass_Beauty_1_*****.exr@0-96
+            ┗ RenderPass_DiffuseKey_1_*****.exr@0-96
+            ┗ RenderPass_Diffuse_1_*****.exr@0-96
+            ┗ RenderPass_Id_1_*****.exr@0-96
+            ┗ RenderPass_IndDiffuse_1_*****.exr@0-96
+            ┗ RenderPass_Ncam_1_*****.exr@0-41,43-96
+            ┗ RenderPass_Ncam_1_00042.exr.bkp
+            ┗ RenderPass_Occlusion_1_*****.exr@0-73,75-96
+            ┗ RenderPass_Occlusion_1_***.exr@74
+            ┗ RenderPass_Pcam_1_*****.exr@0-96
+            ┗ RenderPass_Reflection_1_*****.exr@0-96
+            ┗ RenderPass_SpecularRim_1_*****.exr@0-96
+            ┗ RenderPass_Specular_1_*****.exr@0-96
+        ┗ mega
+            ┗ response_1689510067951.json
+        ┗ small
+            ┗ aaa.***.tif@1-5
+            ┗ foo_bar.exr
+```
