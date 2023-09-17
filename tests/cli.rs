@@ -72,13 +72,25 @@ fn cli_listing() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 #[test]
-fn clir_listing_recursive() -> Result<(), Box<dyn std::error::Error>> {
+fn cli_listing_recursive() -> Result<(), Box<dyn std::error::Error>> {
     let mut cmd = Command::cargo_bin("fls")?;
 
     cmd.arg("-l").arg("-r").arg("--").arg("./samples/");
     cmd.assert()
         .success()
         .stdout(predicate::str::contains("layer #0 size:Vec2(8, 8);"));
+
+    Ok(())
+}
+
+#[test]
+fn cli_tree() -> Result<(), Box<dyn std::error::Error>> {
+    let mut cmd = Command::cargo_bin("fls")?;
+
+    cmd.arg("-t").arg("-r").arg("--").arg("./samples");
+    cmd.assert()
+        .success()
+        .stdout(predicate::str::contains("┗ foo_bar.exr"));
 
     Ok(())
 }
