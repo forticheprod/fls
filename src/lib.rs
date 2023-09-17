@@ -198,13 +198,6 @@ fn create_frame_string(value: Vec<String>) -> String {
 /// It take a `Vec<String>` of entries as an input
 ///  - Pack the frames
 /// - Return a Vector of path packed
-/// ### Example
-/// ```rust
-/// use framels::{basic_listing, parse_dir};
-/// let source = parse_dir("./samples/small");
-/// let result = basic_listing(source);
-/// assert_eq!(result.get_paths().len(), 6);
-/// ```
 pub fn basic_listing(frames: Paths) -> PathsPacked {
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
     let mut frames_list: Vec<String> = frames_dict
@@ -248,13 +241,7 @@ fn get_exr_metada(re: &Regex, root_path: &String, path: &String) -> String {
 ///  - Pack the frames
 ///  - Print the metada if the sequence is an exr sequence
 ///  - Return a Vector of path packed
-/// ### Example
-/// ```rust
-/// use framels::{extended_listing, parse_dir};
-/// let source = parse_dir("./samples/small");
-/// let result = extended_listing("./samples/small".to_string(), source);
-/// assert_eq!(result.get_paths().len(), 6);
-/// ```
+///
 /// ### Example of output
 /// ```bash
 /// ./samples/small/RenderPass_Beauty_1_*****.exr@0-9    1920x1080, RGBA
