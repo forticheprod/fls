@@ -36,12 +36,13 @@ impl Paths {
     pub fn to_vec_path(&self) -> Vec<PathBuf> {
         self.data.iter().cloned().collect()
     }
-    pub fn join(&self, sep: &str) -> String {
+    pub fn join(&self, sep: &str) -> &str {
         self.data
             .iter()
             .map(|f| f.to_string_lossy())
             .collect::<Vec<_>>()
             .join(sep)
+            .as_str()
     }
 }
 

@@ -166,7 +166,7 @@ fn create_frame_string(value: Vec<&str>) -> &str {
 ///
 /// It take a `Vec<String>` of entries as an input
 ///  - Pack the frames
-pub fn basic_listing<'b>(frames: Paths) -> PathsPacked {
+pub fn basic_listing<'b>(frames: Paths) -> PathsPacked<'b> {
     let frames_dict: HashMap<&str, Vec<&str>> = parse_result(frames);
     let mut frames_list: Vec<&str> = frames_dict
         .into_par_iter()
@@ -209,7 +209,7 @@ fn get_exr_metada<'b>(re: &'b Regex, root_path: &'b str, path: &str) -> &'b str 
 ///  - Pack the frames
 ///  - Print the metada if the sequence is an exr sequence
 ///  - Return a Vector of path packed
-pub fn extended_listing(root_path: String, frames: Paths) -> PathsPacked {
+pub fn extended_listing<'b>(root_path: String, frames: Paths) -> PathsPacked<'b> {
     let re: Regex = Regex::new(r".*.exr$").unwrap();
     let frames_dict: HashMap<&str, Vec<&str>> = parse_result(frames);
     let mut out_frames: PathsPacked = PathsPacked::new_empty();

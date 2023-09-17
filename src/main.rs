@@ -30,7 +30,7 @@ fn main() {
     };
 
     // Generate results based on arguments
-    let results: String = if args.list {
+    let results: &str = if args.list {
         if args.recursive {
             extended_listing("".to_string(), in_paths).join("\n")
         } else {
