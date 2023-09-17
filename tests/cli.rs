@@ -46,3 +46,27 @@ fn cli_version() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
+
+#[test]
+fn cli_help() -> Result<(), Box<dyn std::error::Error>> {
+    let mut cmd = Command::cargo_bin("fls")?;
+
+    cmd.arg("-h");
+    cmd.assert().success().stdout(predicate::str::contains(
+        "a simple command line tool to list frame sequence in friendly way",
+    ));
+
+    Ok(())
+}
+
+#[test]
+fn cli_listing() -> Result<(), Box<dyn std::error::Error>> {
+    let mut cmd = Command::cargo_bin("fls")?;
+
+    cmd.arg("-l").arg("--").arg("./samples/small/");
+    cmd.assert().success().stdout(predicate::str::contains(
+        "./samples/small/foo_bar.exr layer #0 size:Vec2(8, 8);",
+    ));
+
+    Ok(())
+}
