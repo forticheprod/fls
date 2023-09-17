@@ -70,3 +70,15 @@ fn cli_listing() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
+
+#[test]
+fn clir_listing_recursive() -> Result<(), Box<dyn std::error::Error>> {
+    let mut cmd = Command::cargo_bin("fls")?;
+
+    cmd.arg("-l").arg("-r").arg("--").arg("./samples/");
+    cmd.assert()
+        .success()
+        .stdout(predicate::str::contains("layer #0 size:Vec2(8, 8);"));
+
+    Ok(())
+}
