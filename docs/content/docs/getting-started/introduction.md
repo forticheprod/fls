@@ -16,7 +16,7 @@ top = false
 
 ## Quick Start
 
-One page summary of how to start a new AdiDoks project. [Quick Start →](../quick-start/)
+One page summary of how to start to use framels. [Quick Start →](../quick-start/)
 
 ## Go further
 
