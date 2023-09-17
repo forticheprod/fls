@@ -3,6 +3,36 @@
 //! sequence of files. This lib is industry oriented for Animation and VFX,
 //! using a lot a frames sequences.
 //! The main objective is to be the fastest as possible using rustlang.
+//! ## Usage
+//! ```rust
+//! use framels::{basic_listing, extended_listing, parse_dir, paths::Paths, recursive_dir};
+//!
+//! fn main() {
+//!    // Perform directory listing
+//!   let in_paths: Paths = parse_dir("./samples/small");
+//!
+//!  // Generate results based on arguments
+//! let results: String = basic_listing(in_paths).get_paths().join("\n");
+//!
+//! println!("{}", results)
+//! }
+//! ```
+//! ## Command line
+//! framels is also a command line tool to list directory and pack frames in sequences
+//! ```bash
+//! framels
+//! framels is a Library to list files and directorys like `ls` style and return a packed sequence of files
+//! This lib is industry oriented for Animation and VFX, using a lot a frames sequences.
+//! The main objective is to be the fastest as possible using rustlang.
+//!     --list         Display EXR metadata size and channels description
+//!    --recursive    Use a recursive approch of listing dir
+//!   -- <root>    Path to parse
+//! ```
+//! ## Example
+//! ```bash
+//!     $ fls --list --recursive -- ./samples/small
+//!    ./samples/small/RenderPass_Beauty_1_*****.exr@0-9    1920x1080, RGBA
+//! ```
 mod exr_metadata;
 pub mod paths;
 use crate::exr_metadata::read_meta;
@@ -14,7 +44,6 @@ use std::collections::HashMap;
 use std::fs;
 use std::{clone::Clone, path::PathBuf};
 
-
 /// # parse_dir
 /// List files and directories in the targeted directory, take a `String` as
 /// input and return a `Vec<String>` of the entries.
@@ -23,11 +52,9 @@ pub fn parse_dir(input_path: &str) -> Paths {
     Paths::new(
         paths_dir
             .filter_map(|entry| {
-                entry.ok().and_then(|e| {
-                    e.path()
-                        .file_name()
-                        .map(PathBuf::from)
-                })
+                entry
+                    .ok()
+                    .and_then(|e| e.path().file_name().map(PathBuf::from))
             })
             .collect::<Vec<PathBuf>>(),
     )
@@ -42,11 +69,9 @@ pub fn recursive_dir(input_path: &str) -> Paths {
             .sort(true)
             .into_iter()
             .filter_map(|entry| {
-                entry.ok().and_then(|e| {
-                    e.path()
-                        .file_name()
-                        .map(PathBuf::from)
-                })
+                entry
+                    .ok()
+                    .and_then(|e| e.path().file_name().map(PathBuf::from))
             })
             .collect::<Vec<PathBuf>>(),
     )
