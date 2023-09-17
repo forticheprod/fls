@@ -4,12 +4,12 @@ title = "A simple but sexy ls command line tool"
 
 # The homepage contents
 [extra]
-lead = '<b>fls</b> is a command line tool dedicated to animation and vfx, terminal user.'
+lead = '<b>framels</b> is a command line tool and lib dedicated to animation and vfx, for terminal user or simply other rust projects.'
 url = "/docs/getting-started/introduction/"
 url_button = "Get started"
-repo_version = "GitHub v0.4.0rc.5"
+repo_version = "GitHub v0.4.2"
 repo_license = "Open-source MIT License."
-repo_url = "https://github.com/doubleailes/fls"
+repo_url = "https://github.com/doubleailes/fls/tree/0.4.2"
 
 # Menu items
 [[extra.menu.main]]
@@ -25,5 +25,9 @@ content = 'Inspire by the standard industry <b>rvls</b> command line from Autode
 [[extra.list]]
 title = "Fast"
 content = '<b>fls</b> is made to be really fast. 5x time faster than any others'
+
+[[extra.list]]
+title = "🦀"
+content = '<b>framels</b> is made with pure rust lib which is helping the compatibility with all OS'
 
 +++

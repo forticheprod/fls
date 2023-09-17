@@ -19,11 +19,13 @@ top = false
 ### Configuration
 
 a standard machine with an OS listed below:
-- Windows 10 x86_64+
-- current linux distro tested: Fedora 37, Centos 7, Manjaro 22
+
+- Windows 10+ x86_64
+- current linux distro tested: Fedora 37, Centos 7, Manjaro 22, rocky 9.2
 - MacOs 10.7+
 
 ### Terminal
+
 Before using `fls` you need to have the adminstrator right and terminal application
 like **powershell** or **gnome-terminal**
 
@@ -58,7 +60,6 @@ You can install via [<https://crates.io/>](https://crates.io/crates/framels)
 Run `fls --help`
 
 ### Basic
-
 
 #### Current directory
 

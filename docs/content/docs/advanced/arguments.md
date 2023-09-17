@@ -80,3 +80,5 @@ $ fls -r -- .\samples\
 .\samples\big\RenderPass_Reflection_1_*****.exr@0-96
 .\samples\small\aaa.***.tif@1-5
 ```
+
+Watch out, the recursive mode is not compatible with the `-l, --list` option, at the moment.
