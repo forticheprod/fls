@@ -68,11 +68,7 @@ pub fn recursive_dir(input_path: &str) -> Paths {
         WalkDir::new(input_path)
             .sort(true)
             .into_iter()
-            .filter_map(|entry| {
-                entry
-                    .ok()
-                    .and_then(|e| e.path().file_name().map(PathBuf::from))
-            })
+            .filter_map(|entry| entry.ok().and_then(|e| Some(e.path())))
             .collect::<Vec<PathBuf>>(),
     )
 }
