@@ -1,6 +1,6 @@
-use std::path::{Path, PathBuf};
 use std::collections::HashMap;
 use std::ffi::OsString;
+use std::path::{Path, PathBuf};
 
 #[derive(Debug)]
 struct TreeNode {
@@ -35,7 +35,12 @@ fn build_tree(paths: &[PathBuf]) -> TreeNode {
 }
 
 fn print_tree(tree: &TreeNode, indent: usize) {
-    println!("{:indent$}┗ {}", "", tree.path.display(), indent = indent * 4);
+    println!(
+        "{:indent$}┗ {}",
+        "",
+        tree.path.display(),
+        indent = indent * 4
+    );
     for child in tree.children.values() {
         print_tree(child, indent + 1);
     }
