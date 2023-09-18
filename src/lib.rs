@@ -141,7 +141,8 @@ fn convert_vec(frames_vec: Vec<String>) -> Vec<isize> {
     let mut out_vec: Vec<isize> = frames_vec
         .into_iter()
         .map(|x: String| x.parse::<isize>().unwrap())
-        .collect::<Vec<isize>>();
+        .collect();
+    out_vec.map_in_place(|x| *x);
     out_vec.sort();
     out_vec
 }
