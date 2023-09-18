@@ -150,7 +150,7 @@ fn convert_vec(frames_vec: Vec<String>) -> Vec<isize> {
 /// isize with the continuity group
 fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
     let mut slice_start: usize = 0;
-    let mut result: Vec<&[isize]> = Vec::new();
+    let mut result: Vec<&[isize]> = Vec::with_capacity(data.len());
     for i in 1..data.len() {
         if data[i - 1] + 1 != data[i] {
             result.push(&data[slice_start..i]);
