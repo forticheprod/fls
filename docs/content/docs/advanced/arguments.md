@@ -18,10 +18,10 @@ top = false
 
 Run `fls -l` to list your current directory and display EXR informations.
 
-Run `fls -l -- /path/of/directory/` to list a specific directory and display EXR informations.
+Run `fls -l /path/of/directory/` to list a specific directory and display EXR informations.
 
 ```bash
-$ fls -l -- samples/big/
+$ fls -l samples/big/
 RenderPass_Beauty_1_*****.exr@0-96
 RenderPass_Occlusion_1_*****.exr@0-73,75-96
 RenderPass_Id_1_*****.exr@0-96
@@ -56,11 +56,11 @@ You can use a recursive approch of the directory and sub-folder
 
 You can use `-r`
 
-Run `fls -r -- /path/of/directory/` to list a specific directory and his
+Run `fls -r /path/of/directory/` to list a specific directory and his
 subfolder
 
 ```bash
-$ fls -r -- .\samples\
+$ fls -r .\samples\
 .\samples\big\RenderPass_Diffuse_1_*****.exr@0-96
 .\samples\big\RenderPass_Ncam_1_00042.exr.bkp
 .\samples\big\RenderPass_DiffuseKey_1_*****.exr@0-96
@@ -91,11 +91,11 @@ You can use `-t` or `--tree`
 
 Always use `-r` to use the tree mode.
 
-Run `fls -t -r -- /path/of/directory/` to list a specific directory and his
+Run `fls -t -r /path/of/directory/` to list a specific directory and his
 subfolder
 
 ```bash
-$ fls -t -r -- .\samples\
+$ fls -t -r .\samples\
 ┗ 
     ┗ samples
         ┗ big

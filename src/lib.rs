@@ -26,11 +26,11 @@
 //! The main objective is to be the fastest as possible using rustlang.
 //!     --list         Display EXR metadata size and channels description
 //!    --recursive    Use a recursive approch of listing dir
-//!   -- <root>    Path to parse
+//!   <root>    Path to parse
 //! ```
 //! ## Example
 //! ```bash
-//!     $ fls --list --recursive -- ./samples/small
+//!     $ fls --list --recursive ./samples/small
 //!    ./samples/small/RenderPass_Beauty_1_*****.exr@0-9    1920x1080, RGBA
 //! ```
 mod exr_metadata;
