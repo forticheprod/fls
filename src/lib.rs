@@ -150,7 +150,7 @@ fn convert_vec(frames_vec: Vec<String>) -> Vec<isize> {
 /// isize with the continuity group
 fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
     let mut slice_start: usize = 0;
-    let mut result: Vec<&[isize]> = Vec::with_capacity(data.len());
+    let mut result: Vec<&[isize]> = Vec::new();
     for i in 1..data.len() {
         if data[i - 1] + 1 != data[i] {
             result.push(&data[slice_start..i]);
@@ -171,18 +171,17 @@ fn create_frame_string(value: Vec<String>) -> String {
     let converted_vec_isize: Vec<isize> = convert_vec(value);
     let group_continuity: Vec<Vec<isize>> = group_continuity(&converted_vec_isize);
     // Concatenation of continuity group in a string
-    let mut result = String::with_capacity(converted_vec_isize.len() * 2);
-    for (i, x) in group_continuity.into_iter().enumerate() {
-        if i > 0 {
-            result.push(',');
-        }
-        if x.len() == 1 {
-            result.push_str(&x[0].to_string());
-        } else {
-            result.push_str(&format!("{}-{}", x.first().unwrap(), x.last().unwrap()));
-        }
-    }
-    result
+    group_continuity
+        .into_iter()
+        .map(|x| {
+            if x.len() == 1 {
+                x[0].to_string()
+            } else {
+                format!("{}-{}", x.first().unwrap(), x.last().unwrap())
+            }
+        })
+        .collect::<Vec<String>>()
+        .join(",")
 }
 
 /// ## Basic listing of the library
