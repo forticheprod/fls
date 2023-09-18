@@ -16,7 +16,7 @@ fn get_error_missing_folder_localize() -> String {
 fn file_doesnt_exist() -> Result<(), Box<dyn std::error::Error>> {
     let mut cmd: Command = Command::cargo_bin("fls")?;
 
-    cmd.arg("--").arg("./samples/toto/");
+    cmd.arg("./samples/toto/");
     cmd.assert()
         .failure()
         .stderr(predicate::str::contains(get_error_missing_folder_localize()));
@@ -28,7 +28,7 @@ fn file_doesnt_exist() -> Result<(), Box<dyn std::error::Error>> {
 fn file_exist() -> Result<(), Box<dyn std::error::Error>> {
     let mut cmd = Command::cargo_bin("fls")?;
 
-    cmd.arg("--").arg("./samples/small/");
+    cmd.arg("./samples/small/");
     cmd.assert()
         .success()
         .stdout(predicate::str::contains("aaa.***.tif@1-5\nfoo_bar.exr"));
@@ -63,7 +63,7 @@ fn cli_help() -> Result<(), Box<dyn std::error::Error>> {
 fn cli_listing() -> Result<(), Box<dyn std::error::Error>> {
     let mut cmd = Command::cargo_bin("fls")?;
 
-    cmd.arg("-l").arg("--").arg("./samples/small/");
+    cmd.arg("-l").arg("./samples/small/");
     cmd.assert().success().stdout(predicate::str::contains(
         "./samples/small/foo_bar.exr layer #0 size:Vec2(8, 8);",
     ));
@@ -75,7 +75,7 @@ fn cli_listing() -> Result<(), Box<dyn std::error::Error>> {
 fn cli_listing_recursive() -> Result<(), Box<dyn std::error::Error>> {
     let mut cmd = Command::cargo_bin("fls")?;
 
-    cmd.arg("-l").arg("-r").arg("--").arg("./samples/");
+    cmd.arg("-l").arg("-r").arg("./samples/");
     cmd.assert()
         .success()
         .stdout(predicate::str::contains("layer #0 size:Vec2(8, 8);"));
@@ -87,7 +87,7 @@ fn cli_listing_recursive() -> Result<(), Box<dyn std::error::Error>> {
 fn cli_tree() -> Result<(), Box<dyn std::error::Error>> {
     let mut cmd = Command::cargo_bin("fls")?;
 
-    cmd.arg("-t").arg("-r").arg("--").arg("./samples");
+    cmd.arg("-t").arg("-r").arg("./samples");
     cmd.assert()
         .success()
         .stdout(predicate::str::contains("┗ foo_bar.exr"));
@@ -99,7 +99,7 @@ fn cli_tree() -> Result<(), Box<dyn std::error::Error>> {
 fn cli_tree_with_listing() -> Result<(), Box<dyn std::error::Error>> {
     let mut cmd = Command::cargo_bin("fls")?;
 
-    cmd.arg("-t").arg("-l").arg("-r").arg("--").arg("./samples");
+    cmd.arg("-t").arg("-l").arg("-r").arg("./samples");
     cmd.assert()
         .success()
         .stdout(predicate::str::contains("┗ foo_bar.exr"));
@@ -111,7 +111,7 @@ fn cli_tree_with_listing() -> Result<(), Box<dyn std::error::Error>> {
 fn cli_tree_with_listing_and_recursive() -> Result<(), Box<dyn std::error::Error>> {
     let mut cmd = Command::cargo_bin("fls")?;
 
-    cmd.arg("-t").arg("-l").arg("-r").arg("--").arg("./samples");
+    cmd.arg("-t").arg("-l").arg("-r").arg("./samples");
     cmd.assert()
         .success()
         .stdout(predicate::str::contains("┗ foo_bar.exr"));
