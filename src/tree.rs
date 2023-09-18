@@ -16,7 +16,34 @@ impl TreeNode {
         }
     }
 }
-
+/// Builds a tree of `TreeNode` objects from a slice of `PathBuf` objects.
+///
+/// # Arguments
+///
+/// * `paths` - A slice of `PathBuf` objects representing the paths to include in the tree.
+///
+/// # Returns
+///
+/// A `TreeNode` object representing the root of the tree.
+///
+/// # Example
+///
+/// ```
+/// use std::path::PathBuf;
+/// use tree::TreeNode;
+///
+/// let paths = vec![
+///     PathBuf::from("/foo/bar/baz"),
+///     PathBuf::from("/foo/bar/qux"),
+///     PathBuf::from("/foo/quux"),
+/// ];
+///
+/// let root_node = build_tree(&paths);
+///
+/// assert_eq!(root_node.children.len(), 1);
+/// assert_eq!(root_node.children.keys().next().unwrap(), "foo");
+/// assert_eq!(root_node.children.values().next().unwrap().children.len(), 2);
+/// ```
 fn build_tree(paths: &[PathBuf]) -> TreeNode {
     let mut root_node = TreeNode::new(PathBuf::new());
 
