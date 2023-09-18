@@ -47,12 +47,12 @@ foo_bar.exr
 aaa.***.tif@1-5
 ```
 
-Run `fls -- /path/of/directory/` to list a specific directory.
+Run `fls /path/of/directory/` to list a specific directory.
 
 Exemple with the sample set **big** at the root level of the repo
 
 ```bash
-$ fls -- samples/big/
+$ fls samples/big/
 RenderPass_Pcam_1_*****.exr@0-96
 RenderPass_Beauty_1_*****.exr@0-96
 RenderPass_IndDiffuse_1_*****.exr@0-96
@@ -74,10 +74,10 @@ Inspired by rvls. You can use `-l`
 
 Run `fls -l` to list your current directory and display EXR informations.
 
-Run `fls -l -- /path/of/directory/` to list a specific directory and display EXR informations.
+Run `fls -l /path/of/directory/` to list a specific directory and display EXR informations.
 
 ```bash
-$ fls -l -- samples/big/
+$ fls -l samples/big/
 RenderPass_Beauty_1_*****.exr@0-96
 RenderPass_Occlusion_1_*****.exr@0-73,75-96
 RenderPass_Id_1_*****.exr@0-96
@@ -112,11 +112,11 @@ You can use a recursive approch of the directory and sub-folder
 
 You can use `-r`
 
-Run `fls -r -- /path/of/directory/` to list a specific directory and his
+Run `fls -r /path/of/directory/` to list a specific directory and his
 subfolder
 
 ```bash
-$ fls -r -- .\samples\
+$ fls -r .\samples\
 .\samples\big\RenderPass_Diffuse_1_*****.exr@0-96
 .\samples\big\RenderPass_Ncam_1_00042.exr.bkp
 .\samples\big\RenderPass_DiffuseKey_1_*****.exr@0-96
@@ -145,11 +145,11 @@ You can use `-t`
 
 Always use `-r` to use the tree mode.
 
-Run `fls -t -r -- /path/of/directory/` to list a specific directory and his
+Run `fls -t -r /path/of/directory/` to list a specific directory and his
 subfolder
 
 ```bash
-$ fls -t -r -- .\samples\
+$ fls -t -r .\samples\
 ┗ 
     ┗ samples
         ┗ big
@@ -188,8 +188,8 @@ Here benchmarks done with [hyperfine](https://github.com/sharkdp/hyperfine) with
 | Time | 4.7 ms   | 23.3 ms  | 33.5 ms  | 41.8 ms  |
 
 ```bash
-hyperfine -N --warmup 3 'target/release/fls -- ./samples/big/'
-Benchmark 1: target/release/fls -- ./samples/big/
+hyperfine -N --warmup 3 'target/release/fls ./samples/big/'
+Benchmark 1: target/release/fls ./samples/big/
   Time (mean ± σ):       4.7 ms ±   0.7 ms    [User: 4.9 ms, System: 1.7 ms]
   Range (min … max):     4.3 ms …  11.5 ms    560 runs
 ```

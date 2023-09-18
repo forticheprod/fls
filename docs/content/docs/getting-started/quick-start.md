@@ -74,12 +74,12 @@ aaa.***.tif@1-5
 
 #### Specific directory
 
-Run `fls -- /path/of/directory/` to list a specific directory.
+Run `fls /path/of/directory/` to list a specific directory.
 
 Exemple with the sample set **big** at the root level of the repo
 
 ```bash
-$ fls -- ./samples/big/
+$ fls ./samples/big/
 RenderPass_Pcam_1_*****.exr@0-96
 RenderPass_Beauty_1_*****.exr@0-96
 RenderPass_IndDiffuse_1_*****.exr@0-96
