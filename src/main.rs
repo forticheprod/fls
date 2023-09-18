@@ -20,7 +20,7 @@ struct Args {
     tree: bool,
 
     /// Path to parse
-    #[arg(default_value_t = String::from("./"), last = true)]
+    #[arg(value_name = "PATH", default_value_t = String::from("./"))]
     root: String,
 }
 
