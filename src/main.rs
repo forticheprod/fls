@@ -28,6 +28,9 @@ struct Args {
     /// Represent output as a tree
     #[arg(short, long)]
     tree: bool,
+    /// Display Buf format
+    #[arg(short, long)]
+    buf: bool,
 
     /// Force the use of multithreading
     #[arg(short, long, default_value_t = false)]
