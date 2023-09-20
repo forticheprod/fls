@@ -18,6 +18,9 @@ struct Args {
     /// Represent output as a tree
     #[arg(short, long)]
     tree: bool,
+    /// Display Buf format
+    #[arg(short, long)]
+    buf: bool,
 
     /// Path to parse
     #[arg(value_name = "PATH", default_value_t = String::from("./"))]
