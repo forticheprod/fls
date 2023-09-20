@@ -233,10 +233,19 @@ fn create_frame_string(value: Vec<String>) -> String {
         .join(",")
 }
 
-/// # basic_listing
-///
-///
-/// ## Description
+/// This part of the code is not already used
+#[allow(dead_code)]
+fn concat_line(main_string: String, frame_string: String) -> String {
+    let buf: bool = false;
+    if buf {
+        let from: String = String::from("#####");
+        main_string.replace(&from, &frame_string)
+    } else {
+        format!("{}@{}", main_string, frame_string)
+    }
+}
+/// ## Basic listing of the library
+/// ### Description
 ///
 /// This function is the main function of the library it use a list of
 /// filename as in input and pack the frame sequences using a new filename
@@ -407,4 +416,11 @@ fn test_create_frame_string() {
     ];
     let expected: String = "1-3,5".to_string();
     assert_eq!(expected, create_frame_string(source));
+}
+#[test]
+fn test_concat_line() {
+    let main_string: String = String::from("toto");
+    let frame_string: String = String::from("bar");
+    let expected: String = String::from("toto@bar");
+    assert_eq!(expected, concat_line(main_string, frame_string));
 }
