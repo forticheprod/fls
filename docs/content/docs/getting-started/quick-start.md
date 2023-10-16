@@ -33,7 +33,7 @@ like **powershell** or **gnome-terminal**
 
 ### Pre-compile bin
 
-You can download the last version <https://github.com/doubleailes/fls/releases>
+You can download the last version <https://github.com/forticheprod/fls/releases>
 
 #### Windows
 

@@ -69,7 +69,7 @@ timezone = "America/New_York"
 
 # Edit page on reposity or not
 edit_page = false
-docs_repo = "https://github.com/doubleailes/fls"
+docs_repo = "https://github.com/forticheprod/fls"
 repo_branch = "main"
 
 ## Math settings
