@@ -12,7 +12,7 @@ The user guide is [here](https://doubleailes.github.io/fls/).
 
 ### Pre-compile bin
 
-You can download the last version <https://github.com/doubleailes/fls/releases>.
+You can download the last version <https://github.com/forticheprod/fls/releases>.
 
 #### Windows
 
