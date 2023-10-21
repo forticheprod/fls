@@ -37,6 +37,7 @@ mod exr_metadata;
 pub mod paths;
 use crate::exr_metadata::read_meta;
 use jwalk::WalkDir;
+use lazy_static::lazy_static;
 use paths::{Paths, PathsPacked};
 use rayon::prelude::*;
 use regex::{Captures, Regex};
@@ -73,20 +74,6 @@ pub fn recursive_dir(input_path: &str) -> Paths {
     )
 }
 
-/// This function compile the main regular expression used to extract the
-/// frames from the file name.
-/// (?x) match the remainder of the pattern with the following effective flags:
-/// gmx x modifier: extended. Spaces and text after a # in the pattern are ignored
-/// The frames group should contain between **2** and **9** digit, the extension
-/// group should contains only letters between 2 and 5 characters.
-fn get_regex() -> Regex {
-    let re = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$");
-    match re {
-        Ok(succes_value) => succes_value,
-        Err(err) => panic!("Can't compile regex with error {}", err),
-    }
-}
-
 /// This function extract the matching group based on regex already compile to
 /// a tuple of string. For exemple toto.458.jpg should return
 /// (toto.***.jpg, 458)
@@ -108,7 +95,10 @@ fn extract_regex(re: &Regex, x: &str) -> (String, String) {
 /// Parse the result of a vector of string. This function use HashMap to pack
 /// filename removed from the frame value.
 fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
-    let re = get_regex();
+    lazy_static! {
+        static ref RE_FLS: Regex = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$")
+            .expect("Can't compile regex");
+    }
     // Optimisation over PAR_THRESHOLD value, the parsing of the frame list
     // used rayon lib to paralelize the work. Result depends a lot from the
     // cpu number of thread may be put in a config file
@@ -116,12 +106,12 @@ fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
     let extracted: Vec<(String, String)> = if dir_scan.len() < PAR_THRESHOLD {
         dir_scan
             .iter()
-            .map(|path| extract_regex(&re, path.to_str().unwrap()))
+            .map(|path| extract_regex(&RE_FLS, path.to_str().unwrap()))
             .collect()
     } else {
         dir_scan
             .par_iter()
-            .map(|path| extract_regex(&re, path.to_str().unwrap()))
+            .map(|path| extract_regex(&RE_FLS, path.to_str().unwrap()))
             .collect()
     };
     let mut paths_dict: HashMap<String, Vec<String>> = HashMap::with_capacity(extracted.len());
@@ -273,21 +263,27 @@ fn test_parse_dir() {
 }
 #[test]
 fn test_handle_none() {
-    let re = get_regex();
+    lazy_static! {
+        static ref RE_FLS: Regex = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$")
+            .expect("Can't compile regex");
+    }
     let source: &str = "foobar.exr";
     let expected: (String, String) = (source.to_string(), "None".to_string());
-    assert_eq!(expected, extract_regex(&re, source))
+    assert_eq!(expected, extract_regex(&RE_FLS, source))
 }
 
 #[test]
 fn test_regex_simple() {
-    let re = get_regex();
+    lazy_static! {
+        static ref RE_FLS: Regex = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$")
+            .expect("Can't compile regex");
+    }
     let source: &str = "RenderPass_Beauty_1_00000.exr";
     let expected: (String, String) = (
         "RenderPass_Beauty_1_*****.exr".to_string(),
         "00000".to_string(),
     );
-    assert_eq!(expected, extract_regex(&re, source))
+    assert_eq!(expected, extract_regex(&RE_FLS, source))
 }
 #[test]
 fn test_parse_string() {
