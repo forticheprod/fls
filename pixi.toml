@@ -13,3 +13,6 @@ rust = "1.73.0.*"
 
 [target.linux-64.dependencies]
 rust = "1.73.0.*"
+
+[target.win-64.dependencies]
+rust = "1.73.0.*"
