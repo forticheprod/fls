@@ -125,31 +125,18 @@ fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
     paths_dict
 }
 
-/// Convert the frame string to a number usefull to work with
-/// fn group_continuity and apply comparaison of value
-fn convert_vec(frames_vec: Vec<String>) -> Vec<isize> {
-    let mut out_vec: Vec<isize> = frames_vec
-        .into_iter()
-        .map(|x: String| x.parse::<isize>().unwrap())
-        .collect::<Vec<isize>>();
-    out_vec.sort();
-    out_vec
-}
-
 /// Check the continuity of a numbers' serie and return a vector of vector of
 /// isize with the continuity group
 fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
-    let mut slice_start: usize = 0;
-    let mut result: Vec<&[isize]> = Vec::new();
+    let mut result = Vec::new();
+    let mut slice_start = 0;
     for i in 1..data.len() {
         if data[i - 1] + 1 != data[i] {
             result.push(&data[slice_start..i]);
             slice_start = i;
         }
     }
-    if !data.is_empty() {
-        result.push(&data[slice_start..]);
-    }
+    result.push(&data[slice_start..]);
     result.iter().map(|x| x.to_vec()).collect()
 }
 
@@ -158,8 +145,11 @@ fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
 /// - analyse the continuity
 /// - convert group of continuity into a concat string
 fn create_frame_string(value: Vec<String>) -> String {
-    let converted_vec_isize: Vec<isize> = convert_vec(value);
-    let group_continuity: Vec<Vec<isize>> = group_continuity(&converted_vec_isize);
+    let converted_vec_isize: Vec<isize> = value
+        .into_iter()
+        .map(|x| x.parse().expect("Failed to parse integer"))
+        .collect();
+    let group_continuity = group_continuity(&converted_vec_isize);
     // Concatenation of continuity group in a string
     group_continuity
         .into_iter()
@@ -167,7 +157,7 @@ fn create_frame_string(value: Vec<String>) -> String {
             if x.len() == 1 {
                 x[0].to_string()
             } else {
-                format!("{}-{}", x.first().unwrap(), x.last().unwrap())
+                format!("{}-{}", x[0], x[x.len() - 1])
             }
         })
         .collect::<Vec<String>>()
@@ -294,12 +284,6 @@ fn test_parse_string() {
         ("foo.exr".to_string(), vec_foo),
     ]);
     assert_eq!(expected, parse_result(source));
-}
-#[test]
-fn test_convert_vec() {
-    let source: Vec<String> = vec!["001".to_string(), "005".to_string(), "003".to_string()];
-    let expected: Vec<isize> = vec![1, 3, 5];
-    assert_eq!(expected, convert_vec(source));
 }
 #[test]
 fn test_continuity() {
