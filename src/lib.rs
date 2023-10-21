@@ -78,8 +78,12 @@ pub fn recursive_dir(input_path: &str) -> Paths {
 /// a tuple of string. For exemple toto.458.jpg should return
 /// (toto.***.jpg, 458)
 #[inline(always)]
-fn extract_regex(re: &Regex, x: &str) -> (String, String) {
-    let result_caps: Option<Captures> = re.captures(&x);
+fn extract_regex(x: &str) -> (String, String) {
+    lazy_static! {
+        static ref RE_FLS: Regex = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$")
+            .expect("Can't compile regex");
+    }
+    let result_caps: Option<Captures> = RE_FLS.captures(&x);
     match result_caps {
         None => (x.to_string(), "None".to_string()),
         caps_wrap => {
@@ -95,10 +99,6 @@ fn extract_regex(re: &Regex, x: &str) -> (String, String) {
 /// Parse the result of a vector of string. This function use HashMap to pack
 /// filename removed from the frame value.
 fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
-    lazy_static! {
-        static ref RE_FLS: Regex = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$")
-            .expect("Can't compile regex");
-    }
     // Optimisation over PAR_THRESHOLD value, the parsing of the frame list
     // used rayon lib to paralelize the work. Result depends a lot from the
     // cpu number of thread may be put in a config file
@@ -106,12 +106,12 @@ fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
     let extracted: Vec<(String, String)> = if dir_scan.len() < PAR_THRESHOLD {
         dir_scan
             .iter()
-            .map(|path| extract_regex(&RE_FLS, path.to_str().unwrap()))
+            .map(|path| extract_regex(path.to_str().unwrap()))
             .collect()
     } else {
         dir_scan
             .par_iter()
-            .map(|path| extract_regex(&RE_FLS, path.to_str().unwrap()))
+            .map(|path| extract_regex(path.to_str().unwrap()))
             .collect()
     };
     let mut paths_dict: HashMap<String, Vec<String>> = HashMap::with_capacity(extracted.len());
@@ -263,27 +263,19 @@ fn test_parse_dir() {
 }
 #[test]
 fn test_handle_none() {
-    lazy_static! {
-        static ref RE_FLS: Regex = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$")
-            .expect("Can't compile regex");
-    }
     let source: &str = "foobar.exr";
     let expected: (String, String) = (source.to_string(), "None".to_string());
-    assert_eq!(expected, extract_regex(&RE_FLS, source))
+    assert_eq!(expected, extract_regex(source))
 }
 
 #[test]
 fn test_regex_simple() {
-    lazy_static! {
-        static ref RE_FLS: Regex = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$")
-            .expect("Can't compile regex");
-    }
     let source: &str = "RenderPass_Beauty_1_00000.exr";
     let expected: (String, String) = (
         "RenderPass_Beauty_1_*****.exr".to_string(),
         "00000".to_string(),
     );
-    assert_eq!(expected, extract_regex(&RE_FLS, source))
+    assert_eq!(expected, extract_regex(source))
 }
 #[test]
 fn test_parse_string() {
