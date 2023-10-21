@@ -128,15 +128,17 @@ fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
 /// Check the continuity of a numbers' serie and return a vector of vector of
 /// isize with the continuity group
 fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
-    let mut result = Vec::new();
-    let mut slice_start = 0;
+    let mut slice_start: usize = 0;
+    let mut result: Vec<&[isize]> = Vec::new();
     for i in 1..data.len() {
         if data[i - 1] + 1 != data[i] {
             result.push(&data[slice_start..i]);
             slice_start = i;
         }
     }
-    result.push(&data[slice_start..]);
+    if !data.is_empty() {
+        result.push(&data[slice_start..]);
+    }
     result.iter().map(|x| x.to_vec()).collect()
 }
 
@@ -145,11 +147,12 @@ fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
 /// - analyse the continuity
 /// - convert group of continuity into a concat string
 fn create_frame_string(value: Vec<String>) -> String {
-    let converted_vec_isize: Vec<isize> = value
+    let mut converted_vec_isize: Vec<isize> = value
         .into_iter()
         .map(|x| x.parse().expect("Failed to parse integer"))
         .collect();
-    let group_continuity = group_continuity(&converted_vec_isize);
+    converted_vec_isize.sort();
+    let group_continuity: Vec<Vec<isize>> = group_continuity(&converted_vec_isize);
     // Concatenation of continuity group in a string
     group_continuity
         .into_iter()
@@ -157,7 +160,7 @@ fn create_frame_string(value: Vec<String>) -> String {
             if x.len() == 1 {
                 x[0].to_string()
             } else {
-                format!("{}-{}", x[0], x[x.len() - 1])
+                format!("{}-{}", x.first().unwrap(), x.last().unwrap())
             }
         })
         .collect::<Vec<String>>()
@@ -290,4 +293,15 @@ fn test_continuity() {
     let source: Vec<isize> = vec![1, 2, 3, 5, 6, 7, 11, 12];
     let expected: Vec<Vec<isize>> = vec![vec![1, 2, 3], vec![5, 6, 7], vec![11, 12]];
     assert_eq!(expected, group_continuity(&source));
+}
+#[test]
+fn test_create_frame_string() {
+    let source: Vec<String> = vec![
+        "001".to_string(),
+        "005".to_string(),
+        "003".to_string(),
+        "002".to_string(),
+    ];
+    let expected: String = "1-3,5".to_string();
+    assert_eq!(expected, create_frame_string(source));
 }
