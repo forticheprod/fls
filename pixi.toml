@@ -1,0 +1,12 @@
+[project]
+name = "fls"
+version = "0.5.3"
+description = "Add a short description here"
+authors = ["Philippe Llerena <philippe.llerena@forticheprod.com>"]
+channels = ["conda-forge"]
+platforms = ["win-64"]
+
+[tasks]
+
+[dependencies]
+rust = "1.73.0.*"

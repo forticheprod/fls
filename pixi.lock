@@ -1,0 +1,56 @@
+metadata:
+  content_hash:
+    win-64: e90c2ee71ad70fc0a1c8302029533a7d1498f2bffcd0eaa8d2934700e775dc1d
+  channels:
+  - url: https://conda.anaconda.org/conda-forge/
+    used_env_vars: []
+  platforms:
+  - win-64
+  sources: []
+  time_metadata: null
+  git_metadata: null
+  inputs_metadata: null
+  custom_metadata: null
+package:
+- platform: win-64
+  name: rust
+  version: 1.73.0
+  category: main
+  manager: conda
+  dependencies:
+  - rust-std-x86_64-pc-windows-msvc 1.73.0 h17fc481_2
+  url: https://conda.anaconda.org/conda-forge/win-64/rust-1.73.0-hf8d6059_2.conda
+  hash:
+    md5: c505caa83650b22c2895952121dca677
+    sha256: 273ee08ff80b8361d214aa0ad4e82fb039605f85f16deb976abe87a2de3f8eb4
+  build: hf8d6059_2
+  arch: x86_64
+  subdir: win-64
+  build_number: 2
+  license: MIT
+  license_family: MIT
+  size: 184611040
+  timestamp: 1697553159782
+- platform: win-64
+  name: rust-std-x86_64-pc-windows-msvc
+  version: 1.73.0
+  category: main
+  manager: conda
+  dependencies:
+  - __win
+  url: https://conda.anaconda.org/conda-forge/noarch/rust-std-x86_64-pc-windows-msvc-1.73.0-h17fc481_2.conda
+  hash:
+    md5: 74202b98c39349c3f2659c681f002120
+    sha256: 1cf9517e7aa364da75d4f53ad0ed4ede6f929935a919a2a793667b83d8edd52e
+  build: h17fc481_2
+  arch: x86_64
+  subdir: win-64
+  build_number: 2
+  constrains:
+  - rust >=1.73.0,<1.73.1.0a0
+  license: MIT
+  license_family: MIT
+  noarch: generic
+  size: 25366601
+  timestamp: 1697552754897
+version: 1
