@@ -1,12 +1,17 @@
 [project]
 name = "fls"
 version = "0.5.3"
-description = "Add a short description here"
+description = "a simple command line tool to list frame sequence in friendly way"
 authors = ["Philippe Llerena <philippe.llerena@forticheprod.com>"]
 channels = ["conda-forge"]
 platforms = ["win-64", "linux-64"]
+readme = "README.md"
+repository = "https://github.com/forticheprod/fls"
 
 [tasks]
+release = "cargo build --release"
+debug = "cargo build"
+bench = "cargo bench"
 
 [dependencies]
 rust = "1.73.0.*"
