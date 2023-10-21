@@ -208,8 +208,11 @@ pub fn basic_listing(frames: Paths) -> PathsPacked {
 
 /// This function is intented to check if a file is an exr to call exr module
 /// and print the exr metadata of the file
-fn get_exr_metada(re: &Regex, root_path: &String, path: &String) -> String {
-    if re.is_match(&path) {
+fn get_exr_metada(root_path: &String, path: &String) -> String {
+    lazy_static! {
+        static ref RE_EXR: Regex = Regex::new(r".*.exr$").expect("Can't compile regex");
+    }
+    if RE_EXR.is_match(&path) {
         let path = format!("{}{}", root_path, path);
         read_meta(path)
     } else {
@@ -237,18 +240,17 @@ fn get_exr_metada(re: &Regex, root_path: &String, path: &String) -> String {
 /// ./samples/small/foo.exr    Not an exr
 /// ```
 pub fn extended_listing(root_path: String, frames: Paths) -> PathsPacked {
-    let re: Regex = Regex::new(r".*.exr$").unwrap();
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
     let mut out_frames: PathsPacked = PathsPacked::new_empty();
     for (key, value) in frames_dict {
         if value[0] == "None" && value.len() == 1 {
-            out_frames.push_metadata(get_exr_metada(&re, &root_path, &key));
+            out_frames.push_metadata(get_exr_metada(&root_path, &key));
             out_frames.push_paths(key.into());
         } else {
             let to = value.first().unwrap();
             let from = String::from_utf8(vec![b'*'; to.len()]).unwrap();
             let new_path = &key.replace(&from, to);
-            out_frames.push_metadata(get_exr_metada(&re, &root_path, &new_path));
+            out_frames.push_metadata(get_exr_metada(&root_path, &new_path));
             out_frames.push_paths(format!("{}@{}", key, create_frame_string(value)).into());
         }
     }
