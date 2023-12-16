@@ -10,29 +10,19 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
-
+  build&test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
-      - name: ⚡ Cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-
       - uses: dtolnay/rust-toolchain@stable
-
       - name: 🔨 Build
         run: cargo build
-
       - name: ✔️ Tests
         run: cargo test
-
+  bench:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
       - name: ⏲️ Bench
         run: cargo bench
