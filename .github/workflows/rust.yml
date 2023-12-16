@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     name: release ${{ matrix.target }}
     if: github.event_name == 'release' && github.event.action == 'created'
-     needs: [publish]
+    needs: [publish]
     strategy:
       fail-fast: false
       matrix:
