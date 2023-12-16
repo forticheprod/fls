@@ -21,6 +21,7 @@ jobs:
         run: cargo test
   bench:
     runs-on: ubuntu-latest
+    needs: [build_test]
     steps:
       - uses: actions/checkout@v3
       - uses: dtolnay/rust-toolchain@stable
@@ -37,6 +38,4 @@ jobs:
           override: true
     - uses: katyo/publish-crates@v2
       with:
-          path: './packages'
-          args: --no-verify
           dry-run: true
