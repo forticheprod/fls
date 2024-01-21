@@ -1,9 +1,26 @@
 //! # framels
-//! framels is a library and a binary to list files and directorys like `ls`
+//!
+//! **framels** is a library and a binary to list files and directorys like `ls`
 //! style and return a packed
 //! sequence of files. This lib is industry oriented for Animation and VFX,
 //! using a lot a frames sequences.
 //! The main objective is to be the fastest as possible using rustlang.
+//!
+//! ## Key concept
+//!
+//! The key concept of the library is to pack frames sequences in a new
+//! filename like `toto.***.jpg@158-179`. It use a regex to extract the frame
+//! number and pack the frames. The regex is `(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$`.
+//! It results in the limitations of only:
+//!
+//! - `.` or `_` as a separator between the filename and the frame number.
+//! - 2 to 9 digits for the frame number.
+//! - 2 to 5 characters for the extension.
+//! - The frame number must be at the end of the filename.
+//! - The frame number must be a number.
+//! - The frame number must be a positive number.
+//! - There is not filetering in the extension.
+//!
 //!
 //! ## Command line
 //!
@@ -29,42 +46,38 @@
 //! The library is the core of the binary, it's a rust library to list
 //! directory and pack frames in sequences.
 //!
-//! ### listing directories
+//! ### listing content of directories
 //!
 //! #### parse_dir
 //!
-//! The [parse_dir](fn.parse_dir) function list files and directories in the targeted
-//! directory, take a `String` as inut and return a `Vec<String>` of the
-//! entries. It use the standard ReadDir of rust.
-//!
-//! - return a [Paths](paths/struct.Paths)
+//! The [parse_dir] function list files and directories in the targeted
+//! directory, take a `String` as input and return a [Paths] of the entries.
+//! It use [std::fs::ReadDir], nothing much.
 //!
 //! #### recursive_dir
 //!
-//! The [recursive_dir](fn.recursive_dir) function list files and directories in the targeted
-//! directory, take a `String` as inut and return a `Vec<String>` of the
+//! The [recursive_dir] function list files and directories in the targeted
+//! directory, take a `String` as inut and return a [Paths] of the
 //! entries recursively. It use [jwalk] as the core of the parsing. It is really
 //! efficiant with a lot of directories.
 //!
-//! - return a [Paths](paths/struct.Paths)
-//!
 //! ### pack frames
 //!
-//! The library is really simple to use, you can use the [basic_listing](fn.basic_listing) or
-//! [extended_listing](fn.extended_listing) function to list directory and pack frames in sequences.
+//! The library is really simple to use, you can use the [basic_listing] or
+//! [extended_listing] function to list directory and pack frames in sequences.
 //!
 //! The frame packing algorithm got a optimization when the amount of listed
 //! files is bigger than 100 000 files.
 //!
 //! #### basic_listing
 //!
-//! The [basic_listing](fn.basic_listing) function is the main function of the library it use a
+//! The [basic_listing] function is the main function of the library it use a
 //! list of filename as in input and pack the frame sequences using a new
 //! filename like `toto.***.jpg@158-179`
 //!
 //! #### extended_listing
 //!
-//! The [extended_listing](fn.extended_listing) function is specialize to analyse exr frames really
+//! The [extended_listing] function is specialize to analyse exr frames really
 //! similar to `rvls -l`
 //! It take a `Vec<String>` of entries as an input
 //! - Pack the frames
