@@ -16,3 +16,4 @@
 # Added by the author
 /docs/public
 .pixi/
+.vscode/settings.json
