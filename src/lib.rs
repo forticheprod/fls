@@ -1,9 +1,74 @@
 //! # framels
-//! framels is a Library to list files and directorys like `ls` style and return a packed
+//! framels is a library and a binary to list files and directorys like `ls`
+//! style and return a packed
 //! sequence of files. This lib is industry oriented for Animation and VFX,
 //! using a lot a frames sequences.
 //! The main objective is to be the fastest as possible using rustlang.
-//! ## Usage
+//!
+//! ## Command line
+//!
+//!
+//! framels is also a command line tool to list directory and pack frames in
+//! sequences. It's a bit like `ls` but for frames sequences.
+//! You can use the short cut `fls` to call the binary.
+//!
+//! ## Example
+//!
+//! In this example we use the recursive option to list all the files in the
+//! directory and subdirectory.
+//!
+//! ```bash
+//! $ fls --recursive ./samples/small
+//! ./samples/small
+//! ./samples/small/aaa.***.tif@1-5
+//! ./samples/small/foo_bar.ex
+//! ```
+//!
+//! ## Library
+//!
+//! The library is the core of the binary, it's a rust library to list
+//! directory and pack frames in sequences.
+//!
+//! ### listing directories
+//!
+//! #### parse_dir
+//!
+//! The [parse_dir](fn.parse_dir) function list files and directories in the targeted
+//! directory, take a `String` as inut and return a `Vec<String>` of the
+//! entries. It use the standard ReadDir of rust.
+//!
+//! #### recursive_dir
+//!
+//! The [recursive_dir](fn.recursive_dir) function list files and directories in the targeted
+//! directory, take a `String` as inut and return a `Vec<String>` of the
+//! entries recursively. It use [jwalk] as the core of the parsing. It is really
+//! efficiant with a lot of directories.
+//!
+//! ### pack frames
+//!
+//! The library is really simple to use, you can use the [basic_listing](fn.basic_listing) or
+//! [extended_listing](fn.extended_listing) function to list directory and pack frames in sequences.
+//!
+//! The frame packing algorithm got a optimization when the amount of listed
+//! files is bigger than 100 000 files.
+//!
+//! #### basic_listing
+//!
+//! The [basic_listing](fn.basic_listing) function is the main function of the library it use a
+//! list of filename as in input and pack the frame sequences using a new
+//! filename like `toto.***.jpg@158-179`
+//!
+//! #### extended_listing
+//!
+//! The [extended_listing](fn.extended_listing) function is specialize to analyse exr frames really
+//! similar to `rvls -l`
+//! It take a `Vec<String>` of entries as an input
+//! - Pack the frames
+//! - Print the metada if the sequence is an exr sequence
+//! - Return a Vector of path packed
+//!
+//! ### Example
+//!
 //! ```rust
 //! use framels::{basic_listing, extended_listing, parse_dir, paths::{Paths,Join}, recursive_dir};
 //!
@@ -16,22 +81,6 @@
 //!
 //! println!("{}", results)
 //! }
-//! ```
-//! ## Command line
-//! framels is also a command line tool to list directory and pack frames in sequences
-//! ```bash
-//! framels
-//! framels is a Library to list files and directorys like `ls` style and return a packed sequence of files
-//! This lib is industry oriented for Animation and VFX, using a lot a frames sequences.
-//! The main objective is to be the fastest as possible using rustlang.
-//!     --list         Display EXR metadata size and channels description
-//!    --recursive    Use a recursive approch of listing dir
-//!   <root>    Path to parse
-//! ```
-//! ## Example
-//! ```bash
-//!     $ fls --list --recursive ./samples/small
-//!    ./samples/small/RenderPass_Beauty_1_*****.exr@0-9    1920x1080, RGBA
 //! ```
 mod exr_metadata;
 pub mod paths;
@@ -179,6 +228,37 @@ fn create_frame_string(value: Vec<String>) -> String {
 /// It take a `Vec<String>` of entries as an input
 ///  - Pack the frames
 /// - Return a Vector of path packed
+///
+/// ## Example
+///
+/// ### Example of output
+///
+/// ```bash
+/// ./samples/small/aaa.***.tif@1-5
+/// ./samples/small/foo_bar.ex
+/// ```
+///
+/// ### Example of output with non exr file
+///
+/// ```bash
+/// ./samples/small/foo.exr@None
+/// ```
+///
+/// ### Example as a library
+///
+/// ```rust
+/// use framels::{basic_listing, parse_dir, paths::{Paths,Join}};
+///
+/// fn main() {
+///     // Perform directory listing
+///     let in_paths: Paths = parse_dir("./samples/small");
+///
+///     // Generate results based on arguments
+///     let results: String = basic_listing(in_paths).get_paths().join("\n");
+///
+///      println!("{}", results)
+/// }
+/// ```
 pub fn basic_listing(frames: Paths) -> PathsPacked {
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
     let mut frames_list: Vec<String> = frames_dict
