@@ -5,7 +5,7 @@
 //! The main objective is to be the fastest as possible using rustlang.
 //! ## Usage
 //! ```rust
-//! use framels::{basic_listing, extended_listing, parse_dir, paths::Paths, recursive_dir};
+//! use framels::{basic_listing, extended_listing, parse_dir, paths::{Paths,Join}, recursive_dir};
 //!
 //! fn main() {
 //!    // Perform directory listing
@@ -38,7 +38,7 @@ pub mod paths;
 use crate::exr_metadata::read_meta;
 use jwalk::WalkDir;
 use lazy_static::lazy_static;
-use paths::{Paths, PathsPacked};
+use paths::{New, Paths, PathsPacked};
 use rayon::prelude::*;
 use regex::{Captures, Regex};
 use std::collections::HashMap;
@@ -50,7 +50,7 @@ use std::{clone::Clone, path::PathBuf};
 /// input and return a `Vec<String>` of the entries.
 pub fn parse_dir(input_path: &str) -> Paths {
     let paths_dir: fs::ReadDir = fs::read_dir(input_path).unwrap();
-    Paths::new(
+    Paths::from(
         paths_dir
             .filter_map(|entry| {
                 entry
@@ -65,7 +65,7 @@ pub fn parse_dir(input_path: &str) -> Paths {
 /// List files and directories in the targeted directory, take a `String` as
 /// inut and return a `Vec<String>` of the entries recursively
 pub fn recursive_dir(input_path: &str) -> Paths {
-    Paths::new(
+    Paths::from(
         WalkDir::new(input_path)
             .sort(true)
             .into_iter()
@@ -196,7 +196,7 @@ pub fn basic_listing(frames: Paths) -> PathsPacked {
         .map(|s| PathBuf::from(s)) // Convert to PathBuf
         .collect::<Vec<PathBuf>>();
 
-    PathsPacked::new_from_vec(paths_packed_data)
+    PathsPacked::from_vec(paths_packed_data)
 }
 
 /// This function is intented to check if a file is an exr to call exr module
@@ -274,7 +274,7 @@ fn test_regex_simple() {
 }
 #[test]
 fn test_parse_string() {
-    let source: Paths = Paths::new(vec![
+    let source: Paths = Paths::from(vec![
         "toto.001.tiff".into(),
         "toto.002.tiff".into(),
         "toto.003.tiff".into(),

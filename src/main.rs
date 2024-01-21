@@ -1,5 +1,9 @@
 use clap::Parser;
-use framels::{basic_listing, extended_listing, parse_dir, paths::Paths, recursive_dir};
+use framels::{
+    basic_listing, extended_listing, parse_dir,
+    paths::{Join, Paths},
+    recursive_dir,
+};
 mod tree;
 use tree::run_tree;
 

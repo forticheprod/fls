@@ -10,6 +10,28 @@
 use rayon::prelude::*;
 use std::{clone::Clone, path::PathBuf};
 
+/// # Join
+///
+/// # Description
+///
+/// Trait to join the paths of a Paths struct
+///
+/// # Example
+///
+/// ```
+/// use framels::paths::{Join, Paths};
+/// use std::path::PathBuf;
+///
+/// let paths = Paths::from(vec![PathBuf::from("foo"), PathBuf::from("bar")]);
+/// assert_eq!(paths.join(" "), "foo bar");
+/// ```
+pub trait Join {
+    fn join(&self, sep: &str) -> String;
+}
+
+pub trait New {
+    fn new_empty() -> Self;
+}
 /// A representation of group of paths
 #[derive(Clone)]
 pub struct Paths {
@@ -30,12 +52,8 @@ impl Paths {
         self.data.par_iter()
     }
     /// Create a new Paths from a Vec of PathBuf
-    pub fn new(data: Vec<PathBuf>) -> Self {
+    pub fn from(data: Vec<PathBuf>) -> Self {
         Paths { data }
-    }
-    /// Create an empty Paths
-    fn new_empty() -> Self {
-        Paths { data: Vec::new() }
     }
     /// Create a Vector of paths from a Paths
     pub fn to_vec(&self) -> Vec<PathBuf> {
@@ -45,12 +63,21 @@ impl Paths {
     pub fn to_vec_path(&self) -> Vec<PathBuf> {
         self.data.iter().cloned().collect()
     }
-    pub fn join(&self, sep: &str) -> String {
+}
+
+impl Join for Paths {
+    fn join(&self, sep: &str) -> String {
         self.data
             .iter()
             .map(|f| f.to_string_lossy())
             .collect::<Vec<_>>()
             .join(sep)
+    }
+}
+
+impl New for Paths {
+    fn new_empty() -> Self {
+        Paths { data: Vec::new() }
     }
 }
 
@@ -63,16 +90,9 @@ pub struct PathsPacked {
 }
 
 impl PathsPacked {
-    /// Create a new PathsPacked empty
-    pub fn new_empty() -> Self {
+    pub fn from_vec(data: Vec<PathBuf>) -> Self {
         PathsPacked {
-            paths: Paths::new_empty(),
-            metadata: Vec::new(),
-        }
-    }
-    pub fn new_from_vec(data: Vec<PathBuf>) -> Self {
-        PathsPacked {
-            paths: Paths::new(data),
+            paths: Paths::from(data),
             metadata: Vec::new(),
         }
     }
@@ -88,8 +108,19 @@ impl PathsPacked {
     pub fn push_metadata(&mut self, path: String) {
         self.metadata.push(path)
     }
+    /// Return a clone of the paths elements
+    pub fn get_paths(&self) -> Paths {
+        self.paths.clone()
+    }
+    /// Return a clone of the metadata elements
+    pub fn get_metadata(&self) -> Vec<String> {
+        self.metadata.clone()
+    }
+}
+
+impl Join for PathsPacked {
     /// Join the paths and the metadata
-    pub fn join(&self, sep: &str) -> String {
+    fn join(&self, sep: &str) -> String {
         let paths_strings: Vec<String> = self
             .paths
             .data
@@ -102,12 +133,13 @@ impl PathsPacked {
             .chain(self.metadata.iter().cloned());
         main_vec.collect::<Vec<String>>().join(sep)
     }
-    /// Return a clone of the paths elements
-    pub fn get_paths(&self) -> Paths {
-        self.paths.clone()
-    }
-    /// Return a clone of the metadata elements
-    pub fn get_metadata(&self) -> Vec<String> {
-        self.metadata.clone()
+}
+
+impl New for PathsPacked {
+    fn new_empty() -> Self {
+        PathsPacked {
+            paths: Paths::new_empty(),
+            metadata: Vec::new(),
+        }
     }
 }
