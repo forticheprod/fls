@@ -7,9 +7,9 @@ title = "A simple but sexy ls command line tool"
 lead = '<b>framels</b> is a command line tool and lib dedicated to animation and vfx, for terminal user or simply other rust projects.'
 url = "/docs/getting-started/introduction/"
 url_button = "Get started"
-repo_version = "GitHub v0.5.5"
+repo_version = "GitHub v0.6.0"
 repo_license = "Open-source MIT License."
-repo_url = "https://github.com/forticheprod/fls/tree/0.5.5"
+repo_url = "https://github.com/forticheprod/fls/tree/0.6.0"
 
 # Menu items
 [[extra.menu.main]]
