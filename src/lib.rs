@@ -37,12 +37,16 @@
 //! directory, take a `String` as inut and return a `Vec<String>` of the
 //! entries. It use the standard ReadDir of rust.
 //!
+//! - return a [Paths](paths/struct.Paths)
+//!
 //! #### recursive_dir
 //!
 //! The [recursive_dir](fn.recursive_dir) function list files and directories in the targeted
 //! directory, take a `String` as inut and return a `Vec<String>` of the
 //! entries recursively. It use [jwalk] as the core of the parsing. It is really
 //! efficiant with a lot of directories.
+//!
+//! - return a [Paths](paths/struct.Paths)
 //!
 //! ### pack frames
 //!

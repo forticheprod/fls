@@ -1,3 +1,5 @@
+//! paths module is handle the Paths and PathsPacked types
+
 use rayon::prelude::*;
 use std::{clone::Clone, path::PathBuf};
 
@@ -17,6 +19,7 @@ use std::{clone::Clone, path::PathBuf};
 /// assert_eq!(paths.join(" "), "foo bar");
 /// ```
 pub trait Join {
+    /// Join the list of elements
     fn join(&self, sep: &str) -> String;
 }
 /// # New
@@ -26,6 +29,7 @@ pub trait Join {
 /// Trait to create an empty Paths or PathsPacked struct
 ///
 pub trait New {
+    /// Create emptry struct to init
     fn new_empty() -> Self;
 }
 /// # Paths
@@ -99,7 +103,7 @@ impl Paths {
     ///
     /// ## Description
     ///
-    /// Create a Paths from a Vector of PathBuf
+    /// Create a [Paths] from a [Vec] of [PathBuf]
     ///
     /// ## Example
     ///
@@ -117,7 +121,7 @@ impl Paths {
     ///
     /// ## Description
     ///
-    /// Create a Vector of PathBuf from a Paths
+    /// Create a [Vec] of [PathBuf] from a [Paths]
     ///
     /// ## Example
     ///
@@ -164,7 +168,7 @@ impl PathsPacked {
     ///
     /// ## Description
     ///
-    /// Create a PathsPacked from a Vector of PathBuf
+    /// Create a [PathsPacked] from a [Vec] of [PathBuf]
     ///
     /// ## Example
     ///
@@ -182,7 +186,7 @@ impl PathsPacked {
             metadata: Vec::new(),
         }
     }
-    /// Push a path packed
+    /// Push a [PathBuf] in the the data of the [PathsPacked]
     pub fn push_paths(&mut self, path: PathBuf) {
         self.paths.data.push(path)
     }
@@ -190,7 +194,7 @@ impl PathsPacked {
     pub fn sort_paths(&mut self) {
         self.paths.data.sort()
     }
-    /// Sort the paths attributes in parallel using rayon
+    /// Sort the paths attributes in parallel using [rayon]
     pub fn sort_par_paths(&mut self) {
         self.paths.data.par_sort()
     }
