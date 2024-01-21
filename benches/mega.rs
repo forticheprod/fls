@@ -13,7 +13,7 @@ struct PathsJson {
 }
 impl PathsJson {
     pub fn to_paths(&self) -> Paths {
-        Paths::new(self.paths_list.clone())
+        Paths::from(self.paths_list.clone())
     }
 }
 
