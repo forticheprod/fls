@@ -28,7 +28,7 @@ impl TreeNode {
 ///
 /// # Example
 ///
-/// ```
+/// ```rust
 /// use std::path::PathBuf;
 /// use tree::TreeNode;
 ///

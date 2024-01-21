@@ -167,8 +167,10 @@ fn create_frame_string(value: Vec<String>) -> String {
         .join(",")
 }
 
-/// ## Basic listing of the library
-/// ### Description
+/// # basic_listing
+///
+///
+/// ## Description
 ///
 /// This function is the main function of the library it use a list of
 /// filename as in input and pack the frame sequences using a new filename
@@ -213,8 +215,10 @@ fn get_exr_metada(root_path: &String, path: &String) -> String {
     }
 }
 
-/// ## Extended function of the Library
-/// ### Description
+/// # extended_listing
+///
+///
+/// ## Description
 ///
 /// This function is specialize to analyse exr frames really similar to
 /// `rvls -l`
@@ -223,6 +227,8 @@ fn get_exr_metada(root_path: &String, path: &String) -> String {
 ///  - Pack the frames
 ///  - Print the metada if the sequence is an exr sequence
 ///  - Return a Vector of path packed
+///
+/// ## Example
 ///
 /// ### Example of output
 /// ```bash
