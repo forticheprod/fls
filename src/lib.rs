@@ -196,7 +196,7 @@ pub fn basic_listing(frames: Paths) -> PathsPacked {
         .map(|s| PathBuf::from(s)) // Convert to PathBuf
         .collect::<Vec<PathBuf>>();
 
-    PathsPacked::from_vec(paths_packed_data)
+    PathsPacked::from(paths_packed_data)
 }
 
 /// This function is intented to check if a file is an exr to call exr module

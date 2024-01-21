@@ -46,7 +46,7 @@ fn main() {
         basic_listing(in_paths)
     };
     if args.tree {
-        run_tree(results.get_paths().to_vec_path())
+        run_tree(results.get_paths().to_vec())
     } else {
         println!("{}", results.join("\n"))
     }
