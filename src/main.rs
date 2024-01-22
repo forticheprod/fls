@@ -44,7 +44,7 @@ fn main() {
 
     // Perform directory listing
     let in_paths: Paths = if args.exr {
-        Paths::new(vec![PathBuf::from(&args.root)])
+        Paths::from(vec![PathBuf::from(&args.root)])
     } else if args.recursive {
         recursive_dir(&args.root)
     } else {
