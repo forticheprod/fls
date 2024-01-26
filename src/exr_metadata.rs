@@ -1,5 +1,6 @@
-use exr::meta::header::Header;
+use exr::meta::{attribute::ChannelList, header::Header};
 use exr::prelude::*;
+use std::str;
 
 /// # read_meta
 ///
@@ -36,13 +37,42 @@ pub fn read_meta(path: String) -> String {
 #[test]
 fn test_read_meta() {
     let source = "./samples/big/RenderPass_Beauty_1_00000.exr".to_string();
-    let expect = "./samples/big/RenderPass_Beauty_1_00000.exr layer #0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(\"A\"), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(\"B\"), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(\"G\"), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(\"Plane_Beauty.A\"), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(\"Plane_Beauty.B\"), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(\"Plane_Beauty.G\"), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(\"Plane_Beauty.R\"), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(\"R\"), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(\"Spheres_Beauty.A\"), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(\"Spheres_Beauty.B\"), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(\"Spheres_Beauty.G\"), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(\"Spheres_Beauty.R\"), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 24, uniform_sample_type: Some(F16) }".to_string();
+    let expect = "./samples/big/RenderPass_Beauty_1_00000.exr layer #0 w x h: 320 x 143; channels: A,B,G,Plane_Beauty.A,Plane_Beauty.B,Plane_Beauty.G,Plane_Beauty.R,R,Spheres_Beauty.A,Spheres_Beauty.B,Spheres_Beauty.G,Spheres_Beauty.R, bit depth: F16".to_string();
     assert_eq!(expect, read_meta(source));
 }
 
+fn get_channels_name(channels: ChannelList) -> String {
+    let mut channels_name: Vec<String> = Vec::new();
+    for channels_description in channels.list {
+        channels_name.push(
+            str::from_utf8(channels_description.name.as_slice())
+                .unwrap()
+                .to_string(),
+        );
+    }
+    //channels_name.sort_by(|a, b| a.len().cmp(&b.len()));
+    channels_name.join(",")
+}
+
+fn get_type(channels: ChannelList) -> String {
+    let mut channels_type: Vec<String> = Vec::new();
+    for channels_description in channels.list {
+        channels_type.push(format!("{:?}", channels_description.sample_type));
+    }
+    channels_type.dedup();
+    channels_type.join(",")
+}
+
 fn trim_medata(layer_index: usize, image_headers: &Header) -> String {
+    let w = image_headers.layer_size.0;
+    let h = image_headers.layer_size.1;
+
     format!(
-        "layer #{} size:{:?}; channels:{:?}",
-        layer_index, image_headers.layer_size, image_headers.channels
+        "layer #{} w x h: {} x {}; channels: {}, bit depth: {}",
+        layer_index,
+        w,
+        h,
+        get_channels_name(image_headers.channels.clone()),
+        get_type(image_headers.channels.clone())
     )
 }

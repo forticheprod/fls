@@ -42,7 +42,7 @@ fn cli_version() -> Result<(), Box<dyn std::error::Error>> {
     cmd.arg("-V");
     cmd.assert()
         .success()
-        .stdout(predicate::str::contains("framels 0.6.1"));
+        .stdout(predicate::str::contains("framels 0.6.5"));
 
     Ok(())
 }
@@ -65,7 +65,7 @@ fn cli_listing() -> Result<(), Box<dyn std::error::Error>> {
 
     cmd.arg("-l").arg("./samples/small/");
     cmd.assert().success().stdout(predicate::str::contains(
-        "./samples/small/foo_bar.exr layer #0 size:Vec2(8, 8);",
+        "./samples/small/foo_bar.exr layer #0 w x h: 8 x 8;",
     ));
 
     Ok(())
@@ -78,7 +78,7 @@ fn cli_listing_recursive() -> Result<(), Box<dyn std::error::Error>> {
     cmd.arg("-l").arg("-r").arg("./samples/");
     cmd.assert()
         .success()
-        .stdout(predicate::str::contains("layer #0 size:Vec2(8, 8);"));
+        .stdout(predicate::str::contains("layer #0 w x h: 8 x 8;"));
 
     Ok(())
 }
