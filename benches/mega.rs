@@ -1,46 +1,43 @@
 use std::path::PathBuf;
 
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
 use framels::{
     basic_listing, parse_dir,
     paths::{Paths, PathsPacked},
 };
-use serde::Deserialize;
 
-#[derive(Deserialize)]
-struct PathsJson {
-    paths_list: Vec<PathBuf>,
-}
-impl PathsJson {
-    pub fn to_paths(&self) -> Paths {
-        Paths::from(self.paths_list.clone())
+fn generate_paths(n: u64)->Paths{
+    let mut paths = Vec::new();
+    for i in 0..n {
+        paths.push(PathBuf::from(format!("Beauty_{:0>8}.exr", i)));
     }
+    assert_eq!(paths.len(), n as usize);
+    Paths::from(paths)
 }
 
-fn get_data_set() -> Paths {
-    let text = std::fs::read_to_string("./samples/mega/response_1689510067951.json").unwrap();
-    let dataset = serde_json::from_str::<PathsJson>(&text).unwrap();
-    dataset.to_paths()
-}
-
-fn mega_parse_and_run() {
-    let _results: PathsPacked = basic_listing(get_data_set());
-}
 fn parse_and_run() {
     let source = "./samples/big".to_string();
     let paths: Paths = parse_dir(&source);
-    let _results: PathsPacked = basic_listing(paths);
+    let _results: PathsPacked = basic_listing(paths, false);
 }
 
 fn small_parse_and_run() {
     let source = "./samples/big".to_string();
     let paths: Paths = parse_dir(&source);
-    let _results: PathsPacked = basic_listing(paths);
+    let _results: PathsPacked = basic_listing(paths, false);
 }
 
 fn criterion_benchmark(c: &mut Criterion) {
     #[allow(clippy::redundant_closure)]
-    c.bench_function("json", |b| b.iter(|| mega_parse_and_run()));
+    let mut group = c.benchmark_group("Parsing");
+    for i in[1u64, 10u64, 100u64, 1000u64, 10000u64].iter() {
+        let data_set = generate_paths(*i);
+        group.bench_with_input(BenchmarkId::new("Mono", i), i, 
+        |b, _i| b.iter(|| basic_listing(data_set.clone(), false)));
+        group.bench_with_input(BenchmarkId::new("Multi", i), i, 
+        |b, _i| b.iter(|| basic_listing(data_set.clone(), true)));
+    }
+    group.finish();
     c.bench_function("big", |b| b.iter(|| parse_and_run()));
     c.bench_function("small", |b| b.iter(|| small_parse_and_run()));
 }

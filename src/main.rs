@@ -23,6 +23,10 @@ struct Args {
     #[arg(short, long)]
     tree: bool,
 
+    /// Force the use of multithreading
+    #[arg(short, long, default_value_t = false)]
+    multithread: bool,
+
     /// Path to parse
     #[arg(value_name = "PATH", default_value_t = String::from("./"))]
     root: String,
@@ -39,11 +43,11 @@ fn main() {
         parse_dir(&args.root)
     };
     let results = if args.list && args.recursive {
-        extended_listing("".to_string(), in_paths)
+        extended_listing("".to_string(), in_paths,args.multithread)
     } else if args.list {
-        extended_listing(args.root, in_paths)
+        extended_listing(args.root, in_paths, args.multithread)
     } else {
-        basic_listing(in_paths)
+        basic_listing(in_paths, args.multithread)
     };
     if args.tree {
         run_tree(results.get_paths().to_vec())
