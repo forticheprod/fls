@@ -94,7 +94,7 @@
 //!   let in_paths: Paths = parse_dir("./samples/small");
 //!
 //!  // Generate results based on arguments
-//! let results: String = basic_listing(in_paths).get_paths().join("\n");
+//! let results: String = basic_listing(in_paths, false).get_paths().join("\n");
 //!
 //! println!("{}", results)
 //! }
@@ -164,19 +164,19 @@ fn extract_regex(x: &str) -> (String, String) {
 
 /// Parse the result of a vector of string. This function use HashMap to pack
 /// filename removed from the frame value.
-fn parse_result(dir_scan: Paths) -> HashMap<String, Vec<String>> {
+fn parse_result(dir_scan: Paths, multithreaded: bool) -> HashMap<String, Vec<String>> {
     // Optimisation over PAR_THRESHOLD value, the parsing of the frame list
     // used rayon lib to paralelize the work. Result depends a lot from the
     // cpu number of thread may be put in a config file
     const PAR_THRESHOLD: usize = 100000;
-    let extracted: Vec<(String, String)> = if dir_scan.len() < PAR_THRESHOLD {
+    let extracted: Vec<(String, String)> = if (dir_scan.len() > PAR_THRESHOLD) | multithreaded {
         dir_scan
-            .iter()
+            .par_iter()
             .map(|path| extract_regex(path.to_str().unwrap()))
             .collect()
     } else {
         dir_scan
-            .par_iter()
+            .iter()
             .map(|path| extract_regex(path.to_str().unwrap()))
             .collect()
     };
@@ -271,13 +271,13 @@ fn create_frame_string(value: Vec<String>) -> String {
 ///     let in_paths: Paths = parse_dir("./samples/small");
 ///
 ///     // Generate results based on arguments
-///     let results: String = basic_listing(in_paths).get_paths().join("\n");
+///     let results: String = basic_listing(in_paths, false).get_paths().join("\n");
 ///
 ///      println!("{}", results)
 /// }
 /// ```
-pub fn basic_listing(frames: Paths) -> PathsPacked {
-    let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
+pub fn basic_listing(frames: Paths, multithreaded: bool) -> PathsPacked {
+    let frames_dict: HashMap<String, Vec<String>> = parse_result(frames, multithreaded);
     let mut frames_list: Vec<String> = frames_dict
         .into_par_iter()
         .map(|(key, value)| {
@@ -335,8 +335,8 @@ fn get_exr_metada(root_path: &String, path: &String) -> String {
 /// ```bash
 /// ./samples/small/foo.exr    Not an exr
 /// ```
-pub fn extended_listing(root_path: String, frames: Paths) -> PathsPacked {
-    let frames_dict: HashMap<String, Vec<String>> = parse_result(frames);
+pub fn extended_listing(root_path: String, frames: Paths, multithreaded: bool) -> PathsPacked {
+    let frames_dict: HashMap<String, Vec<String>> = parse_result(frames, multithreaded);
     let mut out_frames: PathsPacked = PathsPacked::new_empty();
     for (key, value) in frames_dict {
         if value[0] == "None" && value.len() == 1 {
@@ -389,7 +389,7 @@ fn test_parse_string() {
         ("toto.***.tiff".to_string(), vec_toto),
         ("foo.exr".to_string(), vec_foo),
     ]);
-    assert_eq!(expected, parse_result(source));
+    assert_eq!(expected, parse_result(source, false));
 }
 #[test]
 fn test_continuity() {

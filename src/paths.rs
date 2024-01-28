@@ -2,6 +2,7 @@
 
 use rayon::prelude::*;
 use std::{clone::Clone, path::PathBuf};
+use std::ops::Deref;
 
 /// # Join
 ///
@@ -146,6 +147,14 @@ impl Join for Paths {
             .map(|f| f.to_string_lossy())
             .collect::<Vec<_>>()
             .join(sep)
+    }
+}
+
+impl Deref for Paths {
+    type Target = Vec<PathBuf>;
+
+    fn deref(&self) -> &Self::Target {
+        &self.data
     }
 }
 
