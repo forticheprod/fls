@@ -51,7 +51,9 @@ fn main() {
         parse_dir(&args.root)
     };
     let results = if args.list && args.recursive {
-        extended_listing("".to_string(), in_paths,args.multithread)
+        extended_listing("".to_string(), in_paths, args.multithread)
+    } else if args.list && args.exr {
+        extended_listing("".to_string(), in_paths, args.multithread)
     } else if args.list {
         extended_listing(args.root, in_paths, args.multithread)
     } else {
