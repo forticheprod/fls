@@ -1,8 +1,8 @@
 //! paths module is handle the Paths and PathsPacked types
 
 use rayon::prelude::*;
-use std::{clone::Clone, path::PathBuf};
 use std::ops::Deref;
+use std::{clone::Clone, path::PathBuf};
 
 /// # Join
 ///
