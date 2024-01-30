@@ -1,12 +1,12 @@
 use std::path::PathBuf;
 
-use criterion::{criterion_group, criterion_main, Criterion, BenchmarkId};
+use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use framels::{
     basic_listing, parse_dir,
     paths::{Paths, PathsPacked},
 };
 
-fn generate_paths(n: u64)->Paths{
+fn generate_paths(n: u64) -> Paths {
     let mut paths = Vec::new();
     for i in 0..n {
         paths.push(PathBuf::from(format!("Beauty_{:0>8}.exr", i)));
@@ -30,12 +30,14 @@ fn small_parse_and_run() {
 fn criterion_benchmark(c: &mut Criterion) {
     #[allow(clippy::redundant_closure)]
     let mut group = c.benchmark_group("Parsing");
-    for i in[1u64, 10u64, 100u64, 1000u64, 10000u64].iter() {
+    for i in [1u64, 10u64, 100u64, 1000u64, 10000u64].iter() {
         let data_set = generate_paths(*i);
-        group.bench_with_input(BenchmarkId::new("Mono", i), i, 
-        |b, _i| b.iter(|| basic_listing(data_set.clone(), false)));
-        group.bench_with_input(BenchmarkId::new("Multi", i), i, 
-        |b, _i| b.iter(|| basic_listing(data_set.clone(), true)));
+        group.bench_with_input(BenchmarkId::new("Mono", i), i, |b, _i| {
+            b.iter(|| basic_listing(data_set.clone(), false))
+        });
+        group.bench_with_input(BenchmarkId::new("Multi", i), i, |b, _i| {
+            b.iter(|| basic_listing(data_set.clone(), true))
+        });
     }
     group.finish();
     c.bench_function("big", |b| b.iter(|| parse_and_run()));

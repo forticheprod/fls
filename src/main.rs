@@ -43,22 +43,30 @@ fn main() {
     let args = Args::parse();
 
     // Perform directory listing
-    let in_paths: Paths = if args.exr {
+    let in_paths = if args.exr {
         Paths::from(vec![PathBuf::from(&args.root)])
     } else if args.recursive {
         recursive_dir(&args.root)
     } else {
         parse_dir(&args.root)
     };
-    let results = if args.list && args.recursive {
-        extended_listing("".to_string(), in_paths, args.multithread)
-    } else if args.list && args.exr {
-        extended_listing("".to_string(), in_paths, args.multithread)
-    } else if args.list {
-        extended_listing(args.root, in_paths, args.multithread)
+
+    // Choose listing function based on arguments
+    let results = if args.list {
+        extended_listing(
+            if args.recursive || args.exr {
+                "".to_string()
+            } else {
+                args.root
+            },
+            in_paths,
+            args.multithread,
+        )
     } else {
         basic_listing(in_paths, args.multithread)
     };
+
+    // Display results based on arguments
     if args.tree {
         run_tree(results.get_paths().to_vec())
     } else {
