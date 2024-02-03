@@ -222,7 +222,7 @@ Some hard rules, i won't trade off
 
 Thanks to:
 
-- Ben Legros for the passive mentorship over a beer ( or many )
+- Ben Legros for the indirect mentorship over a beer ( or many )
 - Djl for the idea
 - Tcherno
 - Mercenaries Eng for the best render engine ( samples/big render with [Guerilla render](http://guerillarender.com/) )
