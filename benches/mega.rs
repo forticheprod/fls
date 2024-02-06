@@ -4,6 +4,7 @@ use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use framels::{
     basic_listing, parse_dir,
     paths::{Paths, PathsPacked},
+    extended_listing,
 };
 
 fn generate_paths(n: u64) -> Paths {
@@ -27,6 +28,12 @@ fn small_parse_and_run() {
     let _results: PathsPacked = basic_listing(paths, false);
 }
 
+fn exr_reading() {
+    let source = "./samples/big/".to_string();
+    let paths: Paths = parse_dir(&source);
+    let _results: PathsPacked = extended_listing(source,paths, false);
+}
+
 fn criterion_benchmark(c: &mut Criterion) {
     #[allow(clippy::redundant_closure)]
     let mut group = c.benchmark_group("Parsing");
@@ -42,6 +49,7 @@ fn criterion_benchmark(c: &mut Criterion) {
     group.finish();
     c.bench_function("big", |b| b.iter(|| parse_and_run()));
     c.bench_function("small", |b| b.iter(|| small_parse_and_run()));
+    c.bench_function("exr_reading", |b| b.iter(|| exr_reading()));
 }
 criterion_group!(name=benches;config = Criterion::default().significance_level(0.1).sample_size(100); targets=criterion_benchmark);
 criterion_main!(benches);
