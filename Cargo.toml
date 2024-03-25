@@ -24,7 +24,7 @@ lazy_static = "1.4.0"
 rayon = "1.9.0"
 
 [dependencies.regex]
-version = "1.10.3"
+version = "1.10.4"
 default-features = false
 # regex currently requires the standard library, you must re-enable it.
 features = ["std", "unicode-perl"]
