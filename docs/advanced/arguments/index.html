@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" as="font" href="https://forticheprod.github.io/fls/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="https://forticheprod.github.io/fls/fonts/vendor/jost/jost-v4-latin-700.woff2"  type="font/woff2" crossorigin>
+
+
+<link rel="stylesheet" href="https://forticheprod.github.io/fls/main.css">
+
+
+
+  
+  
+    
+  
+
+  
+  
+    
+    
+  
+  
+  
+    
+  
+  
+  
+  
+    
+  
+  
+  
+
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+
+	
+
+
+	
+
+<title>Arguments | fls</title>
+<meta name="description" content="A usage of arguments">
+<link rel="canonical" href="https://forticheprod.github.io/fls/docs/advanced/arguments/">
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  
+    <meta name="twitter:image" content="https://forticheprod.github.io/fls//doks.png">
+  
+  <meta name="twitter:title" content="Arguments">
+  <meta name="twitter:description" content="A usage of arguments">
+  <meta name="twitter:site" content="@doubleailes">
+  <meta name="twitter:creator" content="@doubleailes">
+  
+  <meta property="og:title" content="Arguments">
+  <meta property="og:description" content="A usage of arguments">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://forticheprod.github.io/fls/docs/advanced/arguments/">
+
+  
+    <meta property="og:image" content="https://forticheprod.github.io/fls//doks.png">
+  
+
+  <meta property="og:updated_time" content="2021-05-01T08:00:00+00:00">
+  <meta property="og:site_name" content="Arguments">
+
+  
+
+  
+
+  
+  <meta property="article:publisher" content="https://www.facebook.com/doubleailes">
+  <meta property="article:author" content="https://www.facebook.com/doubleailes">
+  <meta property="og:locale" content="en_US">
+
+
+
+
+
+  
+
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    
+      
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          {
+            "@type": "ListItem",
+            "position":  1 ,
+            "name": "Home",
+            "item": "https://forticheprod.github.io/fls/"
+          },
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  2 ,
+            "name": "Docs",
+            "item": "https://forticheprod.github.io/fls/docs/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  3 ,
+            "name": "Advanced",
+            "item": "https://forticheprod.github.io/fls/docs/advanced/"
+          },
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          {
+            "@type": "ListItem",
+            "position":  4 ,
+            "name": "Arguments",
+            "item": "https://forticheprod.github.io/fls/docs/advanced/arguments/"
+          },
+        
+      
+    
+  }
+</script>
+
+
+
+
+
+
+  <meta name="theme-color" content="#fff">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://forticheprod.github.io/fls/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://forticheprod.github.io/fls/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://forticheprod.github.io/fls/favicon-16x16.png">
+  
+
+
+  
+
+</head>
+
+  
+
+<body class="docs single">
+  
+  
+  
+  
+<div class="header-bar fixed-top"></div>
+<header class="navbar fixed-top navbar-expand-md navbar-light">
+	<div class="container">
+		<input class="menu-btn order-0" type="checkbox" id="menu-btn">
+		<label class="menu-icon d-md-none" for="menu-btn"><span class="navicon"></span></label>
+		<a class="navbar-brand order-1 order-md-0 me-auto" href="https://forticheprod.github.io/fls/">fls</a>
+		<button id="mode" class="btn btn-link order-2 order-md-4" type="button" aria-label="Toggle mode">
+			<span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+			<span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+		</button>
+		<ul class="navbar-nav fork-me order-3 order-md-5">
+			
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://twitter.com/ForticheProd"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg><span class="ms-2 visually-hidden">Twitter</span></a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="https://github.com/forticheprod/fls"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg><span class="ms-2 visually-hidden">GitHub</span></a>
+					</li>
+				
+			
+		</ul>
+		<div class="collapse navbar-collapse order-4 order-md-1">
+			<ul class="navbar-nav main-nav me-auto order-5 order-md-2">
+				
+					
+				
+				
+				
+					
+						<li class="nav-item docs active">
+							<a class="nav-link" href="https://forticheprod.github.io/fls/docs/getting-started/introduction/">Docs</a>
+						</li>
+					
+				
+			</ul>
+			<div class="break order-6 d-md-none"></div>
+			
+				<form class="navbar-form flex-grow-1 order-7 order-md-3">
+					<input id="userinput" class="form-control is-search" type="search" placeholder="Search docs..."
+						aria-label="Search docs..." autocomplete="off">
+					<div id="suggestions" class="shadow bg-white rounded"></div>
+				</form>
+			
+		</div>
+	</div>
+</header>
+
+
+
+  
+<div class="wrap container" role="document">
+  <div class="content">
+    <div class="row flex-xl-nowrap">
+	  
+<div class="col-lg-5 col-xl-4 docs-sidebar">
+	<nav class="docs-links" aria-label="Main navigation">
+			
+			
+			
+			
+					
+					
+					
+							<h3>Getting Started</h3>
+							<ul class="list-unstyled">
+							                           
+									<li><a class="docs-link" href="https://forticheprod.github.io/fls/docs/getting-started/introduction/">Introduction</a></li>
+							                           
+									<li><a class="docs-link" href="https://forticheprod.github.io/fls/docs/getting-started/quick-start/">Quick Start</a></li>
+							
+					</ul>
+					
+					
+					
+					
+							<h3>Advanced usage</h3>
+							<ul class="list-unstyled">
+							                           
+									<li><a class="docs-link active" href="https://forticheprod.github.io/fls/docs/advanced/arguments/">Arguments</a></li>
+							                           
+									<li><a class="docs-link" href="https://forticheprod.github.io/fls/docs/advanced/library/">Library</a></li>
+							
+					</ul>
+					
+					
+					
+					
+							<h3>Contributing</h3>
+							<ul class="list-unstyled">
+							                           
+									<li><a class="docs-link" href="https://forticheprod.github.io/fls/docs/contributing/how-to-contribute/">How to Contribute</a></li>
+							                           
+									<li><a class="docs-link" href="https://forticheprod.github.io/fls/docs/contributing/code-of-conduct/">Code of Conduct</a></li>
+							
+					</ul>
+					
+					
+					
+					
+							<h3>Help</h3>
+							<ul class="list-unstyled">
+							                           
+									<li><a class="docs-link" href="https://forticheprod.github.io/fls/docs/help/faq/">FAQ</a></li>
+							
+					</ul>
+					
+					
+			
+	</nav>
+</div>
+
+	  
+  
+  <nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+  	<div class="page-links">
+  			<h3>On this page</h3>
+  			<nav id="TableOfContents">
+  					<ul>
+  							
+  							<li><a href="https://forticheprod.github.io/fls/docs/advanced/arguments/#list">list</a></li>
+  							
+  							
+  							<li><a href="https://forticheprod.github.io/fls/docs/advanced/arguments/#recursive">Recursive</a></li>
+  							
+  							
+  							<li><a href="https://forticheprod.github.io/fls/docs/advanced/arguments/#tree">Tree</a></li>
+  							
+  							
+  					</ul>
+  			</nav>
+  	</div>
+  </nav>
+  
+
+      <main class="docs-content col-lg-11 col-xl-9">
+        <h1>Arguments</h1>
+        <p class="lead">A usage of arguments</p>
+        <h3 id="list">list</h3>
+<p>Run <code>fls -l</code> to list your current directory and display EXR informations.</p>
+<p>Run <code>fls -l /path/of/directory/</code> to list a specific directory and display EXR informations.</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> fls</span><span style="color:#bf616a;"> -l</span><span> samples/big/
+</span><span style="color:#bf616a;">RenderPass_Beauty_1_*****.exr@0-96
+</span><span style="color:#bf616a;">RenderPass_Occlusion_1_*****.exr@0-73,75-96
+</span><span style="color:#bf616a;">RenderPass_Id_1_*****.exr@0-96
+</span><span style="color:#bf616a;">RenderPass_Occlusion_1_***.exr@74
+</span><span style="color:#bf616a;">RenderPass_Ncam_1_00042.exr.bkp
+</span><span style="color:#bf616a;">RenderPass_SpecularRim_1_*****.exr@0-96
+</span><span style="color:#bf616a;">RenderPass_DiffuseKey_1_*****.exr@0-96
+</span><span style="color:#bf616a;">RenderPass_Pcam_1_*****.exr@0-96
+</span><span style="color:#bf616a;">RenderPass_Reflection_1_*****.exr@0-96
+</span><span style="color:#bf616a;">RenderPass_Specular_1_*****.exr@0-96
+</span><span style="color:#bf616a;">RenderPass_Diffuse_1_*****.exr@0-96
+</span><span style="color:#bf616a;">RenderPass_IndDiffuse_1_*****.exr@0-96
+</span><span style="color:#bf616a;">RenderPass_Ncam_1_*****.exr@0-41,43-96
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Beauty_1_00000.exr</span><span> layer </span><span style="color:#65737e;">#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&quot;A&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;B&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;G&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;Plane_Beauty.A&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;Plane_Beauty.B&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;Plane_Beauty.G&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;Plane_Beauty.R&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;R&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;Spheres_Beauty.A&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;Spheres_Beauty.B&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;Spheres_Beauty.G&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;Spheres_Beauty.R&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 24, uniform_sample_type: Some(F16) }
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Occlusion_1_00000.exr</span><span> layer </span><span style="color:#65737e;">#0 size:Vec2(320, 139); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&quot;A&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;B&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;G&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;R&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Id_1_00000.exr</span><span> layer </span><span style="color:#65737e;">#0 size:Vec2(140, 52); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&quot;A&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;B&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;G&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;R&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Occlusion_1_074.exr</span><span> layer </span><span style="color:#65737e;">#0 size:Vec2(320, 156); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&quot;A&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;B&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;G&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;R&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+</span><span style="color:#bf616a;">Not</span><span> an exr
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_SpecularRim_1_00000.exr</span><span> layer </span><span style="color:#65737e;">#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&quot;A&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;B&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;G&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;R&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_DiffuseKey_1_00000.exr</span><span> layer </span><span style="color:#65737e;">#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&quot;A&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;B&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;G&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;R&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Pcam_1_00000.exr</span><span> layer </span><span style="color:#65737e;">#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&quot;A&quot;), sample_type: F32, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;B&quot;), sample_type: F32, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;G&quot;), sample_type: F32, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;R&quot;), sample_type: F32, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 16, uniform_sample_type: Some(F32) }
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Reflection_1_00000.exr</span><span> layer </span><span style="color:#65737e;">#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&quot;A&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;B&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;G&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;R&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Specular_1_00000.exr</span><span> layer </span><span style="color:#65737e;">#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&quot;A&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;B&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;G&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;R&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Diffuse_1_00000.exr</span><span> layer </span><span style="color:#65737e;">#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&quot;A&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;B&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;G&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;R&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_IndDiffuse_1_00000.exr</span><span> layer </span><span style="color:#65737e;">#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&quot;A&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;B&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;G&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;R&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Ncam_1_00000.exr</span><span> layer </span><span style="color:#65737e;">#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&quot;A&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;B&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;G&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&quot;R&quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+</span></code></pre>
+<h3 id="recursive">Recursive</h3>
+<p>You can use a recursive approch of the directory and sub-folder</p>
+<p>You can use <code>-r</code></p>
+<p>Run <code>fls -r /path/of/directory/</code> to list a specific directory and his
+subfolder</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> fls</span><span style="color:#bf616a;"> -r</span><span> .</span><span style="color:#96b5b4;">\s</span><span>amples\
+</span><span>.</span><span style="color:#96b5b4;">\s</span><span>amples</span><span style="color:#96b5b4;">\b</span><span>ig</span><span style="color:#96b5b4;">\R</span><span>enderPass_Diffuse_1_*****.exr@0-96
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Ncam_1_00042.exr.bkp
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_DiffuseKey_1_*****.exr@0-96
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Occlusion_1_*****.exr@0-73,75-96
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Occlusion_1_***.exr@74
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">mall</span><span style="color:#96b5b4;">\f</span><span style="color:#bf616a;">oo_bar.exr
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_SpecularRim_1_*****.exr@0-96
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Pcam_1_*****.exr@0-96
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Ncam_1_*****.exr@0-41,43-96
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">mall
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Id_1_*****.exr@0-96
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Specular_1_*****.exr@0-96
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Beauty_1_*****.exr@0-96
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_IndDiffuse_1_*****.exr@0-96
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\b</span><span style="color:#bf616a;">ig</span><span style="color:#96b5b4;">\R</span><span style="color:#bf616a;">enderPass_Reflection_1_*****.exr@0-96
+</span><span style="color:#bf616a;">.</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">amples</span><span style="color:#96b5b4;">\s</span><span style="color:#bf616a;">mall</span><span style="color:#96b5b4;">\a</span><span style="color:#bf616a;">aa.***.tif@1-5
+</span></code></pre>
+<p>Watch out, the recursive mode is not compatible with the <code>-l, --list</code> option, at the moment.</p>
+<h3 id="tree">Tree</h3>
+<p>You can use a tree approch of the directory and sub-folder</p>
+<p>You can use <code>-t</code> or <code>--tree</code></p>
+<p>Always use <code>-r</code> to use the tree mode.</p>
+<p>Run <code>fls -t -r /path/of/directory/</code> to list a specific directory and his
+subfolder</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">$</span><span> fls</span><span style="color:#bf616a;"> -t -r</span><span> .</span><span style="color:#96b5b4;">\s</span><span>amples\
+</span><span>┗ 
+</span><span>    </span><span style="color:#bf616a;">┗</span><span> samples
+</span><span>        </span><span style="color:#bf616a;">┗</span><span> big
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> RenderPass_Beauty_1_*****.exr@0-96
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> RenderPass_DiffuseKey_1_*****.exr@0-96
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> RenderPass_Diffuse_1_*****.exr@0-96
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> RenderPass_Id_1_*****.exr@0-96
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> RenderPass_IndDiffuse_1_*****.exr@0-96
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> RenderPass_Ncam_1_*****.exr@0-41,43-96
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> RenderPass_Ncam_1_00042.exr.bkp
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> RenderPass_Occlusion_1_*****.exr@0-73,75-96
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> RenderPass_Occlusion_1_***.exr@74
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> RenderPass_Pcam_1_*****.exr@0-96
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> RenderPass_Reflection_1_*****.exr@0-96
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> RenderPass_SpecularRim_1_*****.exr@0-96
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> RenderPass_Specular_1_*****.exr@0-96
+</span><span>        </span><span style="color:#bf616a;">┗</span><span> mega
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> response_1689510067951.json
+</span><span>        </span><span style="color:#bf616a;">┗</span><span> small
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> aaa.***.tif@1-5
+</span><span>            </span><span style="color:#bf616a;">┗</span><span> foo_bar.exr
+</span></code></pre>
+
+        
+        
+<div class="docs-navigation d-flex justify-content-between">
+  
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+        
+      
+        
+        
+          
+            
+              
+              <a href="https:&#x2F;&#x2F;forticheprod.github.io&#x2F;fls&#x2F;docs&#x2F;getting-started&#x2F;quick-start&#x2F;">
+                <div class="card my-1">
+                  <div class="card-body py-2">
+                    &larr; Quick Start
+                  </div>
+                </div>
+              </a>
+            
+            
+            
+          
+        
+      
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+      
+      
+        
+      
+    
+      
+      
+        
+          
+          
+          <a class="ms-auto" href="https:&#x2F;&#x2F;forticheprod.github.io&#x2F;fls&#x2F;docs&#x2F;contributing&#x2F;how-to-contribute&#x2F;">
+            <div class="card my-1">
+              <div class="card-body py-2">
+                How to Contribute &rarr;
+              </div>
+            </div>
+          </a>
+          
+          
+          
+        
+      
+    
+      
+      
+        
+      
+    
+  
+</div>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+
+  
+    
+<footer class="footer text-muted">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-last order-lg-first">
+				<ul class="list-inline">
+					
+						<li class="list-inline-item">Powered by <a href="https://www.netlify.com/">Netlify</a>, <a href="https://www.getzola.org/">Zola</a>, and <a href="https://github.com/aaranxu/adidoks">AdiDoks</a></li>
+					
+				</ul>
+			</div>
+			<div class="col-lg-8 order-first order-lg-last text-lg-end">
+				<ul class="list-inline">
+					
+						
+							<li class="list-inline-item"><a href="https://forticheprod.github.io/fls/privacy-policy/">Privacy</a></li>
+						
+							<li class="list-inline-item"><a href="https://forticheprod.github.io/fls/docs/contributing/code-of-conduct/">Code of Conduct</a></li>
+						
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+  
+
+  
+<script type="text/javascript" src="https://forticheprod.github.io/fls/js/main.js" defer></script>
+
+  <script type="text/javascript" src="https://forticheprod.github.io/fls/plugins/elasticlunr.min.js" defer></script>
+  <script type="text/javascript" src="https://forticheprod.github.io/fls/search_index.en.js" defer></script>
+  <script type="text/javascript" src="https://forticheprod.github.io/fls/js/search.js" defer></script>
+
+  
+</body>
+</html>

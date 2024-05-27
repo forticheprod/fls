@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>fls</title>
+    <subtitle>fls is simple command lien tool</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://forticheprod.github.io/fls/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://forticheprod.github.io/fls/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2021-05-01T19:30:00+00:00</updated>
+    <id>https://forticheprod.github.io/fls/atom.xml</id>
+    <entry xml:lang="en">
+        <title>FAQ</title>
+        <published>2021-05-01T19:30:00+00:00</published>
+        <updated>2021-05-01T19:30:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://forticheprod.github.io/fls/docs/help/faq/"/>
+        <id>https://forticheprod.github.io/fls/docs/help/faq/</id>
+        
+        <content type="html" xml:base="https://forticheprod.github.io/fls/docs/help/faq/">&lt;h2 id=&quot;what-is-the-adidoks&quot;&gt;What is the AdiDoks?&lt;&#x2F;h2&gt;
+&lt;p&gt;AdiDoks is a Zola theme for Documentation&#x27;s sites, ported by the Hugo Theme
+&lt;a href=&quot;https:&#x2F;&#x2F;getdoks.org&quot;&gt;Doks&lt;&#x2F;a&gt;, which is a pretty nice theme. Thanks a lot to 
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;h-enk&quot;&gt;&lt;em&gt;h-enk&lt;&#x2F;em&gt;&lt;&#x2F;a&gt;, the creator of the &lt;a href=&quot;https:&#x2F;&#x2F;getdoks.org&quot;&gt;Doks&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;keyboard-shortcuts-for-search&quot;&gt;Keyboard shortcuts for search?&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;focus: &lt;code&gt;&#x2F;&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;select: &lt;code&gt;↓&lt;&#x2F;code&gt; and &lt;code&gt;↑&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;open: &lt;code&gt;Enter&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;close: &lt;code&gt;Esc&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;other-documentation&quot;&gt;Other documentation?&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;docs.netlify.com&#x2F;&quot;&gt;Netlify&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;documentation&#x2F;getting-started&#x2F;overview&#x2F;&quot;&gt;Zola&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;contact-the-creator&quot;&gt;Contact the creator?&lt;&#x2F;h2&gt;
+&lt;p&gt;Send &lt;em&gt;Aaran Xu&lt;&#x2F;em&gt; an E-mail:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;mailto:aaranxu@outlook.com&quot;&gt;aaranxu@outlook.com&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Code of Conduct</title>
+        <published>2021-05-01T18:20:00+00:00</published>
+        <updated>2021-05-01T18:20:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://forticheprod.github.io/fls/docs/contributing/code-of-conduct/"/>
+        <id>https://forticheprod.github.io/fls/docs/contributing/code-of-conduct/</id>
+        
+        <content type="html" xml:base="https://forticheprod.github.io/fls/docs/contributing/code-of-conduct/">&lt;h2 id=&quot;our-pledge&quot;&gt;Our Pledge&lt;&#x2F;h2&gt;
+&lt;p&gt;We as members, contributors, and leaders pledge to make participation in our
+community a harassment-free experience for everyone, regardless of age, body
+size, visible or invisible disability, ethnicity, sex characteristics, gender
+identity and expression, level of experience, education, socio-economic status,
+nationality, personal appearance, race, caste, color, religion, or sexual identity
+and orientation.&lt;&#x2F;p&gt;
+&lt;p&gt;We pledge to act and interact in ways that contribute to an open, welcoming,
+diverse, inclusive, and healthy community.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;our-standards&quot;&gt;Our Standards&lt;&#x2F;h2&gt;
+&lt;p&gt;Examples of behavior that contributes to a positive environment for our
+community include:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Demonstrating empathy and kindness toward other people&lt;&#x2F;li&gt;
+&lt;li&gt;Being respectful of differing opinions, viewpoints, and experiences&lt;&#x2F;li&gt;
+&lt;li&gt;Giving and gracefully accepting constructive feedback&lt;&#x2F;li&gt;
+&lt;li&gt;Accepting responsibility and apologizing to those affected by our mistakes,
+and learning from the experience&lt;&#x2F;li&gt;
+&lt;li&gt;Focusing on what is best not just for us as individuals, but for the
+overall community&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Examples of unacceptable behavior include:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The use of sexualized language or imagery, and sexual attention or
+advances of any kind&lt;&#x2F;li&gt;
+&lt;li&gt;Trolling, insulting or derogatory comments, and personal or political attacks&lt;&#x2F;li&gt;
+&lt;li&gt;Public or private harassment&lt;&#x2F;li&gt;
+&lt;li&gt;Publishing others&#x27; private information, such as a physical or email
+address, without their explicit permission&lt;&#x2F;li&gt;
+&lt;li&gt;Other conduct which could reasonably be considered inappropriate in a
+professional setting&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;enforcement-responsibilities&quot;&gt;Enforcement Responsibilities&lt;&#x2F;h2&gt;
+&lt;p&gt;Community leaders are responsible for clarifying and enforcing our standards of
+acceptable behavior and will take appropriate and fair corrective action in
+response to any behavior that they deem inappropriate, threatening, offensive,
+or harmful.&lt;&#x2F;p&gt;
+&lt;p&gt;Community leaders have the right and responsibility to remove, edit, or reject
+comments, commits, code, wiki edits, issues, and other contributions that are
+not aligned to this Code of Conduct, and will communicate reasons for moderation
+decisions when appropriate.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;scope&quot;&gt;Scope&lt;&#x2F;h2&gt;
+&lt;p&gt;This Code of Conduct applies within all community spaces, and also applies when
+an individual is officially representing the community in public spaces.
+Examples of representing our community include using an official e-mail address,
+posting via an official social media account, or acting as an appointed
+representative at an online or offline event.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;enforcement&quot;&gt;Enforcement&lt;&#x2F;h2&gt;
+&lt;p&gt;Instances of abusive, harassing, or otherwise unacceptable behavior may be
+reported to the community leaders responsible for enforcement at
+&lt;a href=&quot;mailto:aaranxu@outlook.com&quot;&gt;aaranxu@outlook.com&lt;&#x2F;a&gt;.
+All complaints will be reviewed and investigated promptly and fairly.&lt;&#x2F;p&gt;
+&lt;p&gt;All community leaders are obligated to respect the privacy and security of the
+reporter of any incident.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;enforcement-guidelines&quot;&gt;Enforcement Guidelines&lt;&#x2F;h2&gt;
+&lt;p&gt;Community leaders will follow these Community Impact Guidelines in determining
+the consequences for any action they deem in violation of this Code of Conduct:&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;1-correction&quot;&gt;1. Correction&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;Community Impact&lt;&#x2F;strong&gt;: Use of inappropriate language or other behavior deemed
+unprofessional or unwelcome in the community.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Consequence&lt;&#x2F;strong&gt;: A private, written warning from community leaders, providing
+clarity around the nature of the violation and an explanation of why the
+behavior was inappropriate. A public apology may be requested.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;2-warning&quot;&gt;2. Warning&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;Community Impact&lt;&#x2F;strong&gt;: A violation through a single incident or series
+of actions.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Consequence&lt;&#x2F;strong&gt;: A warning with consequences for continued behavior. No
+interaction with the people involved, including unsolicited interaction with
+those enforcing the Code of Conduct, for a specified period of time. This
+includes avoiding interactions in community spaces as well as external channels
+like social media. Violating these terms may lead to a temporary or
+permanent ban.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;3-temporary-ban&quot;&gt;3. Temporary Ban&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;Community Impact&lt;&#x2F;strong&gt;: A serious violation of community standards, including
+sustained inappropriate behavior.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Consequence&lt;&#x2F;strong&gt;: A temporary ban from any sort of interaction or public
+communication with the community for a specified period of time. No public or
+private interaction with the people involved, including unsolicited interaction
+with those enforcing the Code of Conduct, is allowed during this period.
+Violating these terms may lead to a permanent ban.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;4-permanent-ban&quot;&gt;4. Permanent Ban&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;Community Impact&lt;&#x2F;strong&gt;: Demonstrating a pattern of violation of community
+standards, including sustained inappropriate behavior,  harassment of an
+individual, or aggression toward or disparagement of classes of individuals.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Consequence&lt;&#x2F;strong&gt;: A permanent ban from any sort of public interaction within
+the community.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;attribution&quot;&gt;Attribution&lt;&#x2F;h2&gt;
+&lt;p&gt;This Code of Conduct is adapted from the &lt;a href=&quot;https:&#x2F;&#x2F;www.contributor-covenant.org&quot;&gt;Contributor Covenant&lt;&#x2F;a&gt;,
+version 2.0, available at
+&lt;a href=&quot;https:&#x2F;&#x2F;www.contributor-covenant.org&#x2F;version&#x2F;2&#x2F;0&#x2F;code_of_conduct.html&quot;&gt;https:&#x2F;&#x2F;www.contributor-covenant.org&#x2F;version&#x2F;2&#x2F;0&#x2F;code_of_conduct.html&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Community Impact Guidelines were inspired by 
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;mozilla&#x2F;diversity&quot;&gt;Mozilla&#x27;s code of conduct enforcement ladder&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;For answers to common questions about this code of conduct, see the FAQ at
+&lt;a href=&quot;https:&#x2F;&#x2F;www.contributor-covenant.org&#x2F;faq&quot;&gt;https:&#x2F;&#x2F;www.contributor-covenant.org&#x2F;faq&lt;&#x2F;a&gt;. Translations are available 
+at &lt;a href=&quot;https:&#x2F;&#x2F;www.contributor-covenant.org&#x2F;translations&quot;&gt;https:&#x2F;&#x2F;www.contributor-covenant.org&#x2F;translations&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>How to Contribute</title>
+        <published>2021-05-01T18:10:00+00:00</published>
+        <updated>2021-05-01T18:10:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://forticheprod.github.io/fls/docs/contributing/how-to-contribute/"/>
+        <id>https://forticheprod.github.io/fls/docs/contributing/how-to-contribute/</id>
+        
+        <content type="html" xml:base="https://forticheprod.github.io/fls/docs/contributing/how-to-contribute/">&lt;p&gt;👉 Make sure to read the &lt;a href=&quot;..&#x2F;code-of-conduct&#x2F;&quot;&gt;Code of Conduct&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;contribute-to-doks&quot;&gt;Contribute to Doks&lt;&#x2F;h2&gt;
+&lt;p&gt;👉 The AdiDoks code lives in the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;aaranxu&#x2F;adidoks&quot;&gt;&lt;code&gt;adidoks&lt;&#x2F;code&gt; repository&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Follow the &lt;a href=&quot;https:&#x2F;&#x2F;guides.github.com&#x2F;introduction&#x2F;flow&#x2F;&quot;&gt;GitHub flow&lt;&#x2F;a&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Follow the &lt;a href=&quot;https:&#x2F;&#x2F;www.conventionalcommits.org&#x2F;en&#x2F;v1.0.0&#x2F;&quot;&gt;Conventional Commits Specification&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;create-an-issue&quot;&gt;Create an issue&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;aaranxu&#x2F;adidoks&#x2F;issues&#x2F;new?template=bug-report---.md&quot;&gt;Bug report&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;aaranxu&#x2F;adidoks&#x2F;issues&#x2F;new?template=feature-request---.md&quot;&gt;Feature request&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;improve-documentation&quot;&gt;Improve documentation&lt;&#x2F;h2&gt;
+&lt;p&gt;👉 The documentation lives in &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;aaranxu&#x2F;adidoks&#x2F;tree&#x2F;master&#x2F;content&#x2F;docs&quot;&gt;&lt;code&gt;.&#x2F;content&#x2F;docs&#x2F;&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;
+of the &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;h-enk&#x2F;getdoks.org&quot;&gt;&lt;code&gt;adidoks&lt;&#x2F;code&gt; repository&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Follow the &lt;a href=&quot;https:&#x2F;&#x2F;guides.github.com&#x2F;introduction&#x2F;flow&#x2F;&quot;&gt;GitHub flow&lt;&#x2F;a&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Follow the &lt;a href=&quot;https:&#x2F;&#x2F;www.conventionalcommits.org&#x2F;en&#x2F;v1.0.0&#x2F;&quot;&gt;Conventional Commits Specification&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Quick Start</title>
+        <published>2021-05-01T08:20:00+00:00</published>
+        <updated>2021-05-01T08:20:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://forticheprod.github.io/fls/docs/getting-started/quick-start/"/>
+        <id>https://forticheprod.github.io/fls/docs/getting-started/quick-start/</id>
+        
+        <content type="html" xml:base="https://forticheprod.github.io/fls/docs/getting-started/quick-start/">&lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;configuration&quot;&gt;Configuration&lt;&#x2F;h3&gt;
+&lt;p&gt;a standard machine with an OS listed below:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows 10+ x86_64&lt;&#x2F;li&gt;
+&lt;li&gt;current linux distro tested: Fedora 37, Centos 7, Manjaro 22, rocky 9.2&lt;&#x2F;li&gt;
+&lt;li&gt;MacOs 10.7+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;terminal&quot;&gt;Terminal&lt;&#x2F;h3&gt;
+&lt;p&gt;Before using &lt;code&gt;fls&lt;&#x2F;code&gt; you need to have the adminstrator right and terminal application
+like &lt;strong&gt;powershell&lt;&#x2F;strong&gt; or &lt;strong&gt;gnome-terminal&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;pre-compile-bin&quot;&gt;Pre-compile bin&lt;&#x2F;h3&gt;
+&lt;p&gt;You can download the last version &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;forticheprod&#x2F;fls&#x2F;releases&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;forticheprod&#x2F;fls&#x2F;releases&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;windows&quot;&gt;Windows&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Unzip the folder&lt;&#x2F;li&gt;
+&lt;li&gt;Copy the &lt;code&gt;fls.exe&lt;&#x2F;code&gt; file into &lt;code&gt;C:\program files\Fls&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Add the path &lt;code&gt;C:\program files\Fls&lt;&#x2F;code&gt; to the &lt;code&gt;PATH&lt;&#x2F;code&gt; environement variable&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h4 id=&quot;linux&quot;&gt;Linux&lt;&#x2F;h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Untar the folder&lt;&#x2F;li&gt;
+&lt;li&gt;Copy the &lt;code&gt;fls&lt;&#x2F;code&gt; binary into &lt;code&gt;&#x2F;usr&#x2F;bin&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;from-cargo&quot;&gt;From Cargo&lt;&#x2F;h3&gt;
+&lt;p&gt;You can install via &lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;framels&quot;&gt;&lt;a href=&quot;https:&#x2F;&#x2F;crates.io&#x2F;&quot;&gt;https:&#x2F;&#x2F;crates.io&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Run &lt;code&gt;cargo install framels&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Check &lt;code&gt;~&#x2F;.cargo&#x2F;bin&#x2F;&lt;&#x2F;code&gt; is added to path if not add it&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;usage&quot;&gt;Usage&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;help&quot;&gt;Help&lt;&#x2F;h3&gt;
+&lt;p&gt;Run &lt;code&gt;fls --help&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;basic&quot;&gt;Basic&lt;&#x2F;h3&gt;
+&lt;h4 id=&quot;current-directory&quot;&gt;Current directory&lt;&#x2F;h4&gt;
+&lt;p&gt;Run &lt;code&gt;fls&lt;&#x2F;code&gt; to list your current directory.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; touch aaa.001.tif aaa.002.tif aaa.003.tif aaa.004.tif aaa.005.tif foo_bar.exr
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; fls
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;foo_bar.exr
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;aaa.***.tif@1-5
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h4 id=&quot;specific-directory&quot;&gt;Specific directory&lt;&#x2F;h4&gt;
+&lt;p&gt;Run &lt;code&gt;fls &#x2F;path&#x2F;of&#x2F;directory&#x2F;&lt;&#x2F;code&gt; to list a specific directory.&lt;&#x2F;p&gt;
+&lt;p&gt;Exemple with the sample set &lt;strong&gt;big&lt;&#x2F;strong&gt; at the root level of the repo&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; fls .&#x2F;samples&#x2F;big&#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Pcam_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Beauty_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_IndDiffuse_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Ncam_1_*****.exr@0-41,43-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Specular_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Id_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Occlusion_1_***.exr@74
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Reflection_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_SpecularRim_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Ncam_1_00042.exr.bkp
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_DiffuseKey_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Diffuse_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Occlusion_1_*****.exr@0-73,75-96
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Arguments</title>
+        <published>2021-05-01T08:00:00+00:00</published>
+        <updated>2021-05-01T08:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://forticheprod.github.io/fls/docs/advanced/arguments/"/>
+        <id>https://forticheprod.github.io/fls/docs/advanced/arguments/</id>
+        
+        <content type="html" xml:base="https://forticheprod.github.io/fls/docs/advanced/arguments/">&lt;h3 id=&quot;list&quot;&gt;list&lt;&#x2F;h3&gt;
+&lt;p&gt;Run &lt;code&gt;fls -l&lt;&#x2F;code&gt; to list your current directory and display EXR informations.&lt;&#x2F;p&gt;
+&lt;p&gt;Run &lt;code&gt;fls -l &#x2F;path&#x2F;of&#x2F;directory&#x2F;&lt;&#x2F;code&gt; to list a specific directory and display EXR informations.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; fls&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -l&lt;&#x2F;span&gt;&lt;span&gt; samples&#x2F;big&#x2F;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Beauty_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Occlusion_1_*****.exr@0-73,75-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Id_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Occlusion_1_***.exr@74
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Ncam_1_00042.exr.bkp
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_SpecularRim_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_DiffuseKey_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Pcam_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Reflection_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Specular_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Diffuse_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_IndDiffuse_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;RenderPass_Ncam_1_*****.exr@0-41,43-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Beauty_1_00000.exr&lt;&#x2F;span&gt;&lt;span&gt; layer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&amp;quot;A&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;B&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;G&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;Plane_Beauty.A&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;Plane_Beauty.B&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;Plane_Beauty.G&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;Plane_Beauty.R&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;R&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;Spheres_Beauty.A&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;Spheres_Beauty.B&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;Spheres_Beauty.G&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;Spheres_Beauty.R&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 24, uniform_sample_type: Some(F16) }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Occlusion_1_00000.exr&lt;&#x2F;span&gt;&lt;span&gt; layer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#0 size:Vec2(320, 139); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&amp;quot;A&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;B&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;G&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;R&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Id_1_00000.exr&lt;&#x2F;span&gt;&lt;span&gt; layer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#0 size:Vec2(140, 52); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&amp;quot;A&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;B&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;G&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;R&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Occlusion_1_074.exr&lt;&#x2F;span&gt;&lt;span&gt; layer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#0 size:Vec2(320, 156); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&amp;quot;A&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;B&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;G&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;R&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Not&lt;&#x2F;span&gt;&lt;span&gt; an exr
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_SpecularRim_1_00000.exr&lt;&#x2F;span&gt;&lt;span&gt; layer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&amp;quot;A&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;B&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;G&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;R&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_DiffuseKey_1_00000.exr&lt;&#x2F;span&gt;&lt;span&gt; layer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&amp;quot;A&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;B&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;G&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;R&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Pcam_1_00000.exr&lt;&#x2F;span&gt;&lt;span&gt; layer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&amp;quot;A&amp;quot;), sample_type: F32, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;B&amp;quot;), sample_type: F32, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;G&amp;quot;), sample_type: F32, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;R&amp;quot;), sample_type: F32, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 16, uniform_sample_type: Some(F32) }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Reflection_1_00000.exr&lt;&#x2F;span&gt;&lt;span&gt; layer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&amp;quot;A&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;B&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;G&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;R&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Specular_1_00000.exr&lt;&#x2F;span&gt;&lt;span&gt; layer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&amp;quot;A&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;B&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;G&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;R&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Diffuse_1_00000.exr&lt;&#x2F;span&gt;&lt;span&gt; layer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&amp;quot;A&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;B&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;G&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;R&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_IndDiffuse_1_00000.exr&lt;&#x2F;span&gt;&lt;span&gt; layer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&amp;quot;A&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;B&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;G&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;R&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Ncam_1_00000.exr&lt;&#x2F;span&gt;&lt;span&gt; layer &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;#0 size:Vec2(320, 143); channels:ChannelList { list: [ChannelDescription { name: exr::Text(&amp;quot;A&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;B&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;G&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }, ChannelDescription { name: exr::Text(&amp;quot;R&amp;quot;), sample_type: F16, quantize_linearly: false, sampling: Vec2(1, 1) }], bytes_per_pixel: 8, uniform_sample_type: Some(F16) }
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;recursive&quot;&gt;Recursive&lt;&#x2F;h3&gt;
+&lt;p&gt;You can use a recursive approch of the directory and sub-folder&lt;&#x2F;p&gt;
+&lt;p&gt;You can use &lt;code&gt;-r&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Run &lt;code&gt;fls -r &#x2F;path&#x2F;of&#x2F;directory&#x2F;&lt;&#x2F;code&gt; to list a specific directory and his
+subfolder&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; fls&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -r&lt;&#x2F;span&gt;&lt;span&gt; .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span&gt;amples\
+&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span&gt;enderPass_Diffuse_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Ncam_1_00042.exr.bkp
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_DiffuseKey_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Occlusion_1_*****.exr@0-73,75-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Occlusion_1_***.exr@74
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mall&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\f&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;oo_bar.exr
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_SpecularRim_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Pcam_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Ncam_1_*****.exr@0-41,43-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mall
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Id_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Specular_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Beauty_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_IndDiffuse_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\b&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ig&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\R&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enderPass_Reflection_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;amples&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;mall&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\a&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;aa.***.tif@1-5
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Watch out, the recursive mode is not compatible with the &lt;code&gt;-l, --list&lt;&#x2F;code&gt; option, at the moment.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;tree&quot;&gt;Tree&lt;&#x2F;h3&gt;
+&lt;p&gt;You can use a tree approch of the directory and sub-folder&lt;&#x2F;p&gt;
+&lt;p&gt;You can use &lt;code&gt;-t&lt;&#x2F;code&gt; or &lt;code&gt;--tree&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Always use &lt;code&gt;-r&lt;&#x2F;code&gt; to use the tree mode.&lt;&#x2F;p&gt;
+&lt;p&gt;Run &lt;code&gt;fls -t -r &#x2F;path&#x2F;of&#x2F;directory&#x2F;&lt;&#x2F;code&gt; to list a specific directory and his
+subfolder&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt; fls&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -t -r&lt;&#x2F;span&gt;&lt;span&gt; .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;\s&lt;&#x2F;span&gt;&lt;span&gt;amples\
+&lt;&#x2F;span&gt;&lt;span&gt;┗ 
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; samples
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; big
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; RenderPass_Beauty_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; RenderPass_DiffuseKey_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; RenderPass_Diffuse_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; RenderPass_Id_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; RenderPass_IndDiffuse_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; RenderPass_Ncam_1_*****.exr@0-41,43-96
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; RenderPass_Ncam_1_00042.exr.bkp
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; RenderPass_Occlusion_1_*****.exr@0-73,75-96
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; RenderPass_Occlusion_1_***.exr@74
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; RenderPass_Pcam_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; RenderPass_Reflection_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; RenderPass_SpecularRim_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; RenderPass_Specular_1_*****.exr@0-96
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; mega
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; response_1689510067951.json
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; small
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; aaa.***.tif@1-5
+&lt;&#x2F;span&gt;&lt;span&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;┗&lt;&#x2F;span&gt;&lt;span&gt; foo_bar.exr
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Library</title>
+        <published>2021-05-01T08:00:00+00:00</published>
+        <updated>2021-05-01T08:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://forticheprod.github.io/fls/docs/advanced/library/"/>
+        <id>https://forticheprod.github.io/fls/docs/advanced/library/</id>
+        
+        <content type="html" xml:base="https://forticheprod.github.io/fls/docs/advanced/library/">&lt;h2 id=&quot;basic-listing-of-the-library&quot;&gt;Basic listing of the library&lt;&#x2F;h2&gt;
+&lt;p&gt;The library is documented with rustdoc and you can find the documentation &lt;a href=&quot;https:&#x2F;&#x2F;docs.rs&#x2F;framels&#x2F;latest&#x2F;framels&#x2F;&quot;&gt;here&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;But here is a basic listing of the library&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;description&quot;&gt;Description&lt;&#x2F;h3&gt;
+&lt;p&gt;The function &lt;strong&gt;basic_listing&lt;&#x2F;strong&gt; is the main function of the library it use a list of
+filename as in input and pack the frame sequences using a new filename
+like &lt;code&gt;toto.***.jpg@158-179&lt;&#x2F;code&gt;
+It take a &lt;code&gt;Vec&amp;lt;String&amp;gt;&lt;&#x2F;code&gt; of entries as an input&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pack the frames&lt;&#x2F;li&gt;
+&lt;li&gt;Return a Vector of path packed&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;example&quot;&gt;Example&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;framels::{basic_listing, parse_dir, paths::{Paths, PathsPacked}};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; source = &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;.&#x2F;samples&#x2F;big&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;to_string&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; paths: Paths = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;parse_dir&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;source);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; results: PathsPacked = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;basic_listing&lt;&#x2F;span&gt;&lt;span&gt;(paths);
+&lt;&#x2F;span&gt;&lt;span&gt;println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, results);
+&lt;&#x2F;span&gt;&lt;span&gt;``
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Introduction</title>
+        <published>2021-05-01T08:00:00+00:00</published>
+        <updated>2021-05-01T08:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://forticheprod.github.io/fls/docs/getting-started/introduction/"/>
+        <id>https://forticheprod.github.io/fls/docs/getting-started/introduction/</id>
+        
+        <content type="html" xml:base="https://forticheprod.github.io/fls/docs/getting-started/introduction/">&lt;h2 id=&quot;quick-start&quot;&gt;Quick Start&lt;&#x2F;h2&gt;
+&lt;p&gt;One page summary of how to start to use framels. &lt;a href=&quot;..&#x2F;quick-start&#x2F;&quot;&gt;Quick Start →&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;go-further&quot;&gt;Go further&lt;&#x2F;h2&gt;
+&lt;p&gt;Contributing and Help.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;contributing&quot;&gt;Contributing&lt;&#x2F;h2&gt;
+&lt;p&gt;Find out how to contribute to Doks. &lt;a href=&quot;..&#x2F;..&#x2F;contributing&#x2F;how-to-contribute&#x2F;&quot;&gt;Contributing →&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;help&quot;&gt;Help&lt;&#x2F;h2&gt;
+&lt;p&gt;Get help on Doks. &lt;a href=&quot;..&#x2F;..&#x2F;help&#x2F;faq&#x2F;&quot;&gt;Help →&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Philippe Llerena</title>
+        <published>2021-04-01T08:50:45+00:00</published>
+        <updated>2021-04-01T08:50:45+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://forticheprod.github.io/fls/authors/philippe-llerena/"/>
+        <id>https://forticheprod.github.io/fls/authors/philippe-llerena/</id>
+        
+        <content type="html" xml:base="https://forticheprod.github.io/fls/authors/philippe-llerena/">&lt;p&gt;Creator of &lt;strong&gt;framels&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;doubleailes&quot;&gt;@doubleailes&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
