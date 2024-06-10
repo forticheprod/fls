@@ -1,0 +1,42 @@
+[package]
+name = "framels"
+version = "0.7.4"
+edition = "2021"
+authors = ["Philippe Llerena<philippe.llerena@gmail.com>"]
+description = "a simple command line tool to list frame sequence in friendly way"
+readme = "../README.md"
+license-file = "../LICENSE"
+repository = "https://github.com/forticheprod/fls"
+exclude = ["images", "samples", ".devcontainer", ".github", "comparaison"]
+
+[[bin]]
+name = "fls"
+path = "src/main.rs"
+
+[profile.release]
+lto = true
+
+[dependencies]
+clap = { version = "4.5.4", features = ["derive"] }
+exr = "1.72.0"
+jwalk = "0.8.1"
+lazy_static = "1.4.0"
+rayon = "1.10.0"
+
+[dependencies.regex]
+version = "1.10.4"
+default-features = false
+# regex currently requires the standard library, you must re-enable it.
+features = ["std", "unicode-perl"]
+
+[dev-dependencies]
+criterion = "0.5"
+serde_json = "1.0.115"
+serde = "1.0.200"
+assert_cmd = "2.0.14"
+predicates = "3.1.0"
+sys-locale = "0.3.1"
+
+[[bench]]
+name = "mega"
+harness = false
