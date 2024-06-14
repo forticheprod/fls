@@ -18,6 +18,12 @@ section = "docs"
 url = "/docs/getting-started/introduction/"
 weight = 10
 
+[[extra.menu.main]]
+name = "Benchmark"
+section = "benchmark"
+url = "/criterion/report/"
+weight = 20
+
 [[extra.list]]
 title = "Inspiration"
 content = 'Inspire by the standard industry <b>rvls</b> command line from Autodesk© (♥ Tweak team)'
@@ -29,5 +35,9 @@ content = '<b>fls</b> is made to be really fast. 5x time faster than any others'
 [[extra.list]]
 title = "🦀"
 content = '<b>framels</b> is made with pure rust lib which is helping the compatibility with all OS'
+
+[[extra.list]]
+title = "Rust Doc"
+content = 'All the documentation is available on <a href="https://docs.rs/framels" target="_blank">docs.rs</a>'
 
 +++
