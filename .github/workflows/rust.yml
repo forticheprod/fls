@@ -56,7 +56,7 @@ jobs:
           dry-run: true
   publish:
     runs-on: ubuntu-latest
-    needs: [dry_publish,bench,build_test,build-doc-draft]
+    needs: [dry_publish,build_test,build-doc-draft]
     if: github.event_name == 'release' && github.event.action == 'created'
     steps:
     - uses: actions/checkout@v4
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     name: release ${{ matrix.target }}
     if: github.event_name == 'release' && github.event.action == 'created'
-    needs: [dry_publish]
+    needs: [dry_publish,build_test,build-doc-draft]
     strategy:
       fail-fast: false
       matrix:
