@@ -15,10 +15,22 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
+  build-doc-draft:
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+      - name: Build only 
+        uses: shalzz/zola-deploy-action@v0.18.0
+        env:
+          BUILD_DIR: docs
+          BUILD_ONLY: true
+          BUILD_FLAGS: --drafts
   build_test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - name: 🔨 Build
         run: cargo build
@@ -26,17 +38,15 @@ jobs:
         run: cargo test
   bench:
     runs-on: ubuntu-latest
-    needs: [build_test]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - name: ⏲️ Bench
         run: cargo bench
   dry_publish:
     runs-on: ubuntu-latest
-    needs: [build_test]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions-rs/toolchain@v1
       with:
           toolchain: stable
@@ -46,10 +56,10 @@ jobs:
           dry-run: true
   publish:
     runs-on: ubuntu-latest
-    needs: [dry_publish]
+    needs: [dry_publish,bench,build_test,build-doc-draft]
     if: github.event_name == 'release' && github.event.action == 'created'
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: actions-rs/toolchain@v1
       with:
           toolchain: stable
