@@ -2,9 +2,8 @@ use std::path::PathBuf;
 
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use framels::{
-    basic_listing, parse_dir,
+    basic_listing, extended_listing, parse_dir,
     paths::{Paths, PathsPacked},
-    extended_listing,
 };
 
 fn generate_paths(n: u64) -> Paths {
@@ -31,7 +30,7 @@ fn small_parse_and_run() {
 fn exr_reading() {
     let source = "./samples/big/".to_string();
     let paths: Paths = parse_dir(&source);
-    let _results: PathsPacked = extended_listing(source,paths, false);
+    let _results: PathsPacked = extended_listing(source, paths, false);
 }
 
 fn criterion_benchmark(c: &mut Criterion) {
