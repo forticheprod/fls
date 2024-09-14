@@ -1,0 +1,9 @@
+[package]
+name = "framels-core"
+version = "0.7.4"
+edition ={ workspace = true}
+authors = { workspace = true}
+description = "a lib to pack file sequences manily for animation and vfx"
+readme = { workspace = true}
+license-file = { workspace = true}
+repository = { workspace = true}

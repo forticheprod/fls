@@ -1,20 +1,17 @@
 [package]
 name = "framels"
 version = "0.7.4"
-edition = "2021"
-authors = ["Philippe Llerena<philippe.llerena@gmail.com>"]
+edition = { workspace = true }
+authors = { workspace = true }
 description = "a simple command line tool to list frame sequence in friendly way"
-readme = "../README.md"
+readme = { workspace = true}
 license-file = "../LICENSE"
-repository = "https://github.com/forticheprod/fls"
-exclude = ["images", "samples", ".devcontainer", ".github", "comparaison"]
+repository = { workspace = true}
+exclude = ["samples"]
 
 [[bin]]
 name = "fls"
 path = "src/main.rs"
-
-[profile.release]
-lto = true
 
 [dependencies]
 clap = { version = "4.5.4", features = ["derive"] }

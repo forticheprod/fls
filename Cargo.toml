@@ -1,3 +1,13 @@
 [workspace]
 resolver = "2"
-members = ["framels", "framels-core"]
+members = ["crates/*"]
+
+[workspace.package]
+edition = "2021"
+authors = ["Philippe Llerena<philippe.llerena@gmail.com>"]
+readme = "./README.md"
+license-file = "./LICENSE"
+repository = "https://github.com/forticheprod/fls"
+
+[profile.release]
+lto = true

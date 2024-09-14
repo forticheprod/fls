@@ -380,7 +380,7 @@ dependencies = [
 
 [[package]]
 name = "framels"
-version = "0.7.7"
+version = "0.7.4"
 dependencies = [
  "assert_cmd",
  "clap",
@@ -395,6 +395,10 @@ dependencies = [
  "serde_json",
  "sys-locale",
 ]
+
+[[package]]
+name = "framels-core"
+version = "0.7.4"
 
 [[package]]
 name = "half"

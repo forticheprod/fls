@@ -1,9 +1,0 @@
-[package]
-name = "framels"
-version = "0.7.4"
-edition = "2021"
-authors = ["Philippe Llerena<philippe.llerena@gmail.com>"]
-description = "a lib to pack file sequences manily for animation and vfx"
-readme = "../README.md"
-license-file = "../LICENSE"
-repository = "https://github.com/forticheprod/fls"
