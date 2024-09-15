@@ -42,7 +42,7 @@ fn cli_version() -> Result<(), Box<dyn std::error::Error>> {
     cmd.arg("-V");
     cmd.assert()
         .success()
-        .stdout(predicate::str::contains("framels 0.7.7"));
+        .stdout(predicate::str::contains("framels 1.0.0"));
 
     Ok(())
 }

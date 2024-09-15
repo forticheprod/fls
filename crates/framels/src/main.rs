@@ -1,11 +1,8 @@
 use std::path::PathBuf;
 
 use clap::Parser;
-use framels::{
-    basic_listing, extended_listing, parse_dir,
-    paths::{Join, Paths},
-    recursive_dir,
-};
+use framels::{extended_listing, parse_dir, recursive_dir, PathsPackedMeta};
+use framels_core::{Paths, PathsPacked};
 mod tree;
 use tree::run_tree;
 
@@ -63,7 +60,8 @@ fn main() {
             args.multithread,
         )
     } else {
-        basic_listing(in_paths, args.multithread)
+        let p: PathsPacked = in_paths.pack(args.multithread);
+        PathsPackedMeta::from(p, Vec::new())
     };
 
     // Display results based on arguments

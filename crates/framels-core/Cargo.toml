@@ -1,9 +1,28 @@
 [package]
 name = "framels-core"
 version = "0.1.0"
-edition ={ workspace = true}
-authors = { workspace = true}
+edition = { workspace = true }
+authors = { workspace = true }
 description = "a lib to pack file sequences manily for animation and vfx"
-readme = { workspace = true}
-license-file = { workspace = true}
-repository = { workspace = true}
+readme = { workspace = true }
+license-file = { workspace = true }
+repository = { workspace = true }
+
+[dependencies]
+lazy_static = { workspace = true }
+rayon = "1.10.0"
+
+[dependencies.regex]
+version = "1.10.4"
+default-features = false
+# regex currently requires the standard library, you must re-enable it.
+features = ["std", "unicode-perl"]
+
+[dev-dependencies]
+criterion = "0.5"
+serde_json = "1.0.115"
+serde = "1.0.200"
+
+[[bench]]
+name = "mega"
+harness = false

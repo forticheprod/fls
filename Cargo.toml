@@ -11,3 +11,6 @@ repository = "https://github.com/forticheprod/fls"
 
 [profile.release]
 lto = true
+
+[workspace.dependencies]
+lazy_static = "1.4.0"

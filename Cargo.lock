@@ -386,10 +386,10 @@ dependencies = [
  "clap",
  "criterion",
  "exr",
+ "framels-core",
  "jwalk",
  "lazy_static",
  "predicates",
- "rayon",
  "regex",
  "serde",
  "serde_json",
@@ -399,6 +399,14 @@ dependencies = [
 [[package]]
 name = "framels-core"
 version = "0.1.0"
+dependencies = [
+ "criterion",
+ "lazy_static",
+ "rayon",
+ "regex",
+ "serde",
+ "serde_json",
+]
 
 [[package]]
 name = "half"

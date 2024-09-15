@@ -1,38 +1,9 @@
 //! paths module is handle the Paths and PathsPacked types
 
+use crate::core::{create_frame_string, parse_result};
 use rayon::prelude::*;
-use std::ops::Deref;
+use std::collections::HashMap;
 use std::{clone::Clone, path::PathBuf};
-
-/// # Join
-///
-/// # Description
-///
-/// Trait to join the paths of a Paths struct
-///
-/// # Example
-///
-/// ```
-/// use framels::paths::{Join, Paths};
-/// use std::path::PathBuf;
-///
-/// let paths = Paths::from(vec![PathBuf::from("foo"), PathBuf::from("bar")]);
-/// assert_eq!(paths.join(" "), "foo bar");
-/// ```
-pub trait Join {
-    /// Join the list of elements
-    fn join(&self, sep: &str) -> String;
-}
-/// # New
-///
-/// # Description
-///
-/// Trait to create an empty Paths or PathsPacked struct
-///
-pub trait New {
-    /// Create emptry struct to init
-    fn new_empty() -> Self;
-}
 /// # Paths
 ///
 /// ## Description
@@ -76,29 +47,8 @@ impl Paths {
     pub fn len(&self) -> usize {
         self.data.len()
     }
-    /// # iter
-    ///
-    /// ## Description
-    ///
-    /// Return an iterator over the paths
-    ///
-    /// ## Example
-    ///
-    /// ```rust
-    /// use framels::paths::Paths;
-    /// use std::path::PathBuf;
-    ///
-    /// let paths = Paths::from(vec![PathBuf::from("foo"), PathBuf::from("bar")]);
-    ///
-    /// for path in paths.iter() {
-    ///    println!("{}", path.to_string_lossy());
-    /// }
-    /// ```
-    pub fn iter(&self) -> impl Iterator<Item = &PathBuf> {
-        self.data.iter()
-    }
-    pub fn par_iter(&self) -> impl ParallelIterator<Item = &PathBuf> {
-        self.data.par_iter()
+    pub fn is_empty(&self) -> bool {
+        self.data.is_empty()
     }
     /// # from
     ///
@@ -138,29 +88,88 @@ impl Paths {
     pub fn to_vec(&self) -> Vec<PathBuf> {
         self.data.clone()
     }
-}
+    /// # basic_listing
+    ///
+    ///
+    /// ## Description
+    ///
+    /// This function is the main function of the library it use a list of
+    /// filename as in input and pack the frame sequences using a new filename
+    /// like `toto.***.jpg@158-179`
+    ///
+    /// It take a `Vec<String>` of entries as an input
+    ///  - Pack the frames
+    /// - Return a Vector of path packed
+    ///
+    /// ## Example
+    ///
+    /// ### Example of output
+    ///
+    /// ```bash
+    /// ./samples/small/aaa.***.tif@1-5
+    /// ./samples/small/foo_bar.ex
+    /// ```
+    ///
+    /// ### Example of output with non exr file
+    ///
+    /// ```bash
+    /// ./samples/small/foo.exr@None
+    /// ```
+    ///
+    /// ### Example as a library
+    ///
+    /// ```rust
+    /// use framels_core::Paths;
+    /// use std::path::PathBuf;
+    ///
+    /// // Perform directory listing
+    /// let in_paths: Paths = Paths::from(vec![
+    /// PathBuf::from("./samples/small/aaa.001.tif"),
+    /// PathBuf::from("./samples/small/aaa.002.tif"),
+    /// PathBuf::from("./samples/small/aaa.003.tif"),
+    /// PathBuf::from("./samples/small/aaa.004.tif"),
+    /// PathBuf::from("./samples/small/aaa.005.tif"),
+    /// PathBuf::from("./samples/small/foo_bar.ex"),
+    /// ]);
+    ///
+    /// // Generate results based on arguments
+    /// let results: String = in_paths.pack(false).get_paths().join("\n");
+    ///
+    /// println!("{}", results)
+    /// ```
+    pub fn pack(self, multithreaded: bool) -> PathsPacked {
+        let frames_dict: HashMap<String, Vec<String>> = parse_result(self.data, multithreaded);
+        let mut frames_list: Vec<String> = frames_dict
+            .into_par_iter()
+            .map(|(key, value)| {
+                if value[0] == "None" && value.len() == 1 {
+                    key
+                } else {
+                    format!("{}@{}", key, create_frame_string(value))
+                }
+            })
+            .collect();
+        frames_list.sort();
 
-impl Join for Paths {
-    fn join(&self, sep: &str) -> String {
+        let paths_packed_data = frames_list
+            .iter()
+            .map(PathBuf::from) // Convert to PathBuf
+            .collect::<Vec<PathBuf>>();
+
+        PathsPacked::from(paths_packed_data)
+    }
+    pub fn join(&self, sep: &str) -> String {
         self.data
             .iter()
             .map(|f| f.to_string_lossy())
             .collect::<Vec<_>>()
             .join(sep)
     }
-}
-
-impl Deref for Paths {
-    type Target = Vec<PathBuf>;
-
-    fn deref(&self) -> &Self::Target {
-        &self.data
-    }
-}
-
-impl New for Paths {
-    fn new_empty() -> Self {
+    pub fn new_empty() -> Self {
         Paths { data: Vec::new() }
+    }
+    pub fn get_paths(&self) -> &Vec<PathBuf> {
+        &self.data
     }
 }
 
@@ -169,7 +178,6 @@ impl New for Paths {
 /// The metadata is a Vec of String
 pub struct PathsPacked {
     paths: Paths,
-    metadata: Vec<String>,
 }
 
 impl PathsPacked {
@@ -189,64 +197,23 @@ impl PathsPacked {
     /// let paths = PathsPacked::from(input_vec.clone());
     /// let output_vec = paths.get_paths().to_vec();
     /// assert_eq!(input_vec, output_vec);
-    pub fn from(data: Vec<PathBuf>) -> Self {
+    pub(crate) fn from(data: Vec<PathBuf>) -> Self {
         PathsPacked {
             paths: Paths::from(data),
-            metadata: Vec::new(),
         }
     }
-    /// Push a [PathBuf] in the the data of the [PathsPacked]
-    pub fn push_paths(&mut self, path: PathBuf) {
-        self.paths.data.push(path)
+    pub fn push(&mut self, path: PathBuf) {
+        self.paths.data.push(path);
     }
-    /// Sort the paths attributes
-    pub fn sort_paths(&mut self) {
-        self.paths.data.sort()
-    }
-    /// Sort the paths attributes in parallel using [rayon]
-    pub fn sort_par_paths(&mut self) {
-        self.paths.data.par_sort()
-    }
-    /// Extend the paths attributes
-    pub fn extend_paths(&mut self, paths: Paths) {
-        self.paths.data.extend(paths.data)
-    }
-    /// Return a clone of the paths elements
-    pub fn get_paths(&self) -> Paths {
-        self.paths.clone()
-    }
-    /// Push a metadata String
-    pub fn push_metadata(&mut self, path: String) {
-        self.metadata.push(path)
-    }
-    /// Return a clone of the metadata elements
-    pub fn get_metadata(&self) -> Vec<String> {
-        self.metadata.clone()
-    }
-}
-
-impl Join for PathsPacked {
-    /// Join the paths and the metadata
-    fn join(&self, sep: &str) -> String {
-        let paths_strings: Vec<String> = self
-            .paths
-            .data
-            .iter()
-            .map(|f| f.to_string_lossy().into_owned())
-            .collect();
-
-        let main_vec = paths_strings
-            .into_iter()
-            .chain(self.metadata.iter().cloned());
-        main_vec.collect::<Vec<String>>().join(sep)
-    }
-}
-
-impl New for PathsPacked {
-    fn new_empty() -> Self {
+    pub fn new_empty() -> Self {
         PathsPacked {
             paths: Paths::new_empty(),
-            metadata: Vec::new(),
         }
+    }
+    pub fn get_paths(&self) -> Vec<PathBuf> {
+        self.paths.to_vec()
+    }
+    pub fn join(&self, sep: &str) -> String {
+        self.paths.join(sep)
     }
 }
