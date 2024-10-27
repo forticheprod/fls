@@ -146,7 +146,7 @@ pub fn recursive_dir(input_path: &str) -> Paths {
 #[inline(always)]
 fn extract_regex(x: &str) -> (String, String) {
     lazy_static! {
-        static ref RE_FLS: Regex = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$")
+        static ref RE_FLS: Regex = Regex::new(r"(?x)(?P<name>.*)(?P<sep>\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$")
             .expect("Can't compile regex");
     }
     let result_caps: Option<Captures> = RE_FLS.captures(&x);
