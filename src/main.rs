@@ -5,6 +5,7 @@ use framels::{
     basic_listing, extended_listing, parse_dir,
     paths::{Join, Paths},
     recursive_dir,
+    FormatTemplate,
 };
 mod tree;
 use tree::run_tree;
@@ -57,10 +58,9 @@ fn main() {
     };
 
     let format = match args.format.as_str() {
-        "default" => "{name}{sep}{padding}.{ext}@{first_frame}-{last_frame}".to_string(),
-        "nuke" => "{name}{sep}.{ext} {first_frame}-{last_frame}".to_string(),
-        "buf" => "{name}{sep}[{first_frame}:{last_frame}].{ext}".to_string(),
-        &_ => todo!(),
+        "nuke" => FormatTemplate::nuke_format().format,
+        "buf" => FormatTemplate::buf_format().format,
+        _ => FormatTemplate::default().format,
     };
 
     // Choose listing function based on arguments
@@ -73,6 +73,7 @@ fn main() {
             },
             in_paths,
             args.multithread,
+            format
         )
     } else {
         basic_listing(in_paths, args.multithread, format)

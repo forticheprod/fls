@@ -81,13 +81,23 @@
 //! similar to `rvls -l`
 //! It take a `Vec<String>` of entries as an input
 //! - Pack the frames
-//! - Print the metada if the sequence is an exr sequence
+//! - Print the metadata if the sequence is an exr sequence
 //! - Return a Vector of path packed
 //!
+//! ### Formating the output
+//! 
+//! The output can be formated using the [FormatTemplate] struct.
+//!  
+//! Three formats are available, with `toto.160.jpg` as an example:
+//!  - default : `{name}{sep}{padding}.{ext}@{first_frame}-{last_frame}` => `toto.***.jpg@158-179`
+//!  - buf : `{name}{sep}[{first_frame}:{last_frame}].{ext}` => `toto.[158:179].jpg`
+//!  - nuke : `{name}{sep}.{ext} {first_frame}-{last_frame}`=> `toto.jpg 158-179`
+//! 
+//! 
 //! ### Example
 //!
 //! ```rust
-//! use framels::{basic_listing, extended_listing, parse_dir, paths::{Paths,Join}, recursive_dir};
+//! use framels::{basic_listing, extended_listing, parse_dir, paths::{Paths,Join}, recursive_dir, FormatTemplate};
 //!
 //! fn main() {
 //!    // Perform directory listing
@@ -95,7 +105,7 @@
 //!
 //!  // Generate results based on arguments
 //! let results: String = basic_listing(in_paths, false,
-//!     "{name}{sep}{padding}.{ext}@{first_frame}-{last_frame}".to_string()).get_paths().join("\n");
+//!     FormatTemplate::default().format).get_paths().join("\n");
 //!
 //! println!("{}", results)
 //! }
@@ -343,8 +353,47 @@ fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
     result.iter().map(|x| x.to_vec()).collect()
 }
 
-/// ## Basic listing of the library
-/// ### Description
+/// Structure to store output string format templates used in the library.
+/// These templates are strings that can be used with the [strfmt()] crate to
+/// model the output.
+pub struct FormatTemplate {
+    pub format: &'static str,
+}
+
+impl Default for FormatTemplate {
+    /// Default format template
+    /// 
+    /// `toto.160.jpg` => `toto.***.jpg@158-179`
+    fn default() -> Self{
+        FormatTemplate {
+            format: "{name}{sep}{padding}.{ext}@{first_frame}-{last_frame}"
+        }
+    }
+}
+
+impl FormatTemplate {
+    /// Buff format template
+    /// 
+    /// `toto.160.jpg` => `toto.[158:179].jpg`
+    pub fn buf_format () -> Self {
+        FormatTemplate {
+            format: "{name}{sep}[{first_frame}:{last_frame}].{ext}"
+        }
+    }
+    /// Nuke format template
+    /// 
+    /// `toto.160.jpg` => `toto.jpg 158-179`
+    pub fn nuke_format() -> Self {
+        FormatTemplate {
+            format: "{name}{sep}.{ext} {first_frame}-{last_frame}"
+        }
+    }
+}
+
+/// # basic_listing
+///
+///
+/// ## Description
 ///
 /// This function is the main function of the library it use a list of
 /// filename as in input and pack the frame sequences using a new filename
@@ -372,26 +421,26 @@ fn group_continuity(data: &[isize]) -> Vec<Vec<isize>> {
 /// ### Example as a library
 ///
 /// ```rust
-/// use framels::{basic_listing, parse_dir, paths::{Paths,Join}};
+/// use framels::{basic_listing, parse_dir, paths::{Paths,Join}, FormatTemplate};
 ///
 /// fn main() {
 ///     // Perform directory listing
 ///     let in_paths: Paths = parse_dir("./samples/small");
 ///
 ///     // Generate results based on arguments
-///     let results: String = basic_listing(in_paths, false, "{name}{sep}{padding}.{ext}@{first_frame}-{last_frame}".to_string()).get_paths().join("\n");
+///     let results: String = basic_listing(in_paths, false, FormatTemplate::default().format).get_paths().join("\n");
 ///
 ///      println!("{}", results)
 /// }
 /// ```
-pub fn basic_listing(frames: Paths, multithreaded: bool, format: String) -> PathsPacked {
+pub fn basic_listing(frames: Paths, multithreaded: bool, format: &str) -> PathsPacked {
     let frames_dict = parse_result(frames, multithreaded);
     let mut frames_list: Vec<String> = frames_dict
         .into_par_iter()
         .map(|(key, value)| {
             match value {
                 None => key,
-                Some(f) => match strfmt(&format, &f.to_hashmap()) {
+                Some(f) => match strfmt(format, &f.to_hashmap()) {
                     Ok(s) => s,
                     Err(e) => {
                         eprint!("Error formatting string: {}", e);
@@ -435,7 +484,7 @@ fn get_exr_metada(root_path: &String, path: &String) -> String {
 ///
 /// It take a `Vec<String>` of entries as an input
 ///  - Pack the frames
-///  - Print the metada if the sequence is an exr sequence
+///  - Print the metadata if the sequence is an exr sequence
 ///  - Return a Vector of path packed
 ///
 /// ## Example
@@ -448,7 +497,7 @@ fn get_exr_metada(root_path: &String, path: &String) -> String {
 /// ```bash
 /// ./samples/small/foo.exr    Not an exr
 /// ```
-pub fn extended_listing(root_path: String, frames: Paths, multithreaded: bool) -> PathsPacked {
+pub fn extended_listing(root_path: String, frames: Paths, multithreaded: bool, format: &str) -> PathsPacked {
     let frames_dict = parse_result(frames, multithreaded);
     let mut out_frames: PathsPacked = PathsPacked::new_empty();
     for (key, value) in frames_dict {
@@ -466,10 +515,9 @@ pub fn extended_listing(root_path: String, frames: Paths, multithreaded: bool) -
                     sep = f.sep,
                     ext = f.ext
                 );
-                dbg!(&new_path);
                 out_frames.push_metadata(get_exr_metada(&root_path, &new_path));
                 out_frames.push_paths(PathBuf::from(
-                    strfmt("{name}@{first_frame}-{last_frame}", &f.to_hashmap()).unwrap(),
+                    strfmt(&format, &f.to_hashmap()).unwrap(),
                 ));
             }
         }
