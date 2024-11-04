@@ -35,7 +35,7 @@ serde_json = "1.0.132"
 serde = "1.0.214"
 assert_cmd = "2.0.16"
 predicates = "3.1.2"
-sys-locale = "0.3.1"
+sys-locale = "0.3.2"
 
 [[bench]]
 name = "mega"
