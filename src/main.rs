@@ -28,9 +28,10 @@ struct Args {
     /// Represent output as a tree
     #[arg(short, long)]
     tree: bool,
-    /// Display Buf format
-    #[arg(short, long)]
-    buf: bool,
+
+    /// Select a format
+    #[arg(short, long, default_value_t = String::from("default"))]
+    format: String,
 
     /// Force the use of multithreading
     #[arg(short, long, default_value_t = false)]
@@ -40,6 +41,7 @@ struct Args {
     #[arg(value_name = "PATH", default_value_t = String::from("./"))]
     root: String,
 }
+
 
 fn main() {
     // Parse command-line arguments
@@ -54,6 +56,13 @@ fn main() {
         parse_dir(&args.root)
     };
 
+    let format = match args.format.as_str() {
+        "default" => "{name}{sep}{padding}.{ext}@{first_frame}-{last_frame}".to_string(),
+        "nuke" => "{name}{sep}.{ext} {first_frame}-{last_frame}".to_string(),
+        "buf" => "{name}{sep}[{first_frame}:{last_frame}].{ext}".to_string(),
+        &_ => todo!(),
+    };
+
     // Choose listing function based on arguments
     let results = if args.list {
         extended_listing(
@@ -66,7 +75,7 @@ fn main() {
             args.multithread,
         )
     } else {
-        basic_listing(in_paths, args.multithread)
+        basic_listing(in_paths, args.multithread, format)
     };
 
     // Display results based on arguments
