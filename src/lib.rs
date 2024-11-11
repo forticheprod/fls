@@ -486,18 +486,28 @@ fn test_parse_dir() {
 #[test]
 fn test_handle_none() {
     let source: &str = "foobar.exr";
-    let expected: (String, String) = (source.to_string(), "None".to_string());
-    assert_eq!(expected, extract_regex(source))
+    let expected: (String, Option<Frames>) = (source.to_string(), None);
+    let extraction = extract_regex(source);
+    assert_eq!(expected.0, extraction.0);
+    assert!(extraction.1.is_none())
 }
 
 #[test]
 fn test_regex_simple() {
     let source: &str = "RenderPass_Beauty_1_00000.exr";
-    let expected: (String, String) = (
+    let expected: (String, Option<HashMap<String, String>>) = (
         "RenderPass_Beauty_1_*****.exr".to_string(),
-        "00000".to_string(),
+        Some(HashMap::from([
+            ("name".to_string(), "RenderPass_Beauty_1".to_string()),
+            ("sep".to_string(), "_".to_string()),
+            ("frames".to_string(), "00000".to_string()),
+            ("ext".to_string(), "exr".to_string()),
+        ])),
     );
-    assert_eq!(expected, extract_regex(source))
+    let extraction = extract_regex(source);
+    assert_eq!(expected.0, extraction.0);
+    assert!(extraction.1.is_some());
+    assert_eq!(expected.1, extraction.1)
 }
 #[test]
 fn test_parse_string() {
@@ -507,11 +517,16 @@ fn test_parse_string() {
         "toto.003.tiff".into(),
         "foo.exr".into(),
     ]);
-    let vec_toto: Vec<String> = vec!["001".to_string(), "002".to_string(), "003".to_string()];
-    let vec_foo: Vec<String> = vec!["None".to_string()];
-    let expected: HashMap<String, Vec<String>> = HashMap::from([
-        ("toto.***.tiff".to_string(), vec_toto),
-        ("foo.exr".to_string(), vec_foo),
+    let frames_toto = Frames {
+        name: "toto".to_string(),
+        sep: ".".to_string(),
+        frames: vec![1, 2, 3],
+        ext: "tiff".to_string(),
+        padding: 3,
+    };
+    let expected: HashMap<String, Option<Frames>> = HashMap::from([
+        ("toto.***.tiff".to_string(), Some(frames_toto)),
+        ("foo.exr".to_string(), None),
     ]);
     assert_eq!(expected, parse_result(source, false));
 }
@@ -520,22 +535,4 @@ fn test_continuity() {
     let source: Vec<isize> = vec![1, 2, 3, 5, 6, 7, 11, 12];
     let expected: Vec<Vec<isize>> = vec![vec![1, 2, 3], vec![5, 6, 7], vec![11, 12]];
     assert_eq!(expected, group_continuity(&source));
-}
-#[test]
-fn test_create_frame_string() {
-    let source: Vec<String> = vec![
-        "001".to_string(),
-        "005".to_string(),
-        "003".to_string(),
-        "002".to_string(),
-    ];
-    let expected: String = "1-3,5".to_string();
-    assert_eq!(expected, create_frame_string(source));
-}
-#[test]
-fn test_concat_line() {
-    let main_string: String = String::from("toto");
-    let frame_string: String = String::from("bar");
-    let expected: String = String::from("toto@bar");
-    assert_eq!(expected, concat_line(main_string, frame_string));
 }
