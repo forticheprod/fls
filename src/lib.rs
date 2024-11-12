@@ -221,7 +221,7 @@ impl Frames {
         let frames = vec![frame.parse().unwrap_or(0)];
         let ext = _hashmap.get("ext").unwrap_or(&"None".to_string()).clone();
         let padding = frame.len();
-
+        
         Frames {
             name,
             sep,
@@ -230,7 +230,6 @@ impl Frames {
             padding,
         }
     }
-
     /// Returns the minimum value in `self.frames`.
     ///
     /// # Returns
@@ -239,7 +238,6 @@ impl Frames {
     fn first_frame(&self) -> Option<i32> {
         self.frames.iter().min().copied()
     }
-
     /// Returns the maximum value in `self.frames`.
     ///
     /// # Returns
@@ -248,8 +246,17 @@ impl Frames {
     fn last_frame(&self) -> Option<i32> {
         self.frames.iter().max().copied()
     }
+    /// Returns a vector of strings representing the frame list. Used to print the missing frames.
+    /// 
+    /// # Returns
+    /// 
+    /// A `Vec<String>` containing the frame list as a string.
+    fn frame_list(&self) -> Vec<String>{
+        let frames_as_isize: Vec<isize> = self.frames.iter()
+        .map(|frame| *frame as isize).collect();
+        group_continuity(&frames_as_isize).iter().map(|ve| format!("{}:{}", ve[0], ve[ve.len()-1])).collect()
 
-
+    }
     /// Converts the `Frames` struct to a `HashMap` of string values.
     ///
     /// This was implemented to be used with `strfmt::strfmt`
@@ -283,11 +290,17 @@ impl Frames {
             "padding".to_string(),
             std::iter::repeat('*').take(self.padding.into()).collect(),
         );
+        map.insert(
+            "frame_list".to_string(),
+            self.frame_list().join(","),
+        );
         map
     }
 }
 
 impl PartialEq for Frames {
+    /// Add a PartialEq implementation to the Frames struct
+    /// mainly for testing purpose.
     fn eq(&self, other: &Self) -> bool {
         self.name == other.name
             && self.sep == other.sep
@@ -377,7 +390,7 @@ impl FormatTemplate {
     /// `toto.160.jpg` => `toto.[158:179].jpg`
     pub fn buf_format () -> Self {
         FormatTemplate {
-            format: "{name}{sep}[{first_frame}:{last_frame}].{ext}"
+            format: "{name}{sep}[{frame_list}].{ext}"
         }
     }
     /// Nuke format template
