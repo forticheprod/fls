@@ -1,11 +1,10 @@
 use std::path::PathBuf;
 
-use clap::Parser;
+use clap::{Parser, ValueEnum};
 use framels::{
     basic_listing, extended_listing, parse_dir,
     paths::{Join, Paths},
-    recursive_dir,
-    FormatTemplate,
+    recursive_dir, FormatTemplate,
 };
 mod tree;
 use tree::run_tree;
@@ -30,9 +29,9 @@ struct Args {
     #[arg(short, long)]
     tree: bool,
 
-    /// Select a format
-    #[arg(short, long, default_value_t = String::from("default"))]
-    format: String,
+    /// Select a format to use for print files name
+    #[arg(short, long, value_enum, default_value_t = Format::Default)]
+    format: Format,
 
     /// Force the use of multithreading
     #[arg(short, long, default_value_t = false)]
@@ -41,6 +40,14 @@ struct Args {
     /// Path to parse
     #[arg(value_name = "PATH", default_value_t = String::from("./"))]
     root: String,
+}
+
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum, Debug)]
+enum Format {
+    /// Default
+    Default,
+    Nuke,
+    Buf,
 }
 
 
@@ -57,10 +64,10 @@ fn main() {
         parse_dir(&args.root)
     };
 
-    let format = match args.format.as_str() {
-        "nuke" => FormatTemplate::nuke_format().format,
-        "buf" => FormatTemplate::buf_format().format,
-        _ => FormatTemplate::default().format,
+    let format: &str = match args.format {
+        Format::Nuke => FormatTemplate::nuke_format().format,
+        Format::Buf => FormatTemplate::buf_format().format,
+        Format::Default => FormatTemplate::default().format,
     };
 
     // Choose listing function based on arguments
@@ -73,7 +80,7 @@ fn main() {
             },
             in_paths,
             args.multithread,
-            format
+            format,
         )
     } else {
         basic_listing(in_paths, args.multithread, format)
