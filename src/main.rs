@@ -5,6 +5,7 @@ use framels::{
     basic_listing, extended_listing, parse_dir,
     paths::{Join, Paths},
     recursive_dir,
+    FormatTemplate,
 };
 mod tree;
 use tree::run_tree;
@@ -29,6 +30,10 @@ struct Args {
     #[arg(short, long)]
     tree: bool,
 
+    /// Select a format
+    #[arg(short, long, default_value_t = String::from("default"))]
+    format: String,
+
     /// Force the use of multithreading
     #[arg(short, long, default_value_t = false)]
     multithread: bool,
@@ -37,6 +42,7 @@ struct Args {
     #[arg(value_name = "PATH", default_value_t = String::from("./"))]
     root: String,
 }
+
 
 fn main() {
     // Parse command-line arguments
@@ -51,6 +57,12 @@ fn main() {
         parse_dir(&args.root)
     };
 
+    let format = match args.format.as_str() {
+        "nuke" => FormatTemplate::nuke_format().format,
+        "buf" => FormatTemplate::buf_format().format,
+        _ => FormatTemplate::default().format,
+    };
+
     // Choose listing function based on arguments
     let results = if args.list {
         extended_listing(
@@ -61,9 +73,10 @@ fn main() {
             },
             in_paths,
             args.multithread,
+            format
         )
     } else {
-        basic_listing(in_paths, args.multithread)
+        basic_listing(in_paths, args.multithread, format)
     };
 
     // Display results based on arguments
