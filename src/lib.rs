@@ -253,8 +253,11 @@ impl Frames {
     /// A `Vec<String>` containing the frame list as a string.
     fn frame_list(&self) -> Vec<String>{
         let frames_as_isize: Vec<isize> = self.frames.iter()
-        .map(|frame| *frame as isize).collect();
-        group_continuity(&frames_as_isize).iter().map(|ve| format!("{}:{}", ve[0], ve[ve.len()-1])).collect()
+            .map(|frame| *frame as isize).collect();
+            group_continuity(&frames_as_isize).iter()
+            .filter(|ve| !ve.is_empty())
+            .map(|ve| format!("{}:{}", ve[0], ve[ve.len()-1]))
+            .collect()
 
     }
     /// Converts the `Frames` struct to a `HashMap` of string values.
