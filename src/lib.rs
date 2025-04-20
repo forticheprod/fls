@@ -533,7 +533,22 @@ pub fn extended_listing(root_path: String, frames: Paths, multithreaded: bool, f
                 );
                 out_frames.push_metadata(get_exr_metada(&root_path, &new_path));
                 out_frames.push_paths(PathBuf::from(
-                    strfmt(&format, &f.to_hashmap()).unwrap(),
+                    match strfmt(&format, &f.to_hashmap()) {
+                        Ok(formatted) => formatted,
+                        Err(e) => {
+                            eprintln!("Error formatting path: {}, fallback to default", e);
+                            format!("{name}{sep}{padding}.{ext}@{first_frame}-{last_frame}",
+                                name = f.name, sep = f.sep, padding = "*".repeat(f.padding), ext = f.ext,
+                                first_frame = match f.first_frame() {
+                                    Some(first_frame) => first_frame.to_string(),
+                                    None => String::from("first_frame")
+                                }, last_frame = match f.last_frame() {
+                                    Some(last_frame) => last_frame.to_string(),
+                                    None => String::from("last_frames")
+                                }
+                            )
+                        }
+                    }
                 ));
             }
         }
