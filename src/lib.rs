@@ -218,7 +218,16 @@ impl Frames {
             .get("frames")
             .unwrap_or(&"None".to_string())
             .clone();
-        let frames = vec![frame.parse().unwrap_or(0)];
+        let frames = {
+            let frame_num = match frame.parse::<i32>() {
+                Ok(num) => num,
+                Err(e) => {
+                    eprintln!("Error parsing frame number '{}': {}", frame, e);
+                    0
+                }
+            };
+            vec![frame_num]
+        };
         let ext = _hashmap.get("ext").unwrap_or(&"None".to_string()).clone();
         let padding = frame.len();
         
