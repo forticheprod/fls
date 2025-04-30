@@ -16,6 +16,11 @@ fn generate_paths(n: u64) -> Paths {
     Paths::from(paths)
 }
 
+fn parse() {
+    let source: String = "./samples/big".to_string();
+    let _paths: Paths = parse_dir(&source);
+}
+
 fn parse_and_run() {
     let source = "./samples/big".to_string();
     let paths: Paths = parse_dir(&source);
@@ -47,6 +52,7 @@ fn criterion_benchmark(c: &mut Criterion) {
         });
     }
     group.finish();
+    c.bench_function("parse", |b| b.iter(|| parse()));
     c.bench_function("big", |b| b.iter(|| parse_and_run()));
     c.bench_function("small", |b| b.iter(|| small_parse_and_run()));
     c.bench_function("exr_reading", |b| b.iter(|| exr_reading()));
