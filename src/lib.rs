@@ -157,7 +157,7 @@ pub fn recursive_dir(input_path: &str) -> Paths {
 /// For example toto.459.jpg should return:
 /// (toto.***.jpg, 458, [("name", "toto"), ("sep", "."), ("frames", "458"), ("ext", "jpg")])
 #[inline(always)]
-fn extract_regex(x: &str) -> (String, Option<HashMap<String, String>>) {
+fn extract_regex(x: &str) -> (String, Option<Captures>) {
     lazy_static! {
         static ref RE_FLS: Regex =
             Regex::new(r"(?x)(?P<name>.*)(?P<sep>\.|_)(?P<frames>\d{2,9})\.(?P<ext>\w{2,5})$")
@@ -167,17 +167,9 @@ fn extract_regex(x: &str) -> (String, Option<HashMap<String, String>>) {
     match result_caps {
         None => (x.to_string(), None),
         Some(caps) => {
-            let hashmap: HashMap<String, String> = RE_FLS
-                .capture_names()
-                .flatten()
-                .filter_map(|n| {
-                    caps.name(n)
-                        .map(|m| (n.to_string(), m.as_str().to_string()))
-                })
-                .collect();
             (
                 x.replace(&caps["frames"], &"*".repeat(caps["frames"].len())),
-                Some(hashmap),
+                Some(caps),
             )
         }
     }
@@ -202,41 +194,15 @@ struct Frames {
 }
 
 impl Frames {
-    /// Creates a `Frames` struct from a `HashMap`.
-    ///
-    /// # Parameters
-    ///
-    /// * `_hashmap` - A reference to a `HashMap<String, String>` containing the frame details.
-    /// name, sep, frames, ext, padding
-    /// # Returns
-    ///
-    /// A `Frames` struct populated with the values from the `HashMap`.
-    fn from_hashmap(_hashmap: &HashMap<String, String>) -> Self {
-        let name = _hashmap.get("name").unwrap_or(&"None".to_string()).clone();
-        let sep = _hashmap.get("sep").unwrap_or(&"None".to_string()).clone();
-        let frame = _hashmap
-            .get("frames")
-            .unwrap_or(&"None".to_string())
-            .clone();
-        let frames = {
-            let frame_num = match frame.parse::<i32>() {
-                Ok(num) => num,
-                Err(e) => {
-                    eprintln!("Error parsing frame number '{}': {}", frame, e);
-                    0
-                }
-            };
-            vec![frame_num]
-        };
-        let ext = _hashmap.get("ext").unwrap_or(&"None".to_string()).clone();
-        let padding = frame.len();
-        
+    fn from_captures(captures: &Captures) -> Self {
+        let frame = vec![captures["frames"].parse().unwrap_or(0)];
+        let padding = captures["frames"].len();
         Frames {
-            name,
-            sep,
-            frames,
-            ext,
-            padding,
+            name: captures["name"].to_string(),
+            sep: captures["sep"].to_string(),
+            frames: frame,
+            ext: captures["ext"].to_string(),
+            padding: padding
         }
     }
     /// Returns the minimum value in `self.frames`.
@@ -329,7 +295,7 @@ fn parse_result(dir_scan: Paths, multithreaded: bool) -> HashMap<String, Option<
     // used rayon lib to paralelize the work. Result depends a lot from the
     // cpu number of thread may be put in a config file
     const PAR_THRESHOLD: usize = 100000;
-    let extracted: Vec<(String, Option<HashMap<String, String>>)> =
+    let extracted: Vec<(String, Option<Captures>)> =
         if (dir_scan.len() > PAR_THRESHOLD) | multithreaded {
             dir_scan
                 .par_iter()
@@ -350,12 +316,12 @@ fn parse_result(dir_scan: Paths, multithreaded: bool) -> HashMap<String, Option<
                 None => (),
                 Some(f) => match &extraction.1 {
                     None => (),
-                    Some(t) => f.frames.push(t.get("frames").unwrap().parse().unwrap_or(0)),
+                    Some(t) => f.frames.push(t["frames"].parse().unwrap_or(0)),
                 },
             })
             .or_insert(match &extraction.1 {
                 None => None,
-                Some(t) => Some(Frames::from_hashmap(t)),
+                Some(t) => Some(Frames::from_captures(t)),
             });
     }
     paths_dict
@@ -583,19 +549,23 @@ fn test_handle_none() {
 #[test]
 fn test_regex_simple() {
     let source: &str = "RenderPass_Beauty_1_00000.exr";
-    let expected: (String, Option<HashMap<String, String>>) = (
+    let expected: (String, HashMap<String, String>) = (
         "RenderPass_Beauty_1_*****.exr".to_string(),
-        Some(HashMap::from([
+        HashMap::from([
             ("name".to_string(), "RenderPass_Beauty_1".to_string()),
             ("sep".to_string(), "_".to_string()),
             ("frames".to_string(), "00000".to_string()),
             ("ext".to_string(), "exr".to_string()),
-        ])),
+        ]),
     );
-    let extraction = extract_regex(source);
-    assert_eq!(expected.0, extraction.0);
-    assert!(extraction.1.is_some());
-    assert_eq!(expected.1, extraction.1)
+    let (name, some_captures) = extract_regex(source);
+
+    assert_eq!(expected.0, name);
+    assert!(some_captures.is_some());
+    let captures = some_captures.unwrap();
+    for group in ["name", "sep", "frames", "ext"] {
+        assert_eq!(expected.1[group], captures[group])
+    }
 }
 #[test]
 fn test_parse_string() {
