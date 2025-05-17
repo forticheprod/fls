@@ -342,10 +342,7 @@ pub fn basic_listing(frames: Paths, multithreaded: bool) -> PathsPacked {
 /// This function is intented to check if a file is an exr to call exr module
 /// and print the exr metadata of the file
 fn get_exr_metada(root_path: &String, path: &String) -> String {
-    lazy_static! {
-        static ref RE_EXR: Regex = Regex::new(r".*.exr$").expect("Can't compile regex");
-    }
-    if RE_EXR.is_match(&path) {
+    if path.ends_with(".exr") {
         let path = format!("{}{}", root_path, path);
         read_meta(path)
     } else {
