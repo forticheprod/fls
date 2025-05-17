@@ -22,6 +22,7 @@ exr = "1.73.0"
 jwalk = "0.8.1"
 lazy_static = "1.5.0"
 rayon = "1.10.0"
+wide = "0.7.32"
 
 [dependencies.regex]
 version = "1.11.1"

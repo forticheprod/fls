@@ -162,6 +162,47 @@ fn extract_regex(x: &str) -> (String, String) {
     }
 }
 
+/// SIMD-accelerated frame number extraction for filenames matching the pattern
+/// Returns (masked_filename, frame_number) or falls back to original if not found
+fn extract_regex_simd(x: &str) -> (String, String) {
+    let bytes = x.as_bytes();
+    let len = bytes.len();
+    if len < 7 {
+        return extract_regex(x);
+    }
+    let mut dot_pos = None;
+    for i in (0..len).rev() {
+        if bytes[i] == b'.' {
+            dot_pos = Some(i);
+            break;
+        }
+    }
+    let dot = match dot_pos {
+        Some(d) => d,
+        None => return extract_regex(x),
+    };
+    let end = dot;
+    let mut start = dot;
+    while start > 0 && bytes[start - 1].is_ascii_digit() {
+        start -= 1;
+    }
+    let digit_count = end - start;
+    if digit_count < 2 || digit_count > 9 {
+        return extract_regex(x);
+    }
+    if start < 2 || !(bytes[start - 1] == b'.' || bytes[start - 1] == b'_') {
+        return extract_regex(x);
+    }
+    let ext_len = len - dot - 1;
+    if ext_len < 2 || ext_len > 5 {
+        return extract_regex(x);
+    }
+    let mut masked = x.to_string();
+    masked.replace_range(start..end, &"*".repeat(digit_count));
+    let frame = &x[start..end];
+    (masked, frame.to_string())
+}
+
 /// Parse the result of a vector of string. This function use HashMap to pack
 /// filename removed from the frame value.
 fn parse_result(dir_scan: Paths, multithreaded: bool) -> HashMap<String, Vec<String>> {
@@ -172,12 +213,12 @@ fn parse_result(dir_scan: Paths, multithreaded: bool) -> HashMap<String, Vec<Str
     let extracted: Vec<(String, String)> = if (dir_scan.len() > PAR_THRESHOLD) | multithreaded {
         dir_scan
             .par_iter()
-            .map(|path| extract_regex(path.to_str().unwrap()))
+            .map(|path| extract_regex_simd(path.to_str().unwrap()))
             .collect()
     } else {
         dir_scan
             .iter()
-            .map(|path| extract_regex(path.to_str().unwrap()))
+            .map(|path| extract_regex_simd(path.to_str().unwrap()))
             .collect()
     };
     let mut paths_dict: HashMap<String, Vec<String>> = HashMap::with_capacity(extracted.len());
