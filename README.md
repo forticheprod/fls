@@ -3,7 +3,7 @@
 ## Description
 
 **framels** project is intent to deliver a *ls* command inspired by *bls* from
-[Buf Compagnie](https://buf.com/) or more recently *rvls* from [RV(https://www.autodesk.com/products/flow-production-tracking/rv)].
+[Buf Compagnie](https://buf.com/) or more recently *rvls* from [RV](https://www.autodesk.com/products/flow-production-tracking/rv).
 
 ## User Guide
 
