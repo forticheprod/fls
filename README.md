@@ -185,7 +185,7 @@ Here benchmarks done with [hyperfine](https://github.com/sharkdp/hyperfine) with
 
 | Tool | `fls 4.0.0`    | `rvls 2023.0.1`   |`lsseq -l`| `lss`    |
 |------|----------|----------|----------|----------|
-| Time | 4.7 ms   | 23.3 ms  | 33.5 ms  | 41.8 ms  |
+| Time | 9.6 ms   | 85.9 ms  | 75.5 ms  | 61.9 ms  |
 
 ```bash
 hyperfine -N --warmup 3 'target/release/fls ./samples/big/'
