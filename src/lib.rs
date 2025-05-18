@@ -320,7 +320,7 @@ fn create_frame_string(value: Vec<String>) -> String {
 pub fn basic_listing(frames: Paths, multithreaded: bool) -> PathsPacked {
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames, multithreaded);
     let mut frames_list: Vec<String> = frames_dict
-        .into_par_iter()
+        .into_iter()
         .map(|(key, value)| {
             if value[0] == "None" && value.len() == 1 {
                 key

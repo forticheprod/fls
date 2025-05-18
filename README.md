@@ -183,9 +183,9 @@ Here benchmarks done with [hyperfine](https://github.com/sharkdp/hyperfine) with
 
 ### Simple file listing
 
-| Tool | `fls 4.0.0`    | `rvls 2023.0.1`   |`lsseq -l`| `lss`    |
-|------|----------|----------|----------|----------|
-| Time | 9.6 ms   | 85.9 ms  | 75.5 ms  | 61.9 ms  |
+| Tool |`fls 0.7.7`| `rvls 2023.0.1`|`lsseq -l`| `lss`    |
+|------|-----------|----------------|----------|----------|
+| Time | 3.9 ms    | 85.9 ms        | 75.5 ms  | 61.9 ms  |
 
 ```bash
 hyperfine -N --warmup 3 'target/release/fls ./samples/big/'
@@ -195,7 +195,7 @@ Benchmark 1: target/release/fls ./samples/big/
 ```
 
 ```bash
-hyperfine --warmup 3 '~/Downloads/rv-centos7-x86-64-2023.0.1/bin/rvls ./samples/big/'
+hyperfine -N --warmup 3 '~/Downloads/rv-centos7-x86-64-2023.0.1/bin/rvls ./samples/big/'
 Benchmark 1: ~/Downloads/rv-centos7-x86-64-2023.0.1/bin/rvls ./samples/big/
   Time (mean ± σ):      23.3 ms ±   7.1 ms    [User: 20.1 ms, System: 2.3 ms]
   Range (min … max):    19.4 ms …  51.5 ms    75 runs
