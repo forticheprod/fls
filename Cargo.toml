@@ -1,6 +1,6 @@
 [package]
 name = "framels"
-version = "0.7.7"
+version = "0.7.8"
 edition = "2024"
 authors = ["Philippe Llerena<philippe.llerena@gmail.com>"]
 description = "a simple command line tool to list frame sequence in friendly way"
