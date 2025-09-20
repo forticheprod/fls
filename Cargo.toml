@@ -17,22 +17,22 @@ path = "src/main.rs"
 lto = true
 
 [dependencies]
-clap = { version = "4.5.43", features = ["derive"] }
+clap = { version = "4.5.47", features = ["derive"] }
 exr = "1.73.0"
 jwalk = "0.8.1"
 lazy_static = "1.5.0"
-rayon = "1.10.0"
+rayon = "1.11.0"
 wide = "0.7.33"
 
 [dependencies.regex]
-version = "1.11.1"
+version = "1.11.2"
 default-features = false
 # regex currently requires the standard library, you must re-enable it.
 features = ["std", "unicode-perl"]
 
 [dev-dependencies]
 criterion = "0.7.0"
-serde_json = "1.0.142"
+serde_json = "1.0.145"
 serde = "1.0.219"
 assert_cmd = "2.0.17"
 predicates = "3.1.3"
