@@ -17,7 +17,7 @@ path = "src/main.rs"
 lto = true
 
 [dependencies]
-clap = { version = "4.5.47", features = ["derive"] }
+clap = { version = "4.5.48", features = ["derive"] }
 exr = "1.73.0"
 jwalk = "0.8.1"
 lazy_static = "1.5.0"
