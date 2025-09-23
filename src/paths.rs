@@ -76,6 +76,27 @@ impl Paths {
     pub fn len(&self) -> usize {
         self.data.len()
     }
+    /// # is_empty
+    ///
+    /// ## Description
+    ///
+    /// Return true if the paths collection is empty, false otherwise
+    ///
+    /// ## Example
+    ///
+    /// ```rust
+    /// use framels::paths::Paths;
+    /// use std::path::PathBuf;
+    ///
+    /// let empty_paths = Paths::from(vec![]);
+    /// assert_eq!(empty_paths.is_empty(), true);
+    ///
+    /// let paths = Paths::from(vec![PathBuf::from("foo")]);
+    /// assert_eq!(paths.is_empty(), false);
+    /// ```
+    pub fn is_empty(&self) -> bool {
+        self.data.is_empty()
+    }
     /// # iter
     ///
     /// ## Description

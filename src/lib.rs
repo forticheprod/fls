@@ -89,15 +89,14 @@
 //! ```rust
 //! use framels::{basic_listing, extended_listing, parse_dir, paths::{Paths,Join}, recursive_dir};
 //!
-//! fn main() {
-//!    // Perform directory listing
-//!   let in_paths: Paths = parse_dir("./samples/small");
+//! 
+//! // Perform directory listing
+//! let in_paths: Paths = parse_dir("./samples/small");
 //!
-//!  // Generate results based on arguments
+//! // Generate results based on arguments
 //! let results: String = basic_listing(in_paths, false).get_paths().join("\n");
 //!
 //! println!("{}", results)
-//! }
 //! ```
 mod exr_metadata;
 pub mod paths;
@@ -307,15 +306,13 @@ fn create_frame_string(value: Vec<String>) -> String {
 /// ```rust
 /// use framels::{basic_listing, parse_dir, paths::{Paths,Join}};
 ///
-/// fn main() {
-///     // Perform directory listing
-///     let in_paths: Paths = parse_dir("./samples/small");
+/// // Perform directory listing
+/// let in_paths: Paths = parse_dir("./samples/small");
 ///
-///     // Generate results based on arguments
-///     let results: String = basic_listing(in_paths, false).get_paths().join("\n");
+/// // Generate results based on arguments
+/// let results: String = basic_listing(in_paths, false).get_paths().join("\n");
 ///
-///      println!("{}", results)
-/// }
+/// println!("{}", results)
 /// ```
 pub fn basic_listing(frames: Paths, multithreaded: bool) -> PathsPacked {
     let frames_dict: HashMap<String, Vec<String>> = parse_result(frames, multithreaded);
