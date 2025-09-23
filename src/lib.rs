@@ -135,7 +135,7 @@ pub fn recursive_dir(input_path: &str) -> Paths {
         WalkDir::new(input_path)
             .sort(true)
             .into_iter()
-            .filter_map(|entry| entry.ok().and_then(|e| Some(e.path())))
+            .filter_map(|entry| entry.ok().map(|e| e.path()))
             .collect::<Vec<PathBuf>>(),
     )
 }
@@ -149,7 +149,7 @@ fn extract_regex(x: &str) -> (String, String) {
         static ref RE_FLS: Regex = Regex::new(r"(?x)(.*)(\.|_)(?P<frames>\d{2,9})\.(\w{2,5})$")
             .expect("Can't compile regex");
     }
-    let result_caps: Option<Captures> = RE_FLS.captures(&x);
+    let result_caps: Option<Captures> = RE_FLS.captures(x);
     match result_caps {
         None => (x.to_string(), "None".to_string()),
         caps_wrap => {
@@ -187,14 +187,14 @@ fn extract_regex_simd(x: &str) -> (String, String) {
         start -= 1;
     }
     let digit_count = end - start;
-    if digit_count < 2 || digit_count > 9 {
+    if !(2..=9).contains(&digit_count) {
         return extract_regex(x);
     }
     if start < 2 || !(bytes[start - 1] == b'.' || bytes[start - 1] == b'_') {
         return extract_regex(x);
     }
     let ext_len = len - dot - 1;
-    if ext_len < 2 || ext_len > 5 {
+    if !(2..=5).contains(&ext_len) {
         return extract_regex(x);
     }
     let mut masked = x.to_string();
@@ -333,7 +333,7 @@ pub fn basic_listing(frames: Paths, multithreaded: bool) -> PathsPacked {
 
     let paths_packed_data = frames_list
         .iter()
-        .map(|s| PathBuf::from(s)) // Convert to PathBuf
+        .map(PathBuf::from) // Convert to PathBuf
         .collect::<Vec<PathBuf>>();
 
     PathsPacked::from(paths_packed_data)
@@ -384,7 +384,7 @@ pub fn extended_listing(root_path: String, frames: Paths, multithreaded: bool) -
             let to = value.first().unwrap();
             let from = String::from_utf8(vec![b'*'; to.len()]).unwrap();
             let new_path = &key.replace(&from, to);
-            out_frames.push_metadata(get_exr_metada(&root_path, &new_path));
+            out_frames.push_metadata(get_exr_metada(&root_path, new_path));
             out_frames.push_paths(format!("{}@{}", key, create_frame_string(value)).into());
         }
     }
