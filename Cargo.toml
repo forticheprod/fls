@@ -25,7 +25,7 @@ rayon = "1.11.0"
 wide = "0.7.33"
 
 [dependencies.regex]
-version = "1.11.2"
+version = "1.11.3"
 default-features = false
 # regex currently requires the standard library, you must re-enable it.
 features = ["std", "unicode-perl"]
