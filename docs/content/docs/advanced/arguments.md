@@ -118,3 +118,43 @@ $ fls -t -r .\samples\
             ┗ aaa.***.tif@1-5
             ┗ foo_bar.exr
 ```
+
+### Multithread
+
+You can use a multithread approch of the directory and sub-folder. **framels**
+is using the [rayon.rs](https://docs.rs/rayon) lib to do that. The performance
+can depends of your CPU frequency and the number of core. See the benchmark.
+
+Starting to 4 core and more than 100 entries, the performance is better than
+the standard approche.
+
+You can use `-m` or `--multithread`
+
+Run `fls -m /path/of/directory/` to list a specific directory and his
+subfolder
+
+```bash
+$ fls -m .\samples\big
+RenderPass_Beauty_1_*****.exr@0-96
+RenderPass_Occlusion_1_*****.exr@0-73,75-96
+RenderPass_Id_1_*****.exr@0-96
+RenderPass_Occlusion_1_***.exr@74
+RenderPass_Ncam_1_00042.exr.bkp
+RenderPass_SpecularRim_1_*****.exr@0-96
+RenderPass_DiffuseKey_1_*****.exr@0-96
+RenderPass_Pcam_1_*****.exr@0-96
+RenderPass_Reflection_1_*****.exr@0-96
+RenderPass_Specular_1_*****.exr@0-96
+RenderPass_Diffuse_1_*****.exr@0-96
+RenderPass_IndDiffuse_1_*****.exr@0-96
+RenderPass_Ncam_1_*****.exr@0-41,43-96
+```
+
+### Version
+
+You can use `-v` or `--version` to display the current version of the tool.
+
+```bash
+$ fls -v
+fls 0.7.0
+```
